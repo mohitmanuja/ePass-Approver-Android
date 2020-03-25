@@ -13,6 +13,10 @@
 
     <string name="govt_id_promt">Select Govt. ID</string>
     <string name="aadhar_number">Enter Aadhaar Number</string>
+    <string name="permission_camera_rationale">Require Camera permission for this feature.</string>
+    <string name="ok">Ok</string>
+    <string name="low_storage_error">Storage is low, Please delete some file and try again.</string>
+    <string name="no_camera_permission">Camera Permission is not granted.</string>
 
     <string-array name="govt_id">
         <item>Aadhaar Card</item>
