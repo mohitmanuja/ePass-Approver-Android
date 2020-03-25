@@ -2,8 +2,12 @@ package com.epass.curfue.utils
 
 
 import android.app.Activity
+import android.content.Context
 import android.content.Intent
+import android.net.ConnectivityManager
+import android.net.NetworkCapabilities
 import android.net.Uri
+import android.os.Build
 import org.json.JSONArray
 import org.json.JSONObject
 import java.text.SimpleDateFormat
@@ -14,6 +18,7 @@ class CommonUtils {
     companion object {
 
         const val NUMBER: String = "number"
+        const val DATA: String = "data"
 
         @JvmStatic
         fun isNotNull(string: String?): Boolean {
@@ -43,24 +48,6 @@ class CommonUtils {
         }
 
 
-        @JvmStatic
-        fun getInitialText(word: String): Char {
-            return word.get(0)
-        }
-
- /*       @JvmStatic
-        fun setBackNavigationToolbar(context: Activity, mActionBar: Toolbar) {
-
-            mActionBar.setNavigationIcon(ContextCompat.getDrawable(context, R.drawable.ic_keyboard_arrow_left_white_24dp))
-
-            mActionBar.setNavigationOnClickListener {
-                context.onBackPressed()
-            }
-        }*/
-
-
-
-
         fun sendEmail(context: Activity,recipient: String, subject: String, message: String) {
             val mIntent = Intent(Intent.ACTION_SEND)
             mIntent.data = Uri.parse("mailto:")
@@ -75,7 +62,36 @@ class CommonUtils {
             }
 
         }
+        fun isInternetAvailable(context: Context): Boolean {
+            var result = false
+            val connectivityManager =
+                context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                val networkCapabilities = connectivityManager.activeNetwork ?: return false
+                val actNw =
+                    connectivityManager.getNetworkCapabilities(networkCapabilities) ?: return false
+                result = when {
+                    actNw.hasTransport(NetworkCapabilities.TRANSPORT_WIFI) -> true
+                    actNw.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR) -> true
+                    actNw.hasTransport(NetworkCapabilities.TRANSPORT_ETHERNET) -> true
+                    else -> false
+                }
+            } else {
+                connectivityManager.run {
+                    connectivityManager.activeNetworkInfo?.run {
+                        result = when (type) {
+                            ConnectivityManager.TYPE_WIFI -> true
+                            ConnectivityManager.TYPE_MOBILE -> true
+                            ConnectivityManager.TYPE_ETHERNET -> true
+                            else -> false
+                        }
 
+                    }
+                }
+            }
+
+            return result
+        }
 
     }
 

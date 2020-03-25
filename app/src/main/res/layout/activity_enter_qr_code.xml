@@ -40,7 +40,7 @@
             android:layout_height="@dimen/margin_60dp"
             android:layout_margin="@dimen/margin_16dp"
             android:layout_marginTop="32dp"
-
+            android:imeOptions="actionGo"
             android:hint="6 digit QR Code"
             android:inputType="text"
             android:maxLength="6"

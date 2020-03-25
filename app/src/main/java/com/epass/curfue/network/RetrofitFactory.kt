@@ -4,10 +4,11 @@ import android.content.Context
 import com.readystatesoftware.chuck.ChuckInterceptor
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
+import retrofit2.converter.moshi.MoshiConverterFactory
 import java.util.concurrent.TimeUnit
 
 object RetrofitFactory {
-    const val BASE_URL = "https://demo4807437.mockable.io/verifyauth"
+    const val BASE_URL = "https://demo4807437.mockable.io/"
     var client: OkHttpClient? = null
 
 
@@ -24,6 +25,7 @@ object RetrofitFactory {
         return Retrofit.Builder()
             .baseUrl(BASE_URL)
             .client(client)
+            .addConverterFactory(MoshiConverterFactory.create().asLenient())
             .build().create(RetrofitService::class.java)
     }
 }

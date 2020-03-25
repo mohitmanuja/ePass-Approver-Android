@@ -25,6 +25,7 @@
     <string name="aadhar_id">Aadhar ID:</string>
     <string name="done">Done</string>
     <string name="qr_code_verified_succesfully">QR code verified successfully!</string>
+    <string name="something_went_wrong_try_again">Something went wrong! Try again</string>
 
     <string-array name="govt_id">
         <item>Aadhaar Card</item>

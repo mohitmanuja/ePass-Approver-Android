@@ -1,43 +1,43 @@
 package com.epass.curfue.models
 
+import android.os.Parcelable
 import androidx.annotation.Keep
+import kotlinx.android.parcel.Parcelize
 
 @Keep
+@Parcelize
 data class VerifyTokenResponse(
-    val additionalAttributes: AdditionalAttributes,
-    val applicationID: Int,
-    val fromPlace: FromPlace,
-    val fromTime: String,
-    val purpose: String,
+    val additionalAttributes: AdditionalAttributes?,
+    val age: Int?,
+    val applicationID: Long,
+    val fromPlace: Place?,
+    val fromTime: String?,
+    val aadharId: String?,
+    val purpose: String?,
     val status: String,
-    val toPlace: ToPlace,
-    val toTime: String,
+    val toPlace: Place?,
+    val toTime: String?,
     val token: String,
-    val tripType: String,
-    val type: String
-){
+    val tripType: String?,
+    val type: String?
+) : Parcelable {
 
     @Keep
+    @Parcelize
     data class AdditionalAttributes(
-        val issuedToname: String,
-        val issuedTonumber: String
-    )
+        val issuedToname: String?,
+        val issuedTonumber: String?
+    ) : Parcelable
 
     @Keep
-    data class FromPlace(
+    @Parcelize
+    data class Place(
         val city: String,
         val lat: Double,
         val lng: Double,
         val name: String,
         val pincode: String
-    )
+    ) : Parcelable
 
-    @Keep
-    data class ToPlace(
-        val city: String,
-        val lat: Double,
-        val lng: Double,
-        val name: String,
-        val pincode: String
-    )
+
 }
