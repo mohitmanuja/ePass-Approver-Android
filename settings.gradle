@@ -1,0 +1,2 @@
+rootProject.name='E-Curfue People'
+include ':app'

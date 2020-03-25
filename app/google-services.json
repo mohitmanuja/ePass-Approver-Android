@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "503112051732",
+    "firebase_url": "https://e-curfue.firebaseio.com",
+    "project_id": "e-curfue",
+    "storage_bucket": "e-curfue.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:503112051732:android:38a54c934f9fbb67968b01",
+        "android_client_info": {
+          "package_name": "com.epass.curfue"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "503112051732-pa14eju86ttvebnsmb4afjs7nvvgeb9d.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAEZjdSulSVj8RLaSX3F-Xd_0HfkScX-wQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "503112051732-pa14eju86ttvebnsmb4afjs7nvvgeb9d.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
