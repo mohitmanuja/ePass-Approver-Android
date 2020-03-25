@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:custom="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/topLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -52,6 +51,17 @@
             custom:layout_constraintRight_toRightOf="parent"
             custom:layout_constraintTop_toTopOf="parent" />
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/margin_24dp"
+            android:text="@string/scan_qr_code_to_verify_the_pass"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_size_14sp"
+            custom:layout_constraintBottom_toTopOf="@id/qr_scanner"
+            custom:layout_constraintEnd_toEndOf="parent"
+            custom:layout_constraintStart_toStartOf="parent" />
+
         <View
             android:id="@+id/qr_scanner_bottom"
             android:layout_width="match_parent"
@@ -94,7 +104,7 @@
             android:layout_width="@dimen/margin_1dp"
             android:layout_height="0dp"
             android:layout_marginRight="@dimen/margin_5dp"
-            android:background="@color/white"
+            android:background="@color/blue_corner"
             custom:layout_constraintHeight_percent="0.05"
             custom:layout_constraintRight_toLeftOf="@id/qr_scanner"
             custom:layout_constraintTop_toTopOf="@id/white_top_left" />
@@ -104,7 +114,7 @@
             android:layout_width="@dimen/margin_1dp"
             android:layout_height="0dp"
             android:layout_marginLeft="@dimen/margin_5dp"
-            android:background="@color/white"
+            android:background="@color/blue_corner"
             custom:layout_constraintHeight_percent="0.05"
             custom:layout_constraintLeft_toRightOf="@id/qr_scanner"
             custom:layout_constraintTop_toTopOf="@id/white_top_right" />
@@ -114,7 +124,7 @@
             android:layout_width="@dimen/margin_1dp"
             android:layout_height="0dp"
             android:layout_marginLeft="@dimen/margin_5dp"
-            android:background="@color/white"
+            android:background="@color/blue_corner"
             custom:layout_constraintBottom_toBottomOf="@id/white_bottom_right"
             custom:layout_constraintHeight_percent="0.05"
             custom:layout_constraintLeft_toRightOf="@id/qr_scanner" />
@@ -124,7 +134,7 @@
             android:layout_width="@dimen/margin_1dp"
             android:layout_height="0dp"
             android:layout_marginRight="@dimen/margin_5dp"
-            android:background="@color/white"
+            android:background="@color/blue_corner"
             custom:layout_constraintBottom_toBottomOf="@id/white_bottom_left"
             custom:layout_constraintHeight_percent="0.05"
             custom:layout_constraintRight_toLeftOf="@id/qr_scanner" />
@@ -134,7 +144,7 @@
             android:layout_width="0dp"
             android:layout_height="@dimen/margin_1dp"
             android:layout_marginBottom="@dimen/margin_5dp"
-            android:background="@color/white"
+            android:background="@color/blue_corner"
             custom:layout_constraintBottom_toTopOf="@id/qr_scanner"
             custom:layout_constraintRight_toRightOf="@id/white_top_right_right"
             custom:layout_constraintWidth_percent="0.075" />
@@ -144,7 +154,7 @@
             android:layout_width="0dp"
             android:layout_height="@dimen/margin_1dp"
             android:layout_marginBottom="@dimen/margin_5dp"
-            android:background="@color/white"
+            android:background="@color/blue_corner"
             custom:layout_constraintBottom_toTopOf="@id/qr_scanner"
             custom:layout_constraintLeft_toLeftOf="@id/white_top_left_left"
             custom:layout_constraintWidth_percent="0.075" />
@@ -154,7 +164,7 @@
             android:layout_width="0dp"
             android:layout_height="@dimen/margin_1dp"
             android:layout_marginTop="@dimen/margin_5dp"
-            android:background="@color/white"
+            android:background="@color/blue_corner"
             custom:layout_constraintRight_toRightOf="@id/white_bottom_right_right"
             custom:layout_constraintTop_toBottomOf="@id/qr_scanner"
             custom:layout_constraintWidth_percent="0.075" />
@@ -164,7 +174,7 @@
             android:layout_width="0dp"
             android:layout_height="@dimen/margin_1dp"
             android:layout_marginTop="@dimen/margin_5dp"
-            android:background="@color/white"
+            android:background="@color/blue_corner"
             custom:layout_constraintLeft_toLeftOf="@id/white_bottom_left_left"
             custom:layout_constraintTop_toBottomOf="@id/qr_scanner"
             custom:layout_constraintWidth_percent="0.075" />
@@ -174,15 +184,22 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
-            android:orientation="vertical"
             android:gravity="center"
+            android:padding="@dimen/margin_16dp"
+            android:background="@color/white"
+            android:orientation="vertical"
             custom:layout_constraintBottom_toBottomOf="parent"
             custom:layout_constraintEnd_toEndOf="parent">
 
             <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Enter Manually" />
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/button_rectangular"
+                android:paddingTop="9dp"
+                android:textSize="@dimen/text_size_14sp"
+                android:paddingBottom="9dp"
+                android:text="Enter QR code manually"
+                android:textColor="@color/white" />
 
         </LinearLayout>
 

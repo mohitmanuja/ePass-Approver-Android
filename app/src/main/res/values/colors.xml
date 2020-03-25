@@ -6,6 +6,7 @@
     <color name="color_button">@color/orange</color>
 
     <color name="white">#FFFFFF</color>
+    <color name="blue_corner">#18A0FB</color>
     <color name="ivory">#FFFFF0</color>
     <color name="light_yellow">#FFFFE0</color>
     <color name="yellow">#FFFF00</color>

@@ -17,6 +17,7 @@
     <string name="ok">Ok</string>
     <string name="low_storage_error">Storage is low, Please delete some file and try again.</string>
     <string name="no_camera_permission">Camera Permission is not granted.</string>
+    <string name="scan_qr_code_to_verify_the_pass">Scan QR code to verify the pass</string>
 
     <string-array name="govt_id">
         <item>Aadhaar Card</item>
