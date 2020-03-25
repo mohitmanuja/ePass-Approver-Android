@@ -110,7 +110,7 @@
                 android:layout_width="@dimen/margin_1dp"
                 android:layout_height="0dp"
                 android:layout_marginRight="@dimen/margin_5dp"
-                android:background="@color/blue_corner"
+                android:background="@color/blue"
                 custom:layout_constraintHeight_percent="0.05"
                 custom:layout_constraintRight_toLeftOf="@id/qr_scanner"
                 custom:layout_constraintTop_toTopOf="@id/white_top_left" />
@@ -120,7 +120,7 @@
                 android:layout_width="@dimen/margin_1dp"
                 android:layout_height="0dp"
                 android:layout_marginLeft="@dimen/margin_5dp"
-                android:background="@color/blue_corner"
+                android:background="@color/blue"
                 custom:layout_constraintHeight_percent="0.05"
                 custom:layout_constraintLeft_toRightOf="@id/qr_scanner"
                 custom:layout_constraintTop_toTopOf="@id/white_top_right" />
@@ -130,7 +130,7 @@
                 android:layout_width="@dimen/margin_1dp"
                 android:layout_height="0dp"
                 android:layout_marginLeft="@dimen/margin_5dp"
-                android:background="@color/blue_corner"
+                android:background="@color/blue"
                 custom:layout_constraintBottom_toBottomOf="@id/white_bottom_right"
                 custom:layout_constraintHeight_percent="0.05"
                 custom:layout_constraintLeft_toRightOf="@id/qr_scanner" />
@@ -140,7 +140,7 @@
                 android:layout_width="@dimen/margin_1dp"
                 android:layout_height="0dp"
                 android:layout_marginRight="@dimen/margin_5dp"
-                android:background="@color/blue_corner"
+                android:background="@color/blue"
                 custom:layout_constraintBottom_toBottomOf="@id/white_bottom_left"
                 custom:layout_constraintHeight_percent="0.05"
                 custom:layout_constraintRight_toLeftOf="@id/qr_scanner" />
@@ -150,7 +150,7 @@
                 android:layout_width="0dp"
                 android:layout_height="@dimen/margin_1dp"
                 android:layout_marginBottom="@dimen/margin_5dp"
-                android:background="@color/blue_corner"
+                android:background="@color/blue"
                 custom:layout_constraintBottom_toTopOf="@id/qr_scanner"
                 custom:layout_constraintRight_toRightOf="@id/white_top_right_right"
                 custom:layout_constraintWidth_percent="0.075" />
@@ -160,7 +160,7 @@
                 android:layout_width="0dp"
                 android:layout_height="@dimen/margin_1dp"
                 android:layout_marginBottom="@dimen/margin_5dp"
-                android:background="@color/blue_corner"
+                android:background="@color/blue"
                 custom:layout_constraintBottom_toTopOf="@id/qr_scanner"
                 custom:layout_constraintLeft_toLeftOf="@id/white_top_left_left"
                 custom:layout_constraintWidth_percent="0.075" />
@@ -170,7 +170,7 @@
                 android:layout_width="0dp"
                 android:layout_height="@dimen/margin_1dp"
                 android:layout_marginTop="@dimen/margin_5dp"
-                android:background="@color/blue_corner"
+                android:background="@color/blue"
                 custom:layout_constraintRight_toRightOf="@id/white_bottom_right_right"
                 custom:layout_constraintTop_toBottomOf="@id/qr_scanner"
                 custom:layout_constraintWidth_percent="0.075" />
@@ -180,7 +180,7 @@
                 android:layout_width="0dp"
                 android:layout_height="@dimen/margin_1dp"
                 android:layout_marginTop="@dimen/margin_5dp"
-                android:background="@color/blue_corner"
+                android:background="@color/blue"
                 custom:layout_constraintLeft_toLeftOf="@id/white_bottom_left_left"
                 custom:layout_constraintTop_toBottomOf="@id/qr_scanner"
                 custom:layout_constraintWidth_percent="0.075" />

@@ -13,8 +13,5 @@ class QRStatusActivity :BaseActivity(){
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_qr_status)
 
-
     }
-
-
 }

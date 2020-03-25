@@ -3,7 +3,6 @@ package com.epass.curfue.activities
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
-import com.epass.curfue.MainActivity
 
 class DeeplinkActivity : Activity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -11,7 +10,7 @@ class DeeplinkActivity : Activity() {
 
         val intent = intent
         val bundle = intent.extras
-        val newIntent = Intent(this, MainActivity::class.java)
+        val newIntent = Intent(this, MultiTrackerActivity::class.java)
         var url: String? = intent.data?.toString()
         if (url.isNullOrEmpty()) url = bundle?.getString("deep_link")
 
@@ -22,11 +21,5 @@ class DeeplinkActivity : Activity() {
         startActivity(newIntent)
         finish()
     }
-
-    override fun onStart() {
-        super.onStart()
-
-    }
-
 
 }

@@ -1,20 +1,20 @@
 package com.epass.curfue.network
 
 import android.content.Context
+import com.readystatesoftware.chuck.ChuckInterceptor
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import java.util.concurrent.TimeUnit
 
 object RetrofitFactory {
-    const val BASE_URL = "https://mobileinfo.p.rapidapi.com/"
+    const val BASE_URL = "https://demo4807437.mockable.io/verifyauth"
     var client: OkHttpClient? = null
 
 
 
-/*    fun makeRetrofitService(context: Context): RetrofitService {
+    fun makeRetrofitService(context: Context): RetrofitService {
         if (client == null){
             client = OkHttpClient().newBuilder().connectTimeout(20, TimeUnit.SECONDS)
-                .callTimeout(2, TimeUnit.MINUTES)
                 .readTimeout(30, TimeUnit.SECONDS)
                 .writeTimeout(30, TimeUnit.SECONDS)
                 .addInterceptor(ChuckInterceptor(context))
@@ -24,7 +24,6 @@ object RetrofitFactory {
         return Retrofit.Builder()
             .baseUrl(BASE_URL)
             .client(client)
-            .addConverterFactory(MoshiConverterFactory.create().asLenient())
             .build().create(RetrofitService::class.java)
-    }*/
+    }
 }

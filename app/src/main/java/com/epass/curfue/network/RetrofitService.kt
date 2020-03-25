@@ -1,15 +1,15 @@
 package com.epass.curfue.network
 
+import com.epass.curfue.models.VerifyTokenRequest
+import com.epass.curfue.models.VerifyTokenResponse
 import retrofit2.Response
 import retrofit2.http.Body
-import retrofit2.http.HeaderMap
 import retrofit2.http.POST
 
 
 interface RetrofitService {
-/*
+
     @POST("/")
-    suspend fun getOperatorDetail(@HeaderMap queryMap: HashMap<String, String>, @Body operatorRequest: OperatorRequest): Response<OperatorResult>
-*/
+    suspend fun postVerifyToken(@Body verifyTokenRequest: VerifyTokenRequest): Response<VerifyTokenResponse>
 
 }

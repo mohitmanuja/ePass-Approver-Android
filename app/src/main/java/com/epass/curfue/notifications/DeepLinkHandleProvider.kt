@@ -49,21 +49,10 @@ object DeepLinkHandleProvider {
         val uri = Uri.parse(url)
         val inWebview = uri.getBooleanQueryParameter("in_web_view", false)
         val inChrome = uri.getBooleanQueryParameter("in_chrome", false)
-        val packageId = uri.getQueryParameter("packageId")
         val name = uri.getQueryParameter("name")
-        val deeplinkActivity = uri.getQueryParameter("page")
-
-
 
         if (inChrome){
             DeeplinkUtils.openInBrowser(url,context)
-            return
-        }
-
-
-
-        if("promo" == pageType){
-            DeeplinkUtils.promoApp(eid, "",context)
             return
         }
 
