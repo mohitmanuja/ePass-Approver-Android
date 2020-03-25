@@ -8,7 +8,8 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="@color/white">
 
 
         <LinearLayout
@@ -35,24 +36,24 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="16dp"
+                android:layout_marginTop="20dp"
                 android:animateLayoutChanges="true"
                 android:orientation="horizontal"
-                android:padding="2dp"
-                android:layout_marginTop="20dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/otp_sent_text"
                 app:layout_constraintTop_toTopOf="parent">
 
 
-                <EditText
+                <androidx.appcompat.widget.AppCompatEditText
                     android:id="@+id/name_et"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="50dp"
                     android:autofillHints=""
+                    android:background="@drawable/editext_boarder"
                     android:ems="10"
-                    android:background="@android:color/transparent"
                     android:hint="@string/enter_name"
-                    android:inputType="textPersonName" />
+                    android:inputType="textPersonName"
+                    android:padding="4dp" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -71,13 +72,14 @@
                 <EditText
                     android:id="@+id/age_et"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="50dp"
                     android:autofillHints=""
-                    android:background="@android:color/transparent"
+                    android:background="@drawable/editext_boarder"
+                    android:ems="10"
                     android:hint="Age"
-                    android:ems="10"
                     android:inputType="number"
-                    android:maxLength="3" />
+                    android:maxLength="3"
+                    android:padding="4dp" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -95,12 +97,36 @@
 
                 <EditText
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="50dp"
                     android:autofillHints=""
+                    android:background="@drawable/editext_boarder"
                     android:ems="10"
-                    android:background="@android:color/transparent"
                     android:hint="Profession"
-                    android:inputType="text" />
+                    android:inputType="text"
+                    android:padding="4dp" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="16dp"
+                android:animateLayoutChanges="true"
+                android:orientation="horizontal"
+                android:padding="2dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/otp_sent_text"
+                app:layout_constraintTop_toTopOf="parent">
+
+
+                <Spinner
+                    android:id="@+id/spinner1"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:background="@drawable/editext_boarder"
+                    android:entries="@array/govt_id"
+                    android:padding="4dp"
+                    android:prompt="@string/govt_id_promt" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -118,35 +144,13 @@
 
                 <EditText
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="50dp"
                     android:autofillHints=""
-                    android:background="@android:color/transparent"
-                    android:ems="10"
-                    android:hint="Select Govt Id"
-                    android:inputType="phone" />
-
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="16dp"
-                android:animateLayoutChanges="true"
-                android:orientation="horizontal"
-                android:padding="2dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/otp_sent_text"
-                app:layout_constraintTop_toTopOf="parent">
-
-
-                <EditText
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:autofillHints=""
-                    android:background="@android:color/transparent"
+                    android:background="@drawable/editext_boarder"
                     android:ems="10"
                     android:hint="Enter Govt. Id Value"
-                    android:inputType="phone" />
+                    android:inputType="phone"
+                    android:padding="4dp" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -154,10 +158,10 @@
                 android:id="@+id/sumbit"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center"
                 android:layout_margin="16dp"
                 android:background="@color/orange"
                 android:text="Submit"
-                android:layout_gravity="center"
                 android:textColor="@color/white"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"

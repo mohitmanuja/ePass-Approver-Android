@@ -12,6 +12,7 @@ import com.epass.curfue.activities.CreateApplicationActivity
 import com.epass.curfue.databinding.ActivityMainBinding
 import com.epass.curfue.notifications.DeepLinkHandleProvider
 import com.epass.curfue.utils.AnalyticsUtil
+import com.epass.curfue.utils.showToast
 import com.google.android.material.navigation.NavigationView
 import com.google.firebase.analytics.FirebaseAnalytics
 
@@ -40,9 +41,11 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
         binding.navView.setNavigationItemSelectedListener(this)
 
         binding.contentMain.createNew.setOnClickListener {
-            startActivity(Intent(this,CreateApplicationActivity::class.java))
+            showToast("Wait I am working !!")
+//            startActivity(Intent(this,CreateApplicationActivity::class.java))
         }
         binding.contentMain.claimPass.setOnClickListener {
+            showToast("Wait I am working !!")
 
         }
     }

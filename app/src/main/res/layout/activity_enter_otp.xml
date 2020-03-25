@@ -46,7 +46,6 @@
                 android:layout_height="wrap_content"
                 android:autofillHints=""
                 android:ems="10"
-                android:text="12"
                 android:hint="@string/enter_otp"
                 android:inputType="phone" />
 

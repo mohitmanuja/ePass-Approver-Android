@@ -44,7 +44,6 @@
                 android:maxLength="10"
                 android:layout_height="wrap_content"
                 android:hint="@string/mobile_number"
-                android:text="9988776655"
                 android:inputType="number" />
 
         </com.google.android.material.textfield.TextInputLayout>

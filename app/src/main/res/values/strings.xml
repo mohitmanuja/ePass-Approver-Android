@@ -10,4 +10,15 @@
     <string name="create_new_application">Create New Application</string>
     <string name="claim_application">Claim Application</string>
     <string name="go_to_home">Go to Home</string>
+
+    <string name="govt_id_promt">Select Govt. ID</string>
+
+    <string-array name="govt_id">
+        <item>Choose Govt. Id</item>
+        <item>Aadhaar Card</item>
+        <item>Pan Card</item>
+        <item>Passport</item>
+        <item>Voter Card</item>
+    </string-array>
+
 </resources>
