@@ -17,7 +17,7 @@ class EnterOtpActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_enter_otp)
         val mobileNumber = intent.getStringExtra(CommonUtils.NUMBER)
-        binding.otpSentText.text = "Enter OTP sent to $mobileNumber"
+//        binding.otpSentText.text = "Enter OTP sent to $mobileNumber"
         supportActionBar?.title = "Enter OTP"
         binding.login.setOnClickListener {
             if (CommonUtils.isNotNull(binding.otpEditText.text.toString())) {

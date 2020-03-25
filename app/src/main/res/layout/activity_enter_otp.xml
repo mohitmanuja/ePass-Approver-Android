@@ -19,7 +19,7 @@
             android:gravity="center_horizontal"
             android:layout_marginStart="16dp"
             android:layout_marginEnd="16dp"
-            android:text="Enter OTP sent to ***********"
+            android:text="Enter OTP sent to +91-99******7897"
             android:textSize="25dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -29,12 +29,13 @@
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/otp_input"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="80dp"
             android:layout_below="@id/otp_sent_text"
             android:layout_margin="16dp"
             android:animateLayoutChanges="true"
             android:orientation="horizontal"
             android:padding="2dp"
+            android:gravity="bottom"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toBottomOf="@id/otp_sent_text"
             app:layout_constraintTop_toTopOf="parent">
@@ -43,8 +44,12 @@
             <EditText
                 android:id="@+id/otp_edit_text"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="50dp"
                 android:autofillHints=""
+                android:padding="4dp"
+                android:text="0766"
+                android:maxLength="6"
+                android:background="@drawable/editext_boarder"
                 android:ems="10"
                 android:hint="@string/enter_otp"
                 android:inputType="phone" />
@@ -61,7 +66,7 @@
             android:textColor="@color/white"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent" />
+            app:layout_constraintTop_toBottomOf="@id/otp_input" />
 
 
 

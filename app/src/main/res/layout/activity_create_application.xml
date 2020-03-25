@@ -8,6 +8,7 @@
 
     <ScrollView
         android:layout_width="match_parent"
+        android:background="@color/white"
         android:layout_height="match_parent">
 
 
@@ -24,6 +25,7 @@
                 android:layout_margin="16dp"
                 android:animateLayoutChanges="true"
                 android:orientation="horizontal"
+                android:gravity="bottom"
                 android:padding="2dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/otp_sent_text"
@@ -33,9 +35,14 @@
                 <EditText
                     android:id="@+id/name_et"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="50dp"
+                    android:background="@drawable/editext_boarder"
                     android:autofillHints=""
-                    android:background="@android:color/transparent"
+                    android:padding="4dp"
+                    android:text="Personal"
+                    android:focusable="false"
+                    android:clickable="false"
+                    android:cursorVisible="false"
                     android:hint="Type of Application"
                     android:inputType="textPersonName" />
 
@@ -48,6 +55,7 @@
                 android:animateLayoutChanges="true"
                 android:orientation="horizontal"
                 android:padding="2dp"
+                android:gravity="bottom"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/otp_sent_text"
                 app:layout_constraintTop_toTopOf="parent">
@@ -56,12 +64,15 @@
                 <EditText
                     android:id="@+id/age_et"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="50dp"
                     android:autofillHints=""
-                    android:background="@android:color/transparent"
-                    android:hint="Start Time"
-                    android:inputType="number"
-                    android:maxLength="3" />
+                    android:focusable="false"
+                    android:clickable="false"
+                    android:cursorVisible="false"
+                    android:padding="4dp"
+                    android:text="25/03/2020 05:20PM "
+                    android:background="@drawable/editext_boarder"
+                    android:hint="Start Time" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -72,6 +83,7 @@
                 android:animateLayoutChanges="true"
                 android:orientation="horizontal"
                 android:padding="2dp"
+                android:gravity="bottom"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/otp_sent_text"
                 app:layout_constraintTop_toTopOf="parent">
@@ -79,9 +91,15 @@
 
                 <EditText
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="50dp"
                     android:autofillHints=""
-                    android:background="@android:color/transparent"
+                    android:padding="4dp"
+
+                    android:focusable="false"
+                    android:clickable="false"
+                    android:cursorVisible="false"
+                    android:text="25/03/2020 08:20PM "
+                    android:background="@drawable/editext_boarder"
                     android:hint="End Time"
                     android:inputType="phone" />
 
@@ -94,20 +112,24 @@
                 android:animateLayoutChanges="true"
                 android:orientation="horizontal"
                 android:padding="2dp"
+                android:gravity="bottom"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/otp_sent_text"
                 app:layout_constraintTop_toTopOf="parent">
 
-
-                <EditText
+<!--&lt;!&ndash;Add Picker&ndash;&gt; Job Groceries, Other-->
+                <TextView
+                    style="@style/InputLabel"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:autofillHints=""
-                    android:background="@android:color/transparent"
-                    android:ems="10"
-                    android:hint="Purpose"
-                    android:inputType="phone" />
+                    android:text="Select Purpose" />
 
+                <Spinner
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:background="@drawable/editext_boarder"
+                    android:entries="@array/purpose_enteries"
+                    android:padding="4dp"/>
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
@@ -117,6 +139,7 @@
                 android:animateLayoutChanges="true"
                 android:orientation="horizontal"
                 android:padding="2dp"
+                android:gravity="bottom"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/otp_sent_text"
                 app:layout_constraintTop_toTopOf="parent">
@@ -124,69 +147,89 @@
 
                 <EditText
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="50dp"
                     android:autofillHints=""
-                    android:background="@android:color/transparent"
+                    android:background="@drawable/editext_boarder"
                     android:ems="10"
-                    android:hint="Enter Govt. Id Value"
-                    android:inputType="phone" />
 
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:layout_width="match_parent"
-                android:layout_height="80dp"
-                android:layout_margin="16dp"
-                android:animateLayoutChanges="true"
-                android:orientation="horizontal"
-                android:padding="2dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/otp_sent_text"
-                app:layout_constraintTop_toTopOf="parent">
-
-
-                <EditText
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:autofillHints=""
-                    android:background="@android:color/transparent"
-                    android:ems="10"
-                    android:hint="Destination"
-                    android:inputType="phone" />
-
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:layout_width="match_parent"
-                android:layout_height="80dp"
-                android:layout_margin="16dp"
-                android:animateLayoutChanges="true"
-                android:orientation="horizontal"
-                android:padding="2dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/otp_sent_text"
-                app:layout_constraintTop_toTopOf="parent">
-
-
-                <EditText
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:autofillHints=""
-                    android:background="@android:color/transparent"
-                    android:ems="10"
+                    android:focusable="false"
+                    android:clickable="false"
+                    android:cursorVisible="false"
+                    android:text="Hill Reach Spring, Banglore"
+                    android:padding="4dp"
                     android:hint="Source"
                     android:inputType="phone" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+                android:layout_margin="16dp"
+                android:animateLayoutChanges="true"
+                android:orientation="horizontal"
+                android:padding="2dp"
+                android:gravity="bottom"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/otp_sent_text"
+                app:layout_constraintTop_toTopOf="parent">
+
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:autofillHints=""
+                    android:background="@drawable/editext_boarder"
+                    android:ems="10"
+                    android:padding="4dp"
+
+                    android:focusable="false"
+                    android:clickable="false"
+                    android:cursorVisible="false"
+                    android:text="Ratnadeep, Banglore"
+                    android:hint="Destination"
+                    android:inputType="phone" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+                android:layout_margin="16dp"
+                android:animateLayoutChanges="true"
+                android:orientation="horizontal"
+                android:padding="2dp"
+                android:gravity="bottom"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/otp_sent_text"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <!--&lt;!&ndash;Add Picker&ndash;&gt; Job Groceries, Other-->
+                <TextView
+                    style="@style/InputLabel"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Choose Trip Type" />
+
+                <Spinner
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:background="@drawable/editext_boarder"
+                    android:entries="@array/trip_enteries"
+                    android:padding="4dp"/>
+            </com.google.android.material.textfield.TextInputLayout>
+
             <Button
-                android:id="@+id/login"
+                android:id="@+id/submit"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_margin="16dp"
                 android:background="@color/orange"
-                android:text="Submit"
+                android:text="Request Anumati"
+                android:paddingStart="20dp"
+                android:paddingEnd="20dp"
                 android:textColor="@color/white"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"

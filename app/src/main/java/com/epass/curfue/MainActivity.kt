@@ -3,10 +3,12 @@ package com.epass.curfue
 import android.content.Intent
 import android.os.Bundle
 import android.view.MenuItem
+import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.core.view.GravityCompat
 import androidx.databinding.DataBindingUtil
+import androidx.drawerlayout.widget.DrawerLayout
 import com.epass.curfue.activities.BaseActivity
 import com.epass.curfue.activities.CreateApplicationActivity
 import com.epass.curfue.databinding.ActivityMainBinding
@@ -23,7 +25,7 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this,R.layout.activity_main)
-        supportActionBar?.title = "Dashboard"
+        supportActionBar?.title = "Anumati"
 
         setScreenName("Test Screen")
         AnalyticsUtil.logEvent(FirebaseAnalytics.getInstance(this))
@@ -38,11 +40,15 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
         )
         binding.drawerLayout.addDrawerListener(toggle)
         toggle.syncState()
+        binding.navView.itemIconTintList = null
+        binding.navView.visibility= View.GONE
+        binding.drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED)
+        toggle.isDrawerIndicatorEnabled = false
+
         binding.navView.setNavigationItemSelectedListener(this)
 
         binding.contentMain.createNew.setOnClickListener {
-            showToast("Wait I am working !!")
-//            startActivity(Intent(this,CreateApplicationActivity::class.java))
+            startActivity(Intent(this,CreateApplicationActivity::class.java))
         }
         binding.contentMain.claimPass.setOnClickListener {
             showToast("Wait I am working !!")

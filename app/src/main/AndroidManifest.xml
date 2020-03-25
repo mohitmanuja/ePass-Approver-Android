@@ -33,6 +33,7 @@
             android:theme="@style/AppTheme.NoActionBar"/>
         <activity android:name=".activities.ProfileActivity"/>
         <activity android:name=".activities.CreateApplicationActivity"/>
+        <activity android:name=".activities.ApplicationCreatedActivity"/>
     </application>
 
 </manifest>

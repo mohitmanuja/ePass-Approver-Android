@@ -34,10 +34,11 @@
 
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="80dp"
                 android:layout_margin="16dp"
                 android:layout_marginTop="20dp"
                 android:animateLayoutChanges="true"
+                android:gravity="bottom"
                 android:orientation="horizontal"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/otp_sent_text"
@@ -50,44 +51,23 @@
                     android:layout_height="50dp"
                     android:autofillHints=""
                     android:background="@drawable/editext_boarder"
+                    android:editable="false"
                     android:ems="10"
                     android:hint="@string/enter_name"
                     android:inputType="textPersonName"
-                    android:padding="4dp" />
+                    android:padding="4dp"
+                    android:text="Mohit Manuja" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="16dp"
+                android:layout_height="80dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginBottom="16dp"
                 android:animateLayoutChanges="true"
-                android:orientation="horizontal"
-                android:padding="2dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/otp_sent_text"
-                app:layout_constraintTop_toTopOf="parent">
-
-
-                <EditText
-                    android:id="@+id/age_et"
-                    android:layout_width="match_parent"
-                    android:layout_height="50dp"
-                    android:autofillHints=""
-                    android:background="@drawable/editext_boarder"
-                    android:ems="10"
-                    android:hint="Age"
-                    android:inputType="number"
-                    android:maxLength="3"
-                    android:padding="4dp" />
-
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="16dp"
-                android:animateLayoutChanges="true"
+                android:gravity="bottom"
                 android:orientation="horizontal"
                 android:padding="2dp"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -101,7 +81,7 @@
                     android:autofillHints=""
                     android:background="@drawable/editext_boarder"
                     android:ems="10"
-                    android:hint="Profession"
+                    android:hint="Choose Profession"
                     android:inputType="text"
                     android:padding="4dp" />
 
@@ -109,15 +89,81 @@
 
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="16dp"
+                android:layout_height="80dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginBottom="16dp"
                 android:animateLayoutChanges="true"
+                android:gravity="bottom"
                 android:orientation="horizontal"
                 android:padding="2dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/otp_sent_text"
                 app:layout_constraintTop_toTopOf="parent">
 
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:autofillHints=""
+                    android:background="@drawable/editext_boarder"
+                    android:editable="false"
+                    android:ems="10"
+                    android:hint="Date of birth"
+                    android:inputType="text"
+                    android:padding="4dp"
+                    android:text="28 Sep 1997" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginBottom="16dp"
+                android:animateLayoutChanges="true"
+                android:gravity="bottom"
+                android:orientation="horizontal"
+                android:padding="2dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/otp_sent_text"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <TextView
+                    style="@style/InputLabel"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Select Gender" />
+
+                <Spinner
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:background="@drawable/editext_boarder"
+                    android:entries="@array/gender_enteries"
+                    android:padding="4dp" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginBottom="16dp"
+                android:animateLayoutChanges="true"
+                android:gravity="bottom"
+                android:orientation="horizontal"
+                android:padding="2dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/otp_sent_text"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <TextView
+                    style="@style/InputLabel"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/govt_id_promt" />
 
                 <Spinner
                     android:id="@+id/spinner1"
@@ -132,9 +178,12 @@
 
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="16dp"
+                android:layout_height="80dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginBottom="16dp"
                 android:animateLayoutChanges="true"
+                android:gravity="bottom"
                 android:orientation="horizontal"
                 android:padding="2dp"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -150,7 +199,8 @@
                     android:ems="10"
                     android:hint="Enter Govt. Id Value"
                     android:inputType="phone"
-                    android:padding="4dp" />
+                    android:padding="4dp"
+                    android:text="123456789123" />
 
             </com.google.android.material.textfield.TextInputLayout>
 

@@ -17,13 +17,13 @@ class WelcomeActivity :BaseActivity(){
         binding = DataBindingUtil.setContentView(this,R.layout.activity_welcome)
 
         binding.login.setOnClickListener {
-            if(CommonUtils.isNotNull(binding.etPh.text.toString()) && binding.etPh.text.toString().length==10){
+            if(CommonUtils.isNotNull(binding.etPh.text.toString()) && binding.etPh.text.toString().length==12){
                 val mobileNumber = binding.etPh.text.toString()
                 val intent = Intent(this, EnterOtpActivity::class.java)
                 intent.putExtra(CommonUtils.NUMBER,mobileNumber)
                 startActivity(intent)
             }else{
-                showToast("Please enter 10 digit mobile number.")
+                showToast("Please enter 12 digit Aadhaar.")
             }
         }
     }

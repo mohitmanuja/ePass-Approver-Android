@@ -6,19 +6,34 @@
     <string name="enter_otp">Enter OTP</string>
     <string name="enter_name">Enter Name</string>
     <string name="dashboard">Dashboard</string>
-    <string name="you_have_no_application_yet">You have no application yet!</string>
-    <string name="create_new_application">Create New Application</string>
+    <string name="you_have_no_application_yet">You have no anumati yet!</string>
+    <string name="create_new_application">Request new anumati</string>
     <string name="claim_application">Claim Application</string>
     <string name="go_to_home">Go to Home</string>
 
     <string name="govt_id_promt">Select Govt. ID</string>
+    <string name="aadhar_number">Enter Aadhaar Number</string>
 
     <string-array name="govt_id">
-        <item>Choose Govt. Id</item>
         <item>Aadhaar Card</item>
         <item>Pan Card</item>
         <item>Passport</item>
         <item>Voter Card</item>
+    </string-array>
+    <string-array name="gender_enteries">
+        <item>Male</item>
+        <item>Female</item>
+    </string-array>
+
+    <string-array name="purpose_enteries">
+        <item>Job</item>
+        <item>Groceries</item>
+        <item>Medical</item>
+    </string-array>
+
+    <string-array name="trip_enteries">
+        <item>One Way</item>
+        <item>Round Trip</item>
     </string-array>
 
 </resources>
