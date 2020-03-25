@@ -18,7 +18,6 @@ package com.epass.curfue.activities;
 import android.Manifest;
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.app.Application;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -32,18 +31,16 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
+import androidx.databinding.DataBindingUtil;
 
 import com.epass.curfue.R;
-import com.epass.curfue.camera.CameraSourcePreview;
-import com.epass.curfue.camera.GraphicOverlay;
+import com.epass.curfue.databinding.ActivityQrScannerBinding;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GoogleApiAvailability;
-
 import com.google.android.gms.vision.CameraSource;
 import com.google.android.gms.vision.MultiDetector;
 import com.google.android.gms.vision.MultiProcessor;
 import com.google.android.gms.vision.barcode.BarcodeDetector;
-import com.google.android.gms.vision.face.FaceDetector;
 import com.google.android.material.snackbar.Snackbar;
 
 import java.io.IOException;
@@ -54,26 +51,21 @@ import java.io.IOException;
  * barcode.
  */
 public final class MultiTrackerActivity extends AppCompatActivity {
-    private static final String TAG = "MultiTracker";
+    private static final String TAG = "Anumati_Police";
 
     private static final int RC_HANDLE_GMS = 9001;
     // permission request codes need to be < 256
     private static final int RC_HANDLE_CAMERA_PERM = 2;
 
     private CameraSource mCameraSource = null;
-    private CameraSourcePreview mPreview;
-    private GraphicOverlay mGraphicOverlay;
-
+    private ActivityQrScannerBinding binding;
     /**
      * Initializes the UI and creates the detector pipeline.
      */
     @Override
     public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
-        setContentView(R.layout.activity_qr_scanner);
-
-        mPreview = (CameraSourcePreview) findViewById(R.id.preview);
-        mGraphicOverlay = (GraphicOverlay) findViewById(R.id.graphicOverlay);
+        binding = DataBindingUtil.setContentView(this,R.layout.activity_qr_scanner);
 
         // Check for the camera permission before accessing the camera.  If the
         // permission is not granted yet, request permission.
@@ -83,6 +75,13 @@ public final class MultiTrackerActivity extends AppCompatActivity {
         } else {
             requestCameraPermission();
         }
+
+        binding.enterManualCode.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(MultiTrackerActivity.this,QRVerificationActivity.class));
+            }
+        });
     }
 
     /**
@@ -111,7 +110,7 @@ public final class MultiTrackerActivity extends AppCompatActivity {
             }
         };
 
-        Snackbar.make(mGraphicOverlay, R.string.permission_camera_rationale,
+        Snackbar.make(binding.graphicOverlay, R.string.permission_camera_rationale,
                 Snackbar.LENGTH_INDEFINITE)
                 .setAction(R.string.ok, listener)
                 .show();
@@ -135,7 +134,7 @@ public final class MultiTrackerActivity extends AppCompatActivity {
         // graphics for each barcode on screen.  The factory is used by the multi-processor to
         // create a separate tracker instance for each barcode.
         BarcodeDetector barcodeDetector = new BarcodeDetector.Builder(context).build();
-        BarcodeTrackerFactory barcodeFactory = new BarcodeTrackerFactory(mGraphicOverlay,this);
+        BarcodeTrackerFactory barcodeFactory = new BarcodeTrackerFactory(binding.graphicOverlay,this);
         barcodeDetector.setProcessor(
                 new MultiProcessor.Builder<>(barcodeFactory).build());
 
@@ -197,7 +196,7 @@ public final class MultiTrackerActivity extends AppCompatActivity {
     @Override
     protected void onPause() {
         super.onPause();
-        mPreview.stop();
+        binding.preview.stop();
     }
 
     /**
@@ -277,7 +276,7 @@ public final class MultiTrackerActivity extends AppCompatActivity {
 
         if (mCameraSource != null) {
             try {
-                mPreview.start(mCameraSource, mGraphicOverlay);
+                binding.preview.start(mCameraSource, binding.graphicOverlay);
             } catch (IOException e) {
                 Log.e(TAG, "Unable to start camera source.", e);
                 mCameraSource.release();

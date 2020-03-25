@@ -41,6 +41,12 @@
         <activity android:name=".activities.ApplicationCreatedActivity"/>
         <activity android:name=".activities.WelcomeActivity"/>
         <activity android:name=".activities.VerificationFoundActivity"/>
+        <activity android:name=".activities.QRVerificationActivity"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:launchMode="singleTop"/>
+
+        <activity android:name=".activities.QRStatusActivity"
+            android:theme="@style/AppTheme.NoActionBar"/>
 
     </application>
 

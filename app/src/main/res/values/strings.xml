@@ -18,6 +18,13 @@
     <string name="low_storage_error">Storage is low, Please delete some file and try again.</string>
     <string name="no_camera_permission">Camera Permission is not granted.</string>
     <string name="scan_qr_code_to_verify_the_pass">Scan QR code to verify the pass</string>
+    <string name="enter_qr_code">Enter QR Code</string>
+    <string name="enter_qr_code_manually">Enter QR code manually</string>
+    <string name="name">Name:</string>
+    <string name="age">Age:</string>
+    <string name="aadhar_id">Aadhar ID:</string>
+    <string name="done">Done</string>
+    <string name="qr_code_verified_succesfully">QR code verified succesfully!</string>
 
     <string-array name="govt_id">
         <item>Aadhaar Card</item>
