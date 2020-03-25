@@ -1,4 +1,13 @@
 <resources>
     <string name="app_name">E-Curfue People</string>
     <string name="custom_title">Please Wait</string>
+    <string name="welcome_to_anumati">Welcome to Anumati</string>
+    <string name="mobile_number">Mobile Number</string>
+    <string name="enter_otp">Enter OTP</string>
+    <string name="enter_name">Enter Name</string>
+    <string name="dashboard">Dashboard</string>
+    <string name="you_have_no_application_yet">You have no application yet!</string>
+    <string name="create_new_application">Create New Application</string>
+    <string name="claim_application">Claim Application</string>
+    <string name="go_to_home">Go to Home</string>
 </resources>

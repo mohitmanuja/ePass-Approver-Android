@@ -8,6 +8,7 @@ import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.core.view.GravityCompat
 import androidx.databinding.DataBindingUtil
 import com.epass.curfue.activities.BaseActivity
+import com.epass.curfue.activities.CreateApplicationActivity
 import com.epass.curfue.databinding.ActivityMainBinding
 import com.epass.curfue.notifications.DeepLinkHandleProvider
 import com.epass.curfue.utils.AnalyticsUtil
@@ -36,6 +37,13 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
         binding.drawerLayout.addDrawerListener(toggle)
         toggle.syncState()
         binding.navView.setNavigationItemSelectedListener(this)
+
+        binding.contentMain.createNew.setOnClickListener {
+            startActivity(Intent(this,CreateApplicationActivity::class.java))
+        }
+        binding.contentMain.claimPass.setOnClickListener {
+
+        }
     }
 
     override fun onNewIntent(intent: Intent?) {

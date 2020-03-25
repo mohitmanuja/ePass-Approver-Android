@@ -3,6 +3,7 @@
     <color name="colorPrimary">@color/white</color>
     <color name="colorPrimaryDark">@color/gray</color>
     <color name="colorAccent">@color/black</color>
+    <color name="color_button">@color/orange</color>
 
     <color name="white">#FFFFFF</color>
     <color name="ivory">#FFFFF0</color>
