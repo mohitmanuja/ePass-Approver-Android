@@ -17,6 +17,7 @@ class ProfileActivity :BaseActivity(){
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this,R.layout.activity_profile)
+        supportActionBar?.title = "Create Profile"
 
         binding.sumbit.setOnClickListener {
             startActivity(Intent(this,MainActivity::class.java))

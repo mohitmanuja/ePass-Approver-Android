@@ -38,12 +38,13 @@
             app:layout_constraintTop_toTopOf="parent">
 
 
-            <EditText
+            <androidx.appcompat.widget.AppCompatEditText
                 android:id="@+id/et_ph"
                 android:layout_width="match_parent"
                 android:maxLength="10"
                 android:layout_height="wrap_content"
                 android:hint="@string/mobile_number"
+                android:text="9988776655"
                 android:inputType="number" />
 
         </com.google.android.material.textfield.TextInputLayout>

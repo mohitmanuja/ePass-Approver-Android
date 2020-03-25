@@ -13,6 +13,8 @@ import java.util.*
 class CommonUtils {
     companion object {
 
+        const val NUMBER: String = "number"
+
         @JvmStatic
         fun isNotNull(string: String?): Boolean {
             return !(string == null || string.isEmpty())

@@ -9,19 +9,21 @@ import com.epass.curfue.databinding.ActivityWelcomeBinding
 import com.epass.curfue.utils.CommonUtils
 import com.epass.curfue.utils.showToast
 
-class EnterOtpActivity :BaseActivity(){
+class EnterOtpActivity : BaseActivity() {
 
-    lateinit var binding:ActivityEnterOtpBinding
+    lateinit var binding: ActivityEnterOtpBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = DataBindingUtil.setContentView(this,R.layout.activity_enter_otp)
-
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_enter_otp)
+        val mobileNumber = intent.getStringExtra(CommonUtils.NUMBER)
+        binding.otpSentText.text = "Enter OTP sent to $mobileNumber"
+        supportActionBar?.title = "Enter OTP"
         binding.login.setOnClickListener {
-            if (CommonUtils.isNotNull(binding.otpEditText.text.toString())){
-                startActivity(Intent(this,ProfileActivity::class.java))
+            if (CommonUtils.isNotNull(binding.otpEditText.text.toString())) {
+                startActivity(Intent(this, ProfileActivity::class.java))
 
-            }else{
+            } else {
                 showToast("Please enter otp")
             }
         }

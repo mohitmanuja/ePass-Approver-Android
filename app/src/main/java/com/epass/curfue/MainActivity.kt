@@ -22,6 +22,7 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this,R.layout.activity_main)
+        supportActionBar?.title = "Dashboard"
 
         setScreenName("Test Screen")
         AnalyticsUtil.logEvent(FirebaseAnalytics.getInstance(this))
