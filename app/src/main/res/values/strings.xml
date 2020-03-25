@@ -24,7 +24,7 @@
     <string name="age">Age:</string>
     <string name="aadhar_id">Aadhar ID:</string>
     <string name="done">Done</string>
-    <string name="qr_code_verified_succesfully">QR code verified succesfully!</string>
+    <string name="qr_code_verified_succesfully">QR code verified successfully!</string>
 
     <string-array name="govt_id">
         <item>Aadhaar Card</item>

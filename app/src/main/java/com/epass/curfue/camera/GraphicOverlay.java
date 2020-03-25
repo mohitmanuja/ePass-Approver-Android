@@ -51,6 +51,8 @@ public class GraphicOverlay<T extends GraphicOverlay.Graphic> extends View {
     private float mHeightScaleFactor = 1.0f;
     private int mFacing = CameraSource.CAMERA_FACING_BACK;
     private Set<T> mGraphics = new HashSet<>();
+    private T mFirstGraphic;
+
 
     /**
      * Base class for a custom graphics object to be rendered within the graphic overlay.  Subclass
@@ -133,17 +135,21 @@ public class GraphicOverlay<T extends GraphicOverlay.Graphic> extends View {
     public void clear() {
         synchronized (mLock) {
             mGraphics.clear();
+            mFirstGraphic = null;
         }
         postInvalidate();
     }
 
+
     /**
      * Adds a graphic to the overlay.
      */
-
     public void add(T graphic) {
         synchronized (mLock) {
             mGraphics.add(graphic);
+            if (mFirstGraphic == null) {
+                mFirstGraphic = graphic;
+            }
         }
         postInvalidate();
     }
@@ -154,15 +160,23 @@ public class GraphicOverlay<T extends GraphicOverlay.Graphic> extends View {
     public void remove(T graphic) {
         synchronized (mLock) {
             mGraphics.remove(graphic);
+            if (mFirstGraphic != null && mFirstGraphic.equals(graphic)) {
+                mFirstGraphic = null;
+            }
         }
         postInvalidate();
     }
 
     /**
-     * Returns the first graphic, if any, that exists at the provided absolute screen coordinates.
-     * These coordinates will be offset by the relative screen position of this view.
-     * @return First graphic containing the point, or null if no text is detected.
+     * Returns the first (oldest) graphic added.  This is used
+     * to get the barcode that was detected first.
+     * @return graphic containing the barcode, or null if no barcodes are detected.
      */
+    public T getFirstGraphic() {
+        synchronized (mLock) {
+            return mFirstGraphic;
+        }
+    }
     public T getGraphicAtLocation(float rawX, float rawY) {
         synchronized (mLock) {
             // Get the position of this View so the raw location can be offset relative to the view.

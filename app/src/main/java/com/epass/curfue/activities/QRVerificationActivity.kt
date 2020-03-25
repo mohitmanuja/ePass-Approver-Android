@@ -1,5 +1,6 @@
 package com.epass.curfue.activities
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.databinding.DataBindingUtil
 import com.epass.curfue.R
@@ -14,6 +15,10 @@ class QRVerificationActivity :BaseActivity(){
         binding = DataBindingUtil.setContentView(this,R.layout.activity_enter_qr_code)
         binding.toolbar.setNavigationOnClickListener {
             finish()
+        }
+
+        binding.verify.setOnClickListener {
+            startActivity(Intent(this,QRStatusActivity::class.java))
         }
 
     }

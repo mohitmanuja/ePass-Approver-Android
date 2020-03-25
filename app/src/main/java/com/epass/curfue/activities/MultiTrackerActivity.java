@@ -24,22 +24,31 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.pm.PackageManager;
+import android.hardware.Camera;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.GestureDetector;
+import android.view.MotionEvent;
 import android.view.View;
+import android.webkit.URLUtil;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.databinding.DataBindingUtil;
 
+import com.epass.curfue.BuildConfig;
 import com.epass.curfue.R;
+import com.epass.curfue.camera.BarcodeGraphic;
+import com.epass.curfue.camera.BarcodeGraphicTracker;
+import com.epass.curfue.camera.GraphicOverlay;
 import com.epass.curfue.databinding.ActivityQrScannerBinding;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GoogleApiAvailability;
 import com.google.android.gms.vision.CameraSource;
 import com.google.android.gms.vision.MultiDetector;
 import com.google.android.gms.vision.MultiProcessor;
+import com.google.android.gms.vision.barcode.Barcode;
 import com.google.android.gms.vision.barcode.BarcodeDetector;
 import com.google.android.material.snackbar.Snackbar;
 
@@ -50,7 +59,7 @@ import java.io.IOException;
  * camera, and draws overlay graphics to indicate the position, size, and ID of each face and
  * barcode.
  */
-public final class MultiTrackerActivity extends AppCompatActivity {
+public final class MultiTrackerActivity extends AppCompatActivity implements BarcodeGraphicTracker.BarcodeUpdateListener {
     private static final String TAG = "Anumati_Police";
 
     private static final int RC_HANDLE_GMS = 9001;
@@ -59,6 +68,9 @@ public final class MultiTrackerActivity extends AppCompatActivity {
 
     private CameraSource mCameraSource = null;
     private ActivityQrScannerBinding binding;
+    private GraphicOverlay<BarcodeGraphic> mGraphicOverlay;
+    private GestureDetector gestureDetector;
+
     /**
      * Initializes the UI and creates the detector pipeline.
      */
@@ -66,6 +78,8 @@ public final class MultiTrackerActivity extends AppCompatActivity {
     public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
         binding = DataBindingUtil.setContentView(this,R.layout.activity_qr_scanner);
+        mGraphicOverlay = findViewById(R.id.graphicOverlay);
+        gestureDetector = new GestureDetector(this, new CaptureGestureListener());
 
         // Check for the camera permission before accessing the camera.  If the
         // permission is not granted yet, request permission.
@@ -75,6 +89,8 @@ public final class MultiTrackerActivity extends AppCompatActivity {
         } else {
             requestCameraPermission();
         }
+
+
 
         binding.enterManualCode.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -110,7 +126,7 @@ public final class MultiTrackerActivity extends AppCompatActivity {
             }
         };
 
-        Snackbar.make(binding.graphicOverlay, R.string.permission_camera_rationale,
+        Snackbar.make(mGraphicOverlay, R.string.permission_camera_rationale,
                 Snackbar.LENGTH_INDEFINITE)
                 .setAction(R.string.ok, listener)
                 .show();
@@ -134,20 +150,20 @@ public final class MultiTrackerActivity extends AppCompatActivity {
         // graphics for each barcode on screen.  The factory is used by the multi-processor to
         // create a separate tracker instance for each barcode.
         BarcodeDetector barcodeDetector = new BarcodeDetector.Builder(context).build();
-        BarcodeTrackerFactory barcodeFactory = new BarcodeTrackerFactory(binding.graphicOverlay,this);
+        BarcodeTrackerFactory barcodeFactory = new BarcodeTrackerFactory(mGraphicOverlay,this);
         barcodeDetector.setProcessor(
                 new MultiProcessor.Builder<>(barcodeFactory).build());
+
+
 
         // A multi-detector groups the two detectors together as one detector.  All images received
         // by this detector from the camera will be sent to each of the underlying detectors, which
         // will each do face and barcode detection, respectively.  The detection results from each
         // are then sent to associated tracker instances which maintain per-item graphics on the
         // screen.
-        MultiDetector multiDetector = new MultiDetector.Builder()
-                .add(barcodeDetector)
-                .build();
 
-        if (!multiDetector.isOperational()) {
+
+        if (!barcodeDetector.isOperational()) {
             // Note: The first time that an app using the barcode or face API is installed on a
             // device, GMS will download a native libraries to the device in order to do detection.
             // Usually this completes before the app is run for the first time.  But if that
@@ -173,11 +189,15 @@ public final class MultiTrackerActivity extends AppCompatActivity {
         // Creates and starts the camera.  Note that this uses a higher resolution in comparison
         // to other detection examples to enable the barcode detector to detect small barcodes
         // at long distances.
-        mCameraSource = new CameraSource.Builder(getApplicationContext(), multiDetector)
+        mCameraSource = new CameraSource.Builder(getApplicationContext(), barcodeDetector)
                 .setFacing(CameraSource.CAMERA_FACING_BACK)
                 .setRequestedPreviewSize(1600, 1024)
+                .setAutoFocusEnabled(true)
                 .setRequestedFps(15.0f)
                 .build();
+
+
+
     }
 
     /**
@@ -199,6 +219,7 @@ public final class MultiTrackerActivity extends AppCompatActivity {
         binding.preview.stop();
     }
 
+
     /**
      * Releases the resources associated with the camera source, the associated detectors, and the
      * rest of the processing pipeline.
@@ -210,6 +231,7 @@ public final class MultiTrackerActivity extends AppCompatActivity {
             mCameraSource.release();
         }
     }
+
 
 
     /**
@@ -276,12 +298,57 @@ public final class MultiTrackerActivity extends AppCompatActivity {
 
         if (mCameraSource != null) {
             try {
-                binding.preview.start(mCameraSource, binding.graphicOverlay);
+                binding.preview.start(mCameraSource, mGraphicOverlay);
             } catch (IOException e) {
                 Log.e(TAG, "Unable to start camera source.", e);
                 mCameraSource.release();
                 mCameraSource = null;
             }
+        }
+    }
+    @Override
+    public boolean onTouchEvent(MotionEvent e) {
+        boolean c = gestureDetector.onTouchEvent(e);
+        return c || super.onTouchEvent(e);
+    }
+
+    private boolean onTap(float x,float y) {
+        BarcodeGraphic graphic = mGraphicOverlay.getFirstGraphic();
+        Barcode barcode = null;
+        if (graphic != null) {
+            barcode = graphic.getBarcode();
+            if (barcode != null) {
+//                requestInProgress = true;
+                String rawValue = barcode.rawValue;
+                Toast.makeText(this, rawValue, Toast.LENGTH_SHORT).show();
+            } else if (BuildConfig.DEBUG) {
+                Log.d(TAG, "barcode data is null");
+            }
+        } else if (BuildConfig.DEBUG) {
+            Log.d(TAG, "no barcode detected");
+        }
+        return barcode != null;
+    }
+
+
+
+    @Override
+    public void onBarcodeDetected(final Barcode barcode) {
+        final Barcode newbarCode = barcode;
+        runOnUiThread(new Runnable() {
+            public void run() {
+                Toast.makeText(MultiTrackerActivity.this, newbarCode.rawValue, Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+
+    private class CaptureGestureListener extends GestureDetector.SimpleOnGestureListener {
+
+        @Override
+        public boolean onSingleTapConfirmed(MotionEvent e) {
+
+            return onTap(e.getRawX(), e.getRawY()) || super.onSingleTapConfirmed(e);
         }
     }
 }

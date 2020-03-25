@@ -7,155 +7,165 @@
 
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <ImageView
-            android:id="@+id/status_icon"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/margin_65dp"
-            android:src="@drawable/activated"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:contentDescription="TODO" />
-
-
-        <TextView
-            android:id="@+id/qr_code_status_label"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/margin_16dp"
-            android:fontFamily="sans-serif"
-            android:text="@string/qr_code_verified_succesfully"
-            android:textColor="@color/black"
-            android:textSize="@dimen/text_size_24sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/status_icon" />
-
-
-        <TextView
-            android:id="@+id/qr_code_text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/margin_16dp"
-            android:layout_marginTop="@dimen/margin_16dp"
-            android:fontFamily="sans-serif"
-            android:textColor="@color/black"
-            android:textSize="@dimen/text_size_24sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/qr_code_status_label"
-            tools:text="QT1782" />
-
-        <View
-            android:id="@+id/view"
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_marginStart="@dimen/margin_24dp"
-            android:layout_marginTop="28dp"
-            android:layout_marginEnd="@dimen/margin_24dp"
-            android:background="#C6CBD4"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/qr_code_text" />
+            android:layout_height="match_parent"
+            android:background="@color/white">
+
+            <ImageView
+                android:id="@+id/status_icon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_65dp"
+                android:contentDescription="TODO"
+                android:src="@drawable/activated"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
 
-        <TextView
-            android:id="@+id/name_label"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/margin_24dp"
-            android:text="@string/name"
-            android:textColor="@color/black"
-            android:textSize="@dimen/text_size_14sp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/view" />
+            <TextView
+                android:id="@+id/qr_code_status_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/margin_16dp"
+                android:fontFamily="sans-serif"
+                android:gravity="center"
+                android:text="@string/qr_code_verified_succesfully"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_size_24sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/status_icon" />
 
-        <TextView
-            android:id="@+id/age_label"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/margin_24dp"
-            android:text="@string/age"
-            android:textColor="@color/black"
-            android:textSize="@dimen/text_size_14sp"
-            app:layout_constraintStart_toStartOf="@id/name_label"
-            app:layout_constraintTop_toBottomOf="@id/name_label" />
 
-        <TextView
-            android:id="@+id/aadhaar_label"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/margin_24dp"
-            android:text="@string/aadhar_id"
-            android:textColor="@color/black"
-            android:textSize="@dimen/text_size_14sp"
-            app:layout_constraintStart_toStartOf="@id/name_label"
-            app:layout_constraintTop_toBottomOf="@id/age_label" />
+            <TextView
+                android:id="@+id/qr_code_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/margin_16dp"
+                android:layout_marginTop="@dimen/margin_16dp"
+                android:fontFamily="sans-serif"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_size_24sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/qr_code_status_label"
+                tools:text="QT1782" />
 
-        <TextView
-            android:id="@+id/name_text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/margin_24dp"
-            android:textColor="@color/black"
-            android:textSize="@dimen/text_size_14sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/view"
-            tools:text="Mohit Manuja" />
+            <View
+                android:id="@+id/view"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginStart="@dimen/margin_24dp"
+                android:layout_marginTop="28dp"
+                android:layout_marginEnd="@dimen/margin_24dp"
+                android:background="#C6CBD4"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/qr_code_text" />
 
-        <TextView
-            android:id="@+id/age_text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/margin_24dp"
-            android:text="22"
-            android:textColor="@color/black"
-            android:textSize="@dimen/text_size_14sp"
-            app:layout_constraintEnd_toEndOf="@id/name_text"
-            app:layout_constraintTop_toBottomOf="@id/name_label" />
 
-        <TextView
-            android:id="@+id/aadhaar_text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/margin_24dp"
-            android:text="xxxxxxx345678"
-            android:textColor="@color/black"
-            android:textSize="@dimen/text_size_14sp"
-            app:layout_constraintEnd_toEndOf="@id/name_text"
-            app:layout_constraintTop_toBottomOf="@id/age_label" />
+            <TextView
+                android:id="@+id/name_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/margin_24dp"
+                android:text="@string/name"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_size_14sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/view" />
 
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/margin_50dp"
-            android:src="@drawable/goi_logo"
-            android:contentDescription="status"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/aadhaar_text" />
+            <TextView
+                android:id="@+id/age_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_24dp"
+                android:text="@string/age"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_size_14sp"
+                app:layout_constraintStart_toStartOf="@id/name_label"
+                app:layout_constraintTop_toBottomOf="@id/name_label" />
 
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/margin_120dp"
-            android:layout_marginEnd="@dimen/margin_16dp"
-            android:background="@drawable/button_rectangular"
-            android:paddingLeft="@dimen/margin_60dp"
-            android:paddingRight="@dimen/margin_60dp"
-            android:text="@string/done"
-            android:paddingTop="13dp"
-            android:paddingBottom="13dp"
-            android:textColor="@color/white"
-            android:textSize="@dimen/text_size_14sp"
-            android:layout_margin="@dimen/margin_24dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            <TextView
+                android:id="@+id/aadhaar_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_24dp"
+                android:text="@string/aadhar_id"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_size_14sp"
+                app:layout_constraintStart_toStartOf="@id/name_label"
+                app:layout_constraintTop_toBottomOf="@id/age_label" />
+
+            <TextView
+                android:id="@+id/name_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/margin_24dp"
+                android:text="Mohit Manuja"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_size_14sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/view" />
+
+            <TextView
+                android:id="@+id/age_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_24dp"
+                android:text="22"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_size_14sp"
+                app:layout_constraintEnd_toEndOf="@id/name_text"
+                app:layout_constraintTop_toBottomOf="@id/name_label" />
+
+            <TextView
+                android:id="@+id/aadhaar_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_24dp"
+                android:text="xxxxxxx345678"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_size_14sp"
+                app:layout_constraintEnd_toEndOf="@id/name_text"
+                app:layout_constraintTop_toBottomOf="@id/age_label" />
+
+            <ImageView
+                android:id="@+id/goi_logo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_50dp"
+                android:contentDescription="status"
+                android:src="@drawable/goi_logo"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/aadhaar_text" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/margin_24dp"
+                android:layout_marginTop="@dimen/margin_120dp"
+                android:layout_marginEnd="@dimen/margin_16dp"
+                android:background="@drawable/button_rectangular"
+                android:paddingLeft="@dimen/margin_60dp"
+                android:paddingTop="13dp"
+                app:layout_constraintTop_toBottomOf="@id/goi_logo"
+                android:paddingRight="@dimen/margin_60dp"
+                android:paddingBottom="13dp"
+                android:text="@string/done"
+                android:textColor="@color/white"
+                android:textSize="@dimen/text_size_14sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+
 </layout>
