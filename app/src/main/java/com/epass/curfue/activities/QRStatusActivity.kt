@@ -23,24 +23,24 @@ class QRStatusActivity :AppCompatActivity(){
         val aadhar = intent?.getStringExtra("aadhar")
         val applicationID = intent?.getLongExtra("applicationID",-1)
         val status = intent?.getSerializableExtra("status")
+
         binding.nameText.text = name
         binding.ageText.text = age.toString()
         binding.aadhaarText.text = aadhar
         binding.qrCodeText.text = applicationID.toString()
+
         if (status == TokenStatus.APPROVED){
-            binding.qrCodeStatusLabel.setText("QR code verified succesfully!")
+            binding.qrCodeStatusLabel.setText(getString(R.string.qr_code_verified_successfully))
             binding.statusIcon.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.activated))
         }else{
-            binding.qrCodeStatusLabel.setText("Oops! Seems like an expired code!")
+            binding.qrCodeStatusLabel.setText(getString(R.string.oops_seems_like_an_expired_code))
             binding.statusIcon.setImageDrawable(ContextCompat.getDrawable(this,R.drawable.expired))
         }
+
         binding.done.setOnClickListener {
             val myIntent = Intent(this, MultiTrackerActivity::class.java)
             myIntent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
             startActivity(myIntent)
         }
-
-
-
     }
 }

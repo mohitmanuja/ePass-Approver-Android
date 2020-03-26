@@ -99,7 +99,6 @@ public final class MultiTrackerActivity extends BaseActivity implements BarcodeG
             requestCameraPermission();
         }
 
-
         setObservers();
         binding.enterManualCode.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -392,10 +391,7 @@ public final class MultiTrackerActivity extends BaseActivity implements BarcodeG
             @Override
             public void onChanged(String s) {
                 binding.preview.stop();
-                // set title
                 alertDialogBuilder.setTitle("Oops!");
-
-                // set dialog message
                 alertDialogBuilder
                         .setMessage(s)
                         .setCancelable(false)
@@ -406,8 +402,6 @@ public final class MultiTrackerActivity extends BaseActivity implements BarcodeG
                                 requestInProgress = false;
                             }
                         });
-
-                // create alert dialog
                 AlertDialog alertDialog = alertDialogBuilder.create();
                 alertDialog.show();
 

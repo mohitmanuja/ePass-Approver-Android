@@ -20,6 +20,8 @@ data class VerifyTokenResponse(
     val toTime: String?,
     val token: String,
     val tripType: String?,
+    val error: String?,
+    val message: String?,
     val type: String?
 ) : Parcelable {
 

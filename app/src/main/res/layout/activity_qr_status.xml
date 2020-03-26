@@ -35,7 +35,7 @@
                 android:layout_margin="@dimen/margin_16dp"
                 android:fontFamily="sans-serif"
                 android:gravity="center"
-                android:text="@string/qr_code_verified_succesfully"
+                tools:text="@string/qr_code_verified_successfully"
                 android:textColor="@color/black"
                 android:textSize="@dimen/text_size_24sp"
                 app:layout_constraintEnd_toEndOf="parent"
