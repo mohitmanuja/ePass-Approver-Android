@@ -1,7 +1,7 @@
 package com.epass.curfue.network
 
 import android.content.Context
-import com.readystatesoftware.chuck.ChuckInterceptor
+//import com.readystatesoftware.chuck.ChuckInterceptor
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
@@ -18,7 +18,7 @@ object RetrofitFactory {
             client = NetworkUtil.getUnsafeOkHttpClient().connectTimeout(20, TimeUnit.SECONDS)
                 .readTimeout(30, TimeUnit.SECONDS)
                 .writeTimeout(30, TimeUnit.SECONDS)
-                .addInterceptor(ChuckInterceptor(context))
+//                .addInterceptor(ChuckInterceptor(context))
                 .build()
         }
 
