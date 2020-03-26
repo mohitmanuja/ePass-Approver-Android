@@ -51,7 +51,7 @@ class VerifyTokenViewModel(val tokenRepo: TokenRepo) : ViewModel() {
                             }
                         }
                     } else {
-                        showToast.postValue("Error: ${response.message()}")
+                        showToast.postValue("Oops: Something else went wrong")
                         loadingScreen.postValue(false)
                     }
                 } catch (e: HttpException) {

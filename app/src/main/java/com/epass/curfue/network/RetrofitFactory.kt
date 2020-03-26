@@ -8,14 +8,14 @@ import retrofit2.converter.moshi.MoshiConverterFactory
 import java.util.concurrent.TimeUnit
 
 object RetrofitFactory {
-    const val BASE_URL = "https://demo4807437.mockable.io/"
+    const val BASE_URL = "http://13.233.33.10:8091"
     var client: OkHttpClient? = null
 
 
 
     fun makeRetrofitService(context: Context): RetrofitService {
         if (client == null){
-            client = OkHttpClient().newBuilder().connectTimeout(20, TimeUnit.SECONDS)
+            client = NetworkUtil.getUnsafeOkHttpClient().connectTimeout(20, TimeUnit.SECONDS)
                 .readTimeout(30, TimeUnit.SECONDS)
                 .writeTimeout(30, TimeUnit.SECONDS)
                 .addInterceptor(ChuckInterceptor(context))

@@ -8,8 +8,7 @@ import retrofit2.http.POST
 
 
 interface RetrofitService {
-
-    @POST("/verifyauth")
+    @POST("/verifyToken")
     suspend fun postVerifyToken(@Body verifyTokenRequest: VerifyTokenRequest): Response<VerifyTokenResponse>
 
 }
