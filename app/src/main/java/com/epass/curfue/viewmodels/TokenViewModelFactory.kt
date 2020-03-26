@@ -1,8 +1,7 @@
-package com.livemobilelocationtracker.livelocation.viewmodels
+package com.epass.curfue.viewmodels
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.epass.curfue.viewmodels.VerifyTokenViewModel
 import com.epass.curfue.repos.TokenRepo
 
 class TokenViewModelFactory(private val operatorRepo: TokenRepo) : ViewModelProvider.NewInstanceFactory(){

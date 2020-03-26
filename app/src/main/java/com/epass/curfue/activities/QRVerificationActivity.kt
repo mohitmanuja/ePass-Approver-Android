@@ -8,10 +8,9 @@ import androidx.lifecycle.ViewModelProvider
 import com.epass.curfue.R
 import com.epass.curfue.databinding.ActivityEnterQrCodeBinding
 import com.epass.curfue.repos.TokenRepo
-import com.epass.curfue.utils.CommonUtils
 import com.epass.curfue.utils.showToast
 import com.epass.curfue.viewmodels.VerifyTokenViewModel
-import com.livemobilelocationtracker.livelocation.viewmodels.TokenViewModelFactory
+import com.epass.curfue.viewmodels.TokenViewModelFactory
 
 class QRVerificationActivity : BaseActivity() {
 
@@ -34,6 +33,10 @@ class QRVerificationActivity : BaseActivity() {
                 showToast("Please enter 6 digit valid token number.")
             }
         }
+        setObservers()
+    }
+
+    private fun setObservers() {
 
         tokenViewModel.getUpdateScreenLiveData().observe(this, Observer {
             this.showToast(it)
@@ -56,7 +59,6 @@ class QRVerificationActivity : BaseActivity() {
             intentNew.putExtra("status", it.status)
             startActivity(intentNew)
         })
-
 
     }
 

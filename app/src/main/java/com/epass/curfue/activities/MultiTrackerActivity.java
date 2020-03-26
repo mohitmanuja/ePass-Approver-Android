@@ -24,18 +24,17 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.pm.PackageManager;
-import android.hardware.Camera;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.View;
-import android.webkit.URLUtil;
 import android.widget.Toast;
 
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.databinding.DataBindingUtil;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
 
 import com.epass.curfue.BuildConfig;
 import com.epass.curfue.R;
@@ -43,14 +42,18 @@ import com.epass.curfue.camera.BarcodeGraphic;
 import com.epass.curfue.camera.BarcodeGraphicTracker;
 import com.epass.curfue.camera.GraphicOverlay;
 import com.epass.curfue.databinding.ActivityQrScannerBinding;
+import com.epass.curfue.models.VerifyTokenResponse;
+import com.epass.curfue.repos.TokenRepo;
+import com.epass.curfue.utils.CommonUtils;
+import com.epass.curfue.viewmodels.VerifyTokenViewModel;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GoogleApiAvailability;
 import com.google.android.gms.vision.CameraSource;
-import com.google.android.gms.vision.MultiDetector;
 import com.google.android.gms.vision.MultiProcessor;
 import com.google.android.gms.vision.barcode.Barcode;
 import com.google.android.gms.vision.barcode.BarcodeDetector;
 import com.google.android.material.snackbar.Snackbar;
+import com.epass.curfue.viewmodels.TokenViewModelFactory;
 
 import java.io.IOException;
 
@@ -59,7 +62,7 @@ import java.io.IOException;
  * camera, and draws overlay graphics to indicate the position, size, and ID of each face and
  * barcode.
  */
-public final class MultiTrackerActivity extends AppCompatActivity implements BarcodeGraphicTracker.BarcodeUpdateListener {
+public final class MultiTrackerActivity extends BaseActivity implements BarcodeGraphicTracker.BarcodeUpdateListener {
     private static final String TAG = "Anumati_Police";
 
     private static final int RC_HANDLE_GMS = 9001;
@@ -70,6 +73,9 @@ public final class MultiTrackerActivity extends AppCompatActivity implements Bar
     private ActivityQrScannerBinding binding;
     private GraphicOverlay<BarcodeGraphic> mGraphicOverlay;
     private GestureDetector gestureDetector;
+    private VerifyTokenViewModel verifyTokenViewModel;
+    private TokenViewModelFactory tokenViewModelFactory;
+    private boolean requestInProgress;
 
     /**
      * Initializes the UI and creates the detector pipeline.
@@ -80,6 +86,8 @@ public final class MultiTrackerActivity extends AppCompatActivity implements Bar
         binding = DataBindingUtil.setContentView(this,R.layout.activity_qr_scanner);
         mGraphicOverlay = findViewById(R.id.graphicOverlay);
         gestureDetector = new GestureDetector(this, new CaptureGestureListener());
+        tokenViewModelFactory = new TokenViewModelFactory(new TokenRepo(this));
+        verifyTokenViewModel = new ViewModelProvider(this, tokenViewModelFactory).get(VerifyTokenViewModel.class);
 
         // Check for the camera permission before accessing the camera.  If the
         // permission is not granted yet, request permission.
@@ -91,7 +99,7 @@ public final class MultiTrackerActivity extends AppCompatActivity implements Bar
         }
 
 
-
+        setObservers();
         binding.enterManualCode.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -105,6 +113,8 @@ public final class MultiTrackerActivity extends AppCompatActivity implements Bar
      * showing a "Snackbar" message of why the permission is needed then
      * sending the request.
      */
+
+
     private void requestCameraPermission() {
         Log.w(TAG, "Camera permission is not granted. Requesting permission");
 
@@ -318,9 +328,10 @@ public final class MultiTrackerActivity extends AppCompatActivity implements Bar
         if (graphic != null) {
             barcode = graphic.getBarcode();
             if (barcode != null) {
-//                requestInProgress = true;
+                requestInProgress = true;
                 String rawValue = barcode.rawValue;
-                Toast.makeText(this, rawValue, Toast.LENGTH_SHORT).show();
+                validateQrCode(rawValue);
+
             } else if (BuildConfig.DEBUG) {
                 Log.d(TAG, "barcode data is null");
             }
@@ -337,9 +348,19 @@ public final class MultiTrackerActivity extends AppCompatActivity implements Bar
         final Barcode newbarCode = barcode;
         runOnUiThread(new Runnable() {
             public void run() {
-                Toast.makeText(MultiTrackerActivity.this, newbarCode.rawValue, Toast.LENGTH_SHORT).show();
+                validateQrCode(newbarCode.rawValue);
             }
         });
+    }
+
+    private void validateQrCode(String rawValue) {
+        if (CommonUtils.isNull(rawValue)){
+            Toast.makeText(this, "Invalid Code", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        if (!requestInProgress){
+            verifyTokenViewModel.fetchTokenResponse(rawValue,this);
+        }
     }
 
 
@@ -351,4 +372,46 @@ public final class MultiTrackerActivity extends AppCompatActivity implements Bar
             return onTap(e.getRawX(), e.getRawY()) || super.onSingleTapConfirmed(e);
         }
     }
+
+    private void setObservers() {
+
+        verifyTokenViewModel.getUpdateScreenLiveData().observe(this, new Observer<String>() {
+            @Override
+            public void onChanged(String s) {
+                requestInProgress = false;
+
+            }
+        });
+
+
+        verifyTokenViewModel.getLoadingScreen().observe(this, new Observer<Boolean>() {
+                    @Override
+                    public void onChanged(Boolean aBoolean) {
+                        if (aBoolean) {
+                            showProgressDialog("Processing");
+                        } else {
+                            dismissProgressDialog();
+                        }
+                    }
+                });
+
+
+        verifyTokenViewModel.getTokenResponseLiveData().observe(this, new Observer<VerifyTokenResponse>() {
+            @Override
+            public void onChanged(VerifyTokenResponse it) {
+                requestInProgress = false;
+                Intent intentNew = new Intent(MultiTrackerActivity.this, QRStatusActivity.class);
+                if (it.getAdditionalAttributes()!=null){
+                    intentNew.putExtra("name", it.getAdditionalAttributes().getIssuedToname());
+                }
+                intentNew.putExtra("age", it.getAge());
+                intentNew.putExtra("aadhar", it.getAdhaarID());
+                intentNew.putExtra("applicationID", it.getApplicationID());
+                intentNew.putExtra("status", it.getStatus());
+                startActivity(intentNew);
+            }
+        });
+
+    }
+
 }
