@@ -26,7 +26,6 @@ import com.epass.curfue.camera.BarcodeGraphic;
 import com.epass.curfue.camera.BarcodeGraphicTracker;
 import com.epass.curfue.camera.GraphicOverlay;
 import com.epass.curfue.databinding.ActivityQrScannerBinding;
-import com.epass.curfue.models.VerifyTokenResponse;
 import com.epass.curfue.repos.TokenRepo;
 import com.epass.curfue.utils.CommonUtils;
 import com.epass.curfue.viewmodels.TokenViewModelFactory;
@@ -405,20 +404,12 @@ public final class QRCodeScannerActivity extends BaseActivity implements Barcode
                 }
             }
         });
-
-
-        verifyTokenViewModel.getTokenResponseLiveData().observe(this, new Observer<VerifyTokenResponse>() {
+        verifyTokenViewModel.getTokenResponseLiveData().observe(this, new Observer<TokenVerifyResponse>() {
             @Override
-            public void onChanged(VerifyTokenResponse it) {
+            public void onChanged(TokenVerifyResponse tokenVerifyResponse) {
                 requestInProgress = false;
                 Intent intentNew = new Intent(QRCodeScannerActivity.this, QRStatusActivity.class);
-                if (it.getAdditionalAttributes() != null) {
-                    intentNew.putExtra("name", it.getAdditionalAttributes().getIssuedToname());
-                }
-                intentNew.putExtra("age", it.getAge());
-                intentNew.putExtra("aadhar", it.getAadharID());
-                intentNew.putExtra("applicationID", it.getApplicationID());
-                intentNew.putExtra("status", it.getStatus());
+
                 startActivity(intentNew);
             }
         });

@@ -9,6 +9,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.epass.curfue.R
 import com.epass.curfue.databinding.ActivityEnterQrCodeBinding
 import com.epass.curfue.repos.TokenRepo
+import com.epass.curfue.utils.CommonUtils
 import com.epass.curfue.utils.showToast
 import com.epass.curfue.viewmodels.TokenViewModelFactory
 import com.epass.curfue.viewmodels.VerifyTokenViewModel
@@ -66,11 +67,7 @@ class QRVerificationActivity : BaseActivity() {
         tokenViewModel.getTokenResponseLiveData().observe(this, Observer {
 
             val intentNew = Intent(this, QRStatusActivity::class.java)
-            intentNew.putExtra("name", it.additionalAttributes?.issuedToname)
-            intentNew.putExtra("age", it.age)
-            intentNew.putExtra("aadhar", it.aadharID)
-            intentNew.putExtra("applicationID", it.applicationID)
-            intentNew.putExtra("status", it.status)
+            intentNew.putExtra(CommonUtils.DATA,it)
             startActivity(intentNew)
         })
 

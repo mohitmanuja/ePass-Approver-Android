@@ -21,12 +21,13 @@
     <string name="enter_qr_code">Enter QR Code</string>
     <string name="enter_qr_code_manually">Enter QR code manually</string>
     <string name="name">Name:</string>
-    <string name="age">Age:</string>
+    <string name="age">Dob:</string>
     <string name="aadhar_id">Aadhar ID:</string>
     <string name="done">Done</string>
     <string name="qr_code_verified_successfully">QR code verified successfully!</string>
     <string name="something_went_wrong_try_again">Something went wrong! Try again</string>
     <string name="oops_seems_like_an_expired_code">Oops! Seems like an expired code!</string>
+    <string name="oops_rejected_code">Oops! Your code has been rejected!</string>
 
 
 </resources>
