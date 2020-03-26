@@ -47,7 +47,7 @@ class VerifyTokenViewModel(val tokenRepo: TokenRepo) : ViewModel() {
                             tokenResponseLiveData.postValue(this)
                         }
                     } else {
-                        showToast.postValue("Oops: Something else went wrong")
+                        showToast.postValue("Token is not Valid")
                         loadingScreen.postValue(false)
                     }
                 } catch (e: HttpException) {

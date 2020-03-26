@@ -392,7 +392,7 @@ public final class QRCodeScannerActivity extends BaseActivity implements Barcode
             @Override
             public void onChanged(String s) {
                 requestInProgress = false;
-                Toast.makeText(QRCodeScannerActivity.this, s, Toast.LENGTH_SHORT).show();
+                Toast.makeText(QRCodeScannerActivity.this, s, Toast.LENGTH_LONG).show();
             }
         });
         verifyTokenViewModel.getLoadingScreen().observe(this, new Observer<Boolean>() {
