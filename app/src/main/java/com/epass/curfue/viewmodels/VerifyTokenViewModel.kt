@@ -13,10 +13,15 @@ import retrofit2.HttpException
 class VerifyTokenViewModel(val tokenRepo: TokenRepo) : ViewModel() {
     private val tokenResponseLiveData: MutableLiveData<VerifyTokenResponse> = MutableLiveData()
     private val updateScreen = MutableLiveData<String>()
+    private val showToast = MutableLiveData<String>()
     private val loadingScreen = MutableLiveData<Boolean>()
 
     fun getLoadingScreen(): LiveData<Boolean> {
         return loadingScreen
+    }
+
+    fun getshowToastLiveData(): LiveData<String> {
+        return showToast
     }
 
     fun getUpdateScreenLiveData(): LiveData<String> {
@@ -30,7 +35,7 @@ class VerifyTokenViewModel(val tokenRepo: TokenRepo) : ViewModel() {
 
     fun fetchTokenResponse(token: String, context: Context) {
         if (!CommonUtils.isInternetAvailable(context)) {
-            updateScreen.postValue("No internet Connection found.")
+            showToast.postValue("No internet Connection found.")
         } else {
             val service = RetrofitFactory.makeRetrofitService(context)
             loadingScreen.postValue(true)
@@ -39,18 +44,22 @@ class VerifyTokenViewModel(val tokenRepo: TokenRepo) : ViewModel() {
                     if (response.isSuccessful) {
                         loadingScreen.postValue(false)
                         response.body()?.apply {
-                            tokenResponseLiveData.postValue(this)
+                            if (CommonUtils.isNotNull(this.reason)) {
+                                updateScreen.postValue(this.reason)
+                            } else {
+                                tokenResponseLiveData.postValue(this)
+                            }
                         }
                     } else {
-                        updateScreen.postValue("Error: ${response.message()}")
+                        showToast.postValue("Error: ${response.message()}")
                         loadingScreen.postValue(false)
                     }
                 } catch (e: HttpException) {
-                    updateScreen.postValue("Exception ${e.message}")
+                    showToast.postValue("Exception ${e.message}")
                     loadingScreen.postValue(false)
                 } catch (e: Throwable) {
                     loadingScreen.postValue(false)
-                    updateScreen.postValue("Oops: Something else went wrong")
+                    showToast.postValue("Oops: Something else went wrong")
                 }
 
 

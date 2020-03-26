@@ -16,7 +16,7 @@
     <string name="permission_camera_rationale">Require Camera permission for this feature.</string>
     <string name="ok">Ok</string>
     <string name="low_storage_error">Storage is low, Please delete some file and try again.</string>
-    <string name="no_camera_permission">Camera Permission is not granted.</string>
+    <string name="no_camera_permission">Camera Permission is required to use this feature. Click Ok to give Camera Permission.</string>
     <string name="scan_qr_code_to_verify_the_pass">Scan QR code to verify the pass</string>
     <string name="enter_qr_code">Enter QR Code</string>
     <string name="enter_qr_code_manually">Enter QR code manually</string>

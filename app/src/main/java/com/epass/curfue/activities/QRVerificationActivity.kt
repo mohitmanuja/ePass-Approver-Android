@@ -1,5 +1,7 @@
 package com.epass.curfue.activities
 
+import android.app.AlertDialog
+import android.content.DialogInterface
 import android.content.Intent
 import android.os.Bundle
 import androidx.databinding.DataBindingUtil
@@ -9,8 +11,8 @@ import com.epass.curfue.R
 import com.epass.curfue.databinding.ActivityEnterQrCodeBinding
 import com.epass.curfue.repos.TokenRepo
 import com.epass.curfue.utils.showToast
-import com.epass.curfue.viewmodels.VerifyTokenViewModel
 import com.epass.curfue.viewmodels.TokenViewModelFactory
+import com.epass.curfue.viewmodels.VerifyTokenViewModel
 
 class QRVerificationActivity : BaseActivity() {
 
@@ -38,8 +40,20 @@ class QRVerificationActivity : BaseActivity() {
 
     private fun setObservers() {
 
+        tokenViewModel.getshowToastLiveData().observe(this, Observer {
+            showToast(it)
+        })
+
         tokenViewModel.getUpdateScreenLiveData().observe(this, Observer {
-            this.showToast(it)
+            val alertDialogBuilder = AlertDialog.Builder(this)
+            alertDialogBuilder.setTitle("Oops!")
+            alertDialogBuilder
+                .setMessage(it)
+                .setCancelable(false)
+                .setPositiveButton("Try Again",
+                    { dialog, id -> dialog.dismiss() })
+            val alertDialog = alertDialogBuilder.create()
+            alertDialog.show()
         })
         tokenViewModel.getLoadingScreen().observe(this, Observer {
             if (it) {
@@ -54,7 +68,7 @@ class QRVerificationActivity : BaseActivity() {
             val intentNew = Intent(this, QRStatusActivity::class.java)
             intentNew.putExtra("name", it.additionalAttributes?.issuedToname)
             intentNew.putExtra("age", it.age)
-            intentNew.putExtra("aadhar", it.adhaarID)
+            intentNew.putExtra("aadhar", it.aadharID)
             intentNew.putExtra("applicationID", it.applicationID)
             intentNew.putExtra("status", it.status)
             startActivity(intentNew)

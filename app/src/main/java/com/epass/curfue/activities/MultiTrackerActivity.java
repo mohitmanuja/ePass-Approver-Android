@@ -25,6 +25,7 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
@@ -83,7 +84,7 @@ public final class MultiTrackerActivity extends BaseActivity implements BarcodeG
     @Override
     public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
-        binding = DataBindingUtil.setContentView(this,R.layout.activity_qr_scanner);
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_qr_scanner);
         mGraphicOverlay = findViewById(R.id.graphicOverlay);
         gestureDetector = new GestureDetector(this, new CaptureGestureListener());
         tokenViewModelFactory = new TokenViewModelFactory(new TokenRepo(this));
@@ -103,7 +104,7 @@ public final class MultiTrackerActivity extends BaseActivity implements BarcodeG
         binding.enterManualCode.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(MultiTrackerActivity.this,QRVerificationActivity.class));
+                startActivity(new Intent(MultiTrackerActivity.this, QRVerificationActivity.class));
             }
         });
     }
@@ -126,22 +127,23 @@ public final class MultiTrackerActivity extends BaseActivity implements BarcodeG
             return;
         }
 
-        final Activity thisActivity = this;
 
-        View.OnClickListener listener = new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                ActivityCompat.requestPermissions(thisActivity, permissions,
-                        RC_HANDLE_CAMERA_PERM);
-            }
-        };
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Permission Required")
+                .setMessage(R.string.no_camera_permission)
+                .setCancelable(false)
+                .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        dialog.dismiss();
+                        ActivityCompat.requestPermissions(MultiTrackerActivity.this, permissions,
+                                RC_HANDLE_CAMERA_PERM);
+                    }
+                });
 
-        Snackbar.make(mGraphicOverlay, R.string.permission_camera_rationale,
-                Snackbar.LENGTH_INDEFINITE)
-                .setAction(R.string.ok, listener)
-                .show();
+        // create alert dialog
+        AlertDialog alertDialog = builder.create();
+        alertDialog.show();
     }
-
 
 
     /**
@@ -160,10 +162,9 @@ public final class MultiTrackerActivity extends BaseActivity implements BarcodeG
         // graphics for each barcode on screen.  The factory is used by the multi-processor to
         // create a separate tracker instance for each barcode.
         BarcodeDetector barcodeDetector = new BarcodeDetector.Builder(context).build();
-        BarcodeTrackerFactory barcodeFactory = new BarcodeTrackerFactory(mGraphicOverlay,this);
+        BarcodeTrackerFactory barcodeFactory = new BarcodeTrackerFactory(mGraphicOverlay, this);
         barcodeDetector.setProcessor(
                 new MultiProcessor.Builder<>(barcodeFactory).build());
-
 
 
         // A multi-detector groups the two detectors together as one detector.  All images received
@@ -207,7 +208,6 @@ public final class MultiTrackerActivity extends BaseActivity implements BarcodeG
                 .build();
 
 
-
     }
 
     /**
@@ -243,7 +243,6 @@ public final class MultiTrackerActivity extends BaseActivity implements BarcodeG
     }
 
 
-
     /**
      * Callback for the result from requesting permissions. This method
      * is invoked for every call on {@link #requestPermissions(String[], int)}.
@@ -261,7 +260,7 @@ public final class MultiTrackerActivity extends BaseActivity implements BarcodeG
      * @see #requestPermissions(String[], int)
      */
     @Override
-    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+    public void onRequestPermissionsResult(int requestCode, final String[] permissions, int[] grantResults) {
         if (requestCode != RC_HANDLE_CAMERA_PERM) {
             Log.d(TAG, "Got unexpected permission result: " + requestCode);
             super.onRequestPermissionsResult(requestCode, permissions, grantResults);
@@ -281,15 +280,26 @@ public final class MultiTrackerActivity extends BaseActivity implements BarcodeG
         DialogInterface.OnClickListener listener = new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {
 
-           }
+            }
         };
 
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("Permission")
+        builder.setTitle("Permission Required")
                 .setMessage(R.string.no_camera_permission)
-                .setPositiveButton(R.string.ok, listener)
-                .show();
+                .setCancelable(false)
+                .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        dialog.dismiss();
+                        ActivityCompat.requestPermissions(MultiTrackerActivity.this, permissions,
+                                RC_HANDLE_CAMERA_PERM);
+                    }
+                });
+
+        // create alert dialog
+        AlertDialog alertDialog = builder.create();
+        alertDialog.show();
     }
+
     /**
      * Starts or restarts the camera source, if it exists.  If the camera source doesn't exist yet
      * (e.g., because onResume was called before the camera source was created), this will be called
@@ -316,13 +326,14 @@ public final class MultiTrackerActivity extends BaseActivity implements BarcodeG
             }
         }
     }
+
     @Override
     public boolean onTouchEvent(MotionEvent e) {
         boolean c = gestureDetector.onTouchEvent(e);
         return c || super.onTouchEvent(e);
     }
 
-    private boolean onTap(float x,float y) {
+    private boolean onTap(float x, float y) {
         BarcodeGraphic graphic = mGraphicOverlay.getFirstGraphic();
         Barcode barcode = null;
         if (graphic != null) {
@@ -342,7 +353,6 @@ public final class MultiTrackerActivity extends BaseActivity implements BarcodeG
     }
 
 
-
     @Override
     public void onBarcodeDetected(final Barcode barcode) {
         final Barcode newbarCode = barcode;
@@ -354,12 +364,13 @@ public final class MultiTrackerActivity extends BaseActivity implements BarcodeG
     }
 
     private void validateQrCode(String rawValue) {
-        if (CommonUtils.isNull(rawValue)){
+        if (CommonUtils.isNull(rawValue)) {
             Toast.makeText(this, "Invalid Code", Toast.LENGTH_SHORT).show();
             return;
         }
-        if (!requestInProgress){
-            verifyTokenViewModel.fetchTokenResponse(rawValue,this);
+        if (!requestInProgress) {
+            requestInProgress = true;
+            verifyTokenViewModel.fetchTokenResponse(rawValue, this);
         }
     }
 
@@ -374,26 +385,53 @@ public final class MultiTrackerActivity extends BaseActivity implements BarcodeG
     }
 
     private void setObservers() {
+        final AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(
+                MultiTrackerActivity.this);
 
         verifyTokenViewModel.getUpdateScreenLiveData().observe(this, new Observer<String>() {
             @Override
             public void onChanged(String s) {
-                requestInProgress = false;
+                binding.preview.stop();
+                // set title
+                alertDialogBuilder.setTitle("Oops!");
+
+                // set dialog message
+                alertDialogBuilder
+                        .setMessage(s)
+                        .setCancelable(false)
+                        .setPositiveButton("Try Again", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                dialog.dismiss();
+                                startCameraSource();
+                                requestInProgress = false;
+                            }
+                        });
+
+                // create alert dialog
+                AlertDialog alertDialog = alertDialogBuilder.create();
+                alertDialog.show();
+
 
             }
         });
 
-
+        verifyTokenViewModel.getshowToastLiveData().observe(this, new Observer<String>() {
+            @Override
+            public void onChanged(String s) {
+                requestInProgress = false;
+                Toast.makeText(MultiTrackerActivity.this, s, Toast.LENGTH_SHORT).show();
+            }
+        });
         verifyTokenViewModel.getLoadingScreen().observe(this, new Observer<Boolean>() {
-                    @Override
-                    public void onChanged(Boolean aBoolean) {
-                        if (aBoolean) {
-                            showProgressDialog("Processing");
-                        } else {
-                            dismissProgressDialog();
-                        }
-                    }
-                });
+            @Override
+            public void onChanged(Boolean aBoolean) {
+                if (aBoolean) {
+                    showProgressDialog("Processing");
+                } else {
+                    dismissProgressDialog();
+                }
+            }
+        });
 
 
         verifyTokenViewModel.getTokenResponseLiveData().observe(this, new Observer<VerifyTokenResponse>() {
@@ -401,11 +439,11 @@ public final class MultiTrackerActivity extends BaseActivity implements BarcodeG
             public void onChanged(VerifyTokenResponse it) {
                 requestInProgress = false;
                 Intent intentNew = new Intent(MultiTrackerActivity.this, QRStatusActivity.class);
-                if (it.getAdditionalAttributes()!=null){
+                if (it.getAdditionalAttributes() != null) {
                     intentNew.putExtra("name", it.getAdditionalAttributes().getIssuedToname());
                 }
                 intentNew.putExtra("age", it.getAge());
-                intentNew.putExtra("aadhar", it.getAdhaarID());
+                intentNew.putExtra("aadhar", it.getAadharID());
                 intentNew.putExtra("applicationID", it.getApplicationID());
                 intentNew.putExtra("status", it.getStatus());
                 startActivity(intentNew);
