@@ -51,7 +51,7 @@ class QRVerificationActivity : BaseActivity() {
             val intentNew = Intent(this, QRStatusActivity::class.java)
             intentNew.putExtra("name", it.additionalAttributes?.issuedToname)
             intentNew.putExtra("age", it.age)
-            intentNew.putExtra("aadhar", it.aadharId)
+            intentNew.putExtra("aadhar", it.adhaarID)
             intentNew.putExtra("applicationID", it.applicationID)
             intentNew.putExtra("status", it.status)
             startActivity(intentNew)
