@@ -1,7 +1,6 @@
 package com.epass.curfue.activities
 
 import android.app.AlertDialog
-import android.content.DialogInterface
 import android.content.Intent
 import android.os.Bundle
 import androidx.databinding.DataBindingUtil
@@ -28,6 +27,7 @@ class QRVerificationActivity : BaseActivity() {
         binding.toolbar.setNavigationOnClickListener {
             finish()
         }
+        setScreenName("QR Verification Screen")
         binding.verify.setOnClickListener {
             if (validateToken()) {
                 tokenViewModel.fetchTokenResponse(binding.qrCodeEdittext.text.toString(), this)

@@ -10,7 +10,7 @@ class DeeplinkActivity : Activity() {
 
         val intent = intent
         val bundle = intent.extras
-        val newIntent = Intent(this, MultiTrackerActivity::class.java)
+        val newIntent = Intent(this, QRCodeScannerActivity::class.java)
         var url: String? = intent.data?.toString()
         if (url.isNullOrEmpty()) url = bundle?.getString("deep_link")
 

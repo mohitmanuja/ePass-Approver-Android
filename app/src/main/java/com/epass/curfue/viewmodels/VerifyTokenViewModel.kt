@@ -61,12 +61,8 @@ class VerifyTokenViewModel(val tokenRepo: TokenRepo) : ViewModel() {
                     loadingScreen.postValue(false)
                     showToast.postValue("Oops: Something else went wrong")
                 }
-
-
             }
         }
 
     }
-
-
 }

@@ -19,7 +19,7 @@ class TokenRepo(private val context: Context) {
     ) {
         CoroutineScope(Dispatchers.Main).launch {
 
-            val verifyTokenRequest = VerifyTokenRequest(token)
+            val verifyTokenRequest = VerifyTokenRequest("abc-def")
             val response = service.postVerifyToken(verifyTokenRequest)
             listener?.invoke(response)
 

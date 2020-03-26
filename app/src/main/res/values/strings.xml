@@ -28,26 +28,5 @@
     <string name="something_went_wrong_try_again">Something went wrong! Try again</string>
     <string name="oops_seems_like_an_expired_code">Oops! Seems like an expired code!</string>
 
-    <string-array name="govt_id">
-        <item>Aadhaar Card</item>
-        <item>Pan Card</item>
-        <item>Passport</item>
-        <item>Voter Card</item>
-    </string-array>
-    <string-array name="gender_enteries">
-        <item>Male</item>
-        <item>Female</item>
-    </string-array>
-
-    <string-array name="purpose_enteries">
-        <item>Job</item>
-        <item>Groceries</item>
-        <item>Medical</item>
-    </string-array>
-
-    <string-array name="trip_enteries">
-        <item>One Way</item>
-        <item>Round Trip</item>
-    </string-array>
 
 </resources>

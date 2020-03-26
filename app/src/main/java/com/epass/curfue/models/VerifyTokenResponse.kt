@@ -35,11 +35,11 @@ data class VerifyTokenResponse(
     @Keep
     @Parcelize
     data class Place(
-        val city: String,
-        val lat: Double,
-        val lng: Double,
-        val name: String,
-        val pincode: String
+        val city: String?,
+        val lat: Double?,
+        val lng: Double?,
+        val name: String?,
+        val pincode: String?
     ) : Parcelable
 
 

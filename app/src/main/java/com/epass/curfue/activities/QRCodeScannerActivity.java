@@ -1,22 +1,6 @@
-/*
- * Copyright (C) The Android Open Source Project
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *      http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
 package com.epass.curfue.activities;
 
 import android.Manifest;
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
@@ -25,7 +9,6 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
-import android.os.Handler;
 import android.util.Log;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
@@ -46,6 +29,7 @@ import com.epass.curfue.databinding.ActivityQrScannerBinding;
 import com.epass.curfue.models.VerifyTokenResponse;
 import com.epass.curfue.repos.TokenRepo;
 import com.epass.curfue.utils.CommonUtils;
+import com.epass.curfue.viewmodels.TokenViewModelFactory;
 import com.epass.curfue.viewmodels.VerifyTokenViewModel;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GoogleApiAvailability;
@@ -53,8 +37,6 @@ import com.google.android.gms.vision.CameraSource;
 import com.google.android.gms.vision.MultiProcessor;
 import com.google.android.gms.vision.barcode.Barcode;
 import com.google.android.gms.vision.barcode.BarcodeDetector;
-import com.google.android.material.snackbar.Snackbar;
-import com.epass.curfue.viewmodels.TokenViewModelFactory;
 
 import java.io.IOException;
 
@@ -63,7 +45,7 @@ import java.io.IOException;
  * camera, and draws overlay graphics to indicate the position, size, and ID of each face and
  * barcode.
  */
-public final class MultiTrackerActivity extends BaseActivity implements BarcodeGraphicTracker.BarcodeUpdateListener {
+public final class QRCodeScannerActivity extends BaseActivity implements BarcodeGraphicTracker.BarcodeUpdateListener {
     private static final String TAG = "Anumati_Police";
 
     private static final int RC_HANDLE_GMS = 9001;
@@ -78,9 +60,7 @@ public final class MultiTrackerActivity extends BaseActivity implements BarcodeG
     private TokenViewModelFactory tokenViewModelFactory;
     private boolean requestInProgress;
 
-    /**
-     * Initializes the UI and creates the detector pipeline.
-     */
+
     @Override
     public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
@@ -90,8 +70,7 @@ public final class MultiTrackerActivity extends BaseActivity implements BarcodeG
         tokenViewModelFactory = new TokenViewModelFactory(new TokenRepo(this));
         verifyTokenViewModel = new ViewModelProvider(this, tokenViewModelFactory).get(VerifyTokenViewModel.class);
 
-        // Check for the camera permission before accessing the camera.  If the
-        // permission is not granted yet, request permission.
+        setScreenName("QR Code Scanner");
         int rc = ActivityCompat.checkSelfPermission(this, Manifest.permission.CAMERA);
         if (rc == PackageManager.PERMISSION_GRANTED) {
             createCameraSource();
@@ -103,7 +82,7 @@ public final class MultiTrackerActivity extends BaseActivity implements BarcodeG
         binding.enterManualCode.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(MultiTrackerActivity.this, QRVerificationActivity.class));
+                startActivity(new Intent(QRCodeScannerActivity.this, QRVerificationActivity.class));
             }
         });
     }
@@ -134,7 +113,7 @@ public final class MultiTrackerActivity extends BaseActivity implements BarcodeG
                 .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
                         dialog.dismiss();
-                        ActivityCompat.requestPermissions(MultiTrackerActivity.this, permissions,
+                        ActivityCompat.requestPermissions(QRCodeScannerActivity.this, permissions,
                                 RC_HANDLE_CAMERA_PERM);
                     }
                 });
@@ -289,7 +268,7 @@ public final class MultiTrackerActivity extends BaseActivity implements BarcodeG
                 .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
                         dialog.dismiss();
-                        ActivityCompat.requestPermissions(MultiTrackerActivity.this, permissions,
+                        ActivityCompat.requestPermissions(QRCodeScannerActivity.this, permissions,
                                 RC_HANDLE_CAMERA_PERM);
                     }
                 });
@@ -385,7 +364,7 @@ public final class MultiTrackerActivity extends BaseActivity implements BarcodeG
 
     private void setObservers() {
         final AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(
-                MultiTrackerActivity.this);
+                QRCodeScannerActivity.this);
 
         verifyTokenViewModel.getUpdateScreenLiveData().observe(this, new Observer<String>() {
             @Override
@@ -413,7 +392,7 @@ public final class MultiTrackerActivity extends BaseActivity implements BarcodeG
             @Override
             public void onChanged(String s) {
                 requestInProgress = false;
-                Toast.makeText(MultiTrackerActivity.this, s, Toast.LENGTH_SHORT).show();
+                Toast.makeText(QRCodeScannerActivity.this, s, Toast.LENGTH_SHORT).show();
             }
         });
         verifyTokenViewModel.getLoadingScreen().observe(this, new Observer<Boolean>() {
@@ -432,7 +411,7 @@ public final class MultiTrackerActivity extends BaseActivity implements BarcodeG
             @Override
             public void onChanged(VerifyTokenResponse it) {
                 requestInProgress = false;
-                Intent intentNew = new Intent(MultiTrackerActivity.this, QRStatusActivity.class);
+                Intent intentNew = new Intent(QRCodeScannerActivity.this, QRStatusActivity.class);
                 if (it.getAdditionalAttributes() != null) {
                     intentNew.putExtra("name", it.getAdditionalAttributes().getIssuedToname());
                 }

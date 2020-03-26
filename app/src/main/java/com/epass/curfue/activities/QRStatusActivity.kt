@@ -10,13 +10,14 @@ import com.epass.curfue.databinding.ActivityQrStatusBinding
 import com.epass.curfue.models.TokenStatus
 
 
-class QRStatusActivity :AppCompatActivity(){
+class QRStatusActivity :BaseActivity(){
 
     lateinit var binding:ActivityQrStatusBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_qr_status)
+        setScreenName("QR Status Activity")
 
         val name = intent?.getStringExtra("name")
         val age = intent?.getIntExtra("age",0)
@@ -38,7 +39,7 @@ class QRStatusActivity :AppCompatActivity(){
         }
 
         binding.done.setOnClickListener {
-            val myIntent = Intent(this, MultiTrackerActivity::class.java)
+            val myIntent = Intent(this, QRCodeScannerActivity::class.java)
             myIntent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
             startActivity(myIntent)
         }
