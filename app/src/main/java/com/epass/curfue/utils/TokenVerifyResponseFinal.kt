@@ -1,15 +1,12 @@
-package com.epass.curfue.models
-
 import android.os.Parcelable
 import androidx.annotation.Keep
 import com.epass.curfue.models.ApplicationStatus
 import com.epass.curfue.models.ApplicationType
 import com.epass.curfue.models.ProofType
-import kotlinx.android.parcel.Parcelize
 import java.io.Serializable
 
 @Keep
-data class TokenVerifyResponse(
+data class TokenVerifyResponseFinal(
     val applicationID: Int,
     val applicationStatus: ApplicationStatus,
     val applicationType: ApplicationType,

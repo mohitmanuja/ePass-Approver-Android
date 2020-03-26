@@ -1,7 +1,7 @@
 package com.epass.curfue.repos
 
-import TokenVerifyResponse
 import android.content.Context
+import com.epass.curfue.models.TokenVerifyResponse
 import com.epass.curfue.models.VerifyTokenRequest
 import com.epass.curfue.network.RetrofitService
 import kotlinx.coroutines.CoroutineScope

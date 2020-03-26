@@ -1,6 +1,5 @@
 package com.epass.curfue.activities
 
-import TokenVerifyResponse
 import android.content.Intent
 import android.os.Bundle
 import androidx.core.content.ContextCompat
@@ -9,6 +8,7 @@ import com.epass.curfue.R
 import com.epass.curfue.databinding.ActivityQrStatusBinding
 import com.epass.curfue.models.ApplicationStatus
 import com.epass.curfue.models.ApplicationType
+import com.epass.curfue.models.TokenVerifyResponse
 import com.epass.curfue.utils.CommonUtils
 import com.epass.curfue.utils.gone
 import com.epass.curfue.utils.visible
@@ -30,10 +30,10 @@ class QRStatusActivity : BaseActivity() {
 
         binding.qrCodeText.text = tokenVerifyResponse.token
 
-        if (applicationType == ApplicationType.vehicle){
+        if (applicationType == ApplicationType.vehicle) {
             setVehicleDetails(tokenVerifyResponse)
 
-        }else if (applicationType == ApplicationType.person){
+        } else if (applicationType == ApplicationType.person) {
             setPersonDetails(tokenVerifyResponse)
 
         }
@@ -82,30 +82,22 @@ class QRStatusActivity : BaseActivity() {
     private fun setVehicleDetails(tokenVerifyResponse: TokenVerifyResponse) {
         if (CommonUtils.isNotNull(tokenVerifyResponse.entity?.proofId)) {
             binding.row1.visible()
-            binding.nameLabel.text = "Vehicle Number"
-            binding.nameText.text = tokenVerifyResponse.entity?.proofId
-
-        } else {
-            binding.row1.gone()
+            binding.row1Label.text = "Vehicle Number"
+            binding.row1Text.text = tokenVerifyResponse.entity?.proofId
         }
 
         if (CommonUtils.isNotNull(tokenVerifyResponse.entity?.vehicleModel)) {
             binding.row2.visible()
-            binding.ageLabel.text = "Model"
-            binding.ageText.text = tokenVerifyResponse.entity?.vehicleModel
-
-        } else {
-            binding.row2.gone()
+            binding.row2Label.text = "Model"
+            binding.row2Text.text = tokenVerifyResponse.entity?.vehicleModel
         }
 
         if (CommonUtils.isNotNull(tokenVerifyResponse.entity?.registrationNumber)) {
             binding.row3.visible()
-            binding.aadhaarLabel.text = "Registration Number"
-            binding.aadhaarText.text = tokenVerifyResponse.entity?.registrationNumber
-
-        } else {
-            binding.row3.gone()
+            binding.row3Label.text = "Registration Number"
+            binding.row3Text.text = tokenVerifyResponse.entity?.registrationNumber
         }
+
 
     }
 
@@ -113,22 +105,18 @@ class QRStatusActivity : BaseActivity() {
 
         if (CommonUtils.isNotNull(tokenVerifyResponse.entity?.firstName)) {
             binding.row1.visible()
-            binding.nameLabel.text = "Name"
+            binding.row1Label.text = "Name"
             val fullName =
                 tokenVerifyResponse.entity?.firstName + tokenVerifyResponse.entity?.lastName
-            binding.nameText.text = fullName
+            binding.row1Text.text = fullName
 
-        } else {
-            binding.row1.gone()
         }
 
         if (CommonUtils.isNotNull(tokenVerifyResponse.entity?.dob)) {
             binding.row2.visible()
-            binding.ageLabel.text = "D.O.B"
-            binding.ageText.text = tokenVerifyResponse.entity?.dob
+            binding.row2Label.text = "D.O.B"
+            binding.row2Text.text = tokenVerifyResponse.entity?.dob
 
-        } else {
-            binding.row2.gone()
         }
 
         if (CommonUtils.isNotNull(tokenVerifyResponse.entity?.proofType.toString()) &&
@@ -136,11 +124,9 @@ class QRStatusActivity : BaseActivity() {
         ) {
 
             binding.row3.visible()
-            binding.aadhaarLabel.text = tokenVerifyResponse.entity?.proofType?.value
-            binding.aadhaarText.text = tokenVerifyResponse.entity?.proofId
+            binding.row3Label.text = tokenVerifyResponse.entity?.proofType?.value
+            binding.row3Text.text = tokenVerifyResponse.entity?.proofId
 
-        } else {
-            binding.row3.gone()
         }
     }
 }

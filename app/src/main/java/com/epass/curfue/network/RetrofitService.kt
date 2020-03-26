@@ -1,6 +1,6 @@
 package com.epass.curfue.network
 
-import TokenVerifyResponse
+import com.epass.curfue.models.TokenVerifyResponse
 import com.epass.curfue.models.VerifyTokenRequest
 import retrofit2.Response
 import retrofit2.http.Body

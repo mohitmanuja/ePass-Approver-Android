@@ -71,70 +71,73 @@
 
 
             <TextView
-                android:id="@+id/name_label"
+                android:id="@+id/row_1_label"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/margin_24dp"
-                android:text="@string/name"
+                tools:text="@string/name"
                 android:textColor="@color/black"
                 android:textSize="@dimen/text_size_14sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/view" />
 
             <TextView
-                android:id="@+id/age_label"
+                android:id="@+id/row_2_label"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/margin_24dp"
-                android:text="@string/age"
+                tools:text="@string/age"
                 android:textColor="@color/black"
+                android:layout_marginLeft="@dimen/margin_24dp"
                 android:textSize="@dimen/text_size_14sp"
-                app:layout_constraintStart_toStartOf="@id/name_label"
-                app:layout_constraintTop_toBottomOf="@id/name_label" />
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/row_1_label" />
 
             <TextView
-                android:id="@+id/aadhaar_label"
+                android:id="@+id/row_3_label"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/margin_24dp"
-                android:text="@string/aadhar_id"
+                tools:text="@string/aadhar_id"
                 android:textColor="@color/black"
                 android:textSize="@dimen/text_size_14sp"
-                app:layout_constraintStart_toStartOf="@id/name_label"
-                app:layout_constraintTop_toBottomOf="@id/age_label" />
+                android:layout_marginLeft="@dimen/margin_24dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/row_2_label" />
 
             <TextView
-                android:id="@+id/name_text"
+                android:id="@+id/row_1_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/margin_24dp"
-                android:text="Mohit Manuja"
+                tools:text="Mohit Manuja"
                 android:textColor="@color/black"
                 android:textSize="@dimen/text_size_14sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/view" />
 
             <TextView
-                android:id="@+id/age_text"
+                android:id="@+id/row_2_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/margin_24dp"
-                android:text="22"
+                tools:text="22"
                 android:textColor="@color/black"
                 android:textSize="@dimen/text_size_14sp"
-                app:layout_constraintEnd_toEndOf="@id/name_text"
-                app:layout_constraintTop_toBottomOf="@id/name_label" />
+                android:layout_marginRight="@dimen/margin_24dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/row_1_label" />
 
             <TextView
-                android:id="@+id/aadhaar_text"
+                android:id="@+id/row_3_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/margin_24dp"
-                android:text="xxxxxxx345678"
+                tools:text="xxxxxxx345678"
                 android:textColor="@color/black"
                 android:textSize="@dimen/text_size_14sp"
-                app:layout_constraintEnd_toEndOf="@id/name_text"
-                app:layout_constraintTop_toBottomOf="@id/age_label" />
+                app:layout_constraintEnd_toEndOf="@id/row_1_text"
+                app:layout_constraintTop_toBottomOf="@id/row_2_label" />
 
             <ImageView
                 android:id="@+id/goi_logo"
@@ -145,25 +148,31 @@
                 android:src="@drawable/goi_logo"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/aadhaar_text" />
+                app:layout_constraintTop_toBottomOf="@id/row_3_text" />
 
             <androidx.constraintlayout.widget.Group
                 android:id="@+id/row_1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:constraint_referenced_ids="name_label,name_text" />
+                android:visibility="gone"
+                tools:visibility="visible"
+                app:constraint_referenced_ids="row_1_label,row_1_text" />
 
             <androidx.constraintlayout.widget.Group
                 android:id="@+id/row_2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:constraint_referenced_ids="age_label,age_text" />
+                android:visibility="gone"
+                tools:visibility="visible"
+                app:constraint_referenced_ids="row_2_label,row_2_text" />
 
             <androidx.constraintlayout.widget.Group
                 android:id="@+id/row_3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:constraint_referenced_ids="aadhaar_label,aadhaar_text" />
+                android:visibility="gone"
+                tools:visibility="visible"
+                app:constraint_referenced_ids="row_3_label,row_3_text" />
 
             <Button
                 android:id="@+id/done"

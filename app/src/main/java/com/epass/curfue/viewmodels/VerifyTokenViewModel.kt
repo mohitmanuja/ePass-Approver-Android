@@ -1,10 +1,10 @@
 package com.epass.curfue.viewmodels
 
-import TokenVerifyResponse
 import android.content.Context
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.epass.curfue.models.TokenVerifyResponse
 import com.epass.curfue.network.RetrofitFactory
 import com.epass.curfue.repos.TokenRepo
 import com.epass.curfue.utils.CommonUtils
