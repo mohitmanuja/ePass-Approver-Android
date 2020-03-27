@@ -24,7 +24,7 @@ object RetrofitFactory {
 
         return Retrofit.Builder()
             .baseUrl(BASE_URL)
-            .client(client)
+            .client(client!!)
             .addConverterFactory(MoshiConverterFactory.create().asLenient())
             .build().create(RetrofitService::class.java)
     }

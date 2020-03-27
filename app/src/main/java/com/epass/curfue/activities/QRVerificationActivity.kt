@@ -51,8 +51,8 @@ class QRVerificationActivity : BaseActivity() {
             alertDialogBuilder
                 .setMessage(it)
                 .setCancelable(false)
-                .setPositiveButton("Try Again",
-                    { dialog, id -> dialog.dismiss() })
+                .setPositiveButton("Try Again"
+                ) { dialog, _ -> dialog.dismiss() }
             val alertDialog = alertDialogBuilder.create()
             alertDialog.show()
         })

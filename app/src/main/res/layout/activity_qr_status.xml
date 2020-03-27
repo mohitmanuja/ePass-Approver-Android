@@ -70,75 +70,6 @@
                 app:layout_constraintTop_toBottomOf="@id/qr_code_text" />
 
 
-            <TextView
-                android:id="@+id/row_1_label"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="@dimen/margin_24dp"
-                tools:text="@string/name"
-                android:textColor="@color/black"
-                android:textSize="@dimen/text_size_14sp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/view" />
-
-            <TextView
-                android:id="@+id/row_2_label"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/margin_24dp"
-                tools:text="@string/age"
-                android:textColor="@color/black"
-                android:layout_marginLeft="@dimen/margin_24dp"
-                android:textSize="@dimen/text_size_14sp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/row_1_label" />
-
-            <TextView
-                android:id="@+id/row_3_label"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/margin_24dp"
-                tools:text="@string/aadhar_id"
-                android:textColor="@color/black"
-                android:textSize="@dimen/text_size_14sp"
-                android:layout_marginLeft="@dimen/margin_24dp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/row_2_label" />
-
-            <TextView
-                android:id="@+id/row_1_text"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="@dimen/margin_24dp"
-                tools:text="Mohit Manuja"
-                android:textColor="@color/black"
-                android:textSize="@dimen/text_size_14sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/view" />
-
-            <TextView
-                android:id="@+id/row_2_text"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/margin_24dp"
-                tools:text="22"
-                android:textColor="@color/black"
-                android:textSize="@dimen/text_size_14sp"
-                android:layout_marginRight="@dimen/margin_24dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/row_1_label" />
-
-            <TextView
-                android:id="@+id/row_3_text"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/margin_24dp"
-                tools:text="xxxxxxx345678"
-                android:textColor="@color/black"
-                android:textSize="@dimen/text_size_14sp"
-                app:layout_constraintEnd_toEndOf="@id/row_1_text"
-                app:layout_constraintTop_toBottomOf="@id/row_2_label" />
-
             <ImageView
                 android:id="@+id/goi_logo"
                 android:layout_width="wrap_content"
@@ -148,31 +79,20 @@
                 android:src="@drawable/goi_logo"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/row_3_text" />
+                app:layout_constraintTop_toBottomOf="@id/show_layout" />
 
-            <androidx.constraintlayout.widget.Group
-                android:id="@+id/row_1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:visibility="gone"
-                tools:visibility="visible"
-                app:constraint_referenced_ids="row_1_label,row_1_text" />
 
-            <androidx.constraintlayout.widget.Group
-                android:id="@+id/row_2"
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:id="@+id/show_layout"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:visibility="gone"
-                tools:visibility="visible"
-                app:constraint_referenced_ids="row_2_label,row_2_text" />
-
-            <androidx.constraintlayout.widget.Group
-                android:id="@+id/row_3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:visibility="gone"
-                tools:visibility="visible"
-                app:constraint_referenced_ids="row_3_label,row_3_text" />
+                android:layout_marginLeft="@dimen/margin_24dp"
+                android:layout_marginRight="@dimen/margin_24dp"
+                android:orientation="vertical"
+                app:layout_constraintBottom_toTopOf="@id/goi_logo"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/view" />
 
             <Button
                 android:id="@+id/done"

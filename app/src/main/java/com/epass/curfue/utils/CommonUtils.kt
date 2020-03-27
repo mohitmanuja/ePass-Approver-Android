@@ -106,11 +106,11 @@ class CommonUtils {
     }
 
     fun AlertDialog.Builder.positiveButton(text: String = "Okay", handleClick: (which: Int) -> Unit = {}) {
-        this.setPositiveButton(text, { dialogInterface, which-> handleClick(which) })
+        this.setPositiveButton(text, { _, which-> handleClick(which) })
     }
 
     fun AlertDialog.Builder.negativeButton(text: String = "Cancel", handleClick: (which: Int) -> Unit = {}) {
-        this.setNegativeButton(text, { dialogInterface, which-> handleClick(which) })
+        this.setNegativeButton(text, { _, which-> handleClick(which) })
     }
 
 

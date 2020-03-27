@@ -12,6 +12,7 @@ import com.epass.curfue.models.TokenVerifyResponse
 import com.epass.curfue.utils.CommonUtils
 import com.epass.curfue.utils.gone
 import com.epass.curfue.utils.visible
+import com.epass.curfue.views.GenericKeyValueInfoView
 
 
 class QRStatusActivity : BaseActivity() {
@@ -81,22 +82,23 @@ class QRStatusActivity : BaseActivity() {
 
     private fun setVehicleDetails(tokenVerifyResponse: TokenVerifyResponse) {
         if (CommonUtils.isNotNull(tokenVerifyResponse.entity?.proofId)) {
-            binding.row1.visible()
-            binding.row1Label.text = "Vehicle Number"
-            binding.row1Text.text = tokenVerifyResponse.entity?.proofId
+            val genricKeyValue = GenericKeyValueInfoView(this)
+            genricKeyValue.setData("Vehicle Number",tokenVerifyResponse.entity?.proofId)
+            binding.showLayout.addView(genricKeyValue)
         }
 
         if (CommonUtils.isNotNull(tokenVerifyResponse.entity?.vehicleModel)) {
-            binding.row2.visible()
-            binding.row2Label.text = "Model"
-            binding.row2Text.text = tokenVerifyResponse.entity?.vehicleModel
+            val genricKeyValue = GenericKeyValueInfoView(this)
+            genricKeyValue.setData("Model",tokenVerifyResponse.entity?.vehicleModel)
+            binding.showLayout.addView(genricKeyValue)
         }
 
         if (CommonUtils.isNotNull(tokenVerifyResponse.entity?.registrationNumber)) {
-            binding.row3.visible()
-            binding.row3Label.text = "Registration Number"
-            binding.row3Text.text = tokenVerifyResponse.entity?.registrationNumber
+            val genricKeyValue = GenericKeyValueInfoView(this)
+            genricKeyValue.setData("Registration Number",tokenVerifyResponse.entity?.registrationNumber)
+            binding.showLayout.addView(genricKeyValue)
         }
+
 
 
     }
@@ -104,29 +106,27 @@ class QRStatusActivity : BaseActivity() {
     private fun setPersonDetails(tokenVerifyResponse: TokenVerifyResponse) {
 
         if (CommonUtils.isNotNull(tokenVerifyResponse.entity?.firstName)) {
-            binding.row1.visible()
-            binding.row1Label.text = "Name"
             val fullName =
                 tokenVerifyResponse.entity?.firstName + tokenVerifyResponse.entity?.lastName
-            binding.row1Text.text = fullName
+            val genricKeyValue = GenericKeyValueInfoView(this)
+            genricKeyValue.setData("Name",fullName)
+            binding.showLayout.addView(genricKeyValue)
 
         }
 
         if (CommonUtils.isNotNull(tokenVerifyResponse.entity?.dob)) {
-            binding.row2.visible()
-            binding.row2Label.text = "D.O.B"
-            binding.row2Text.text = tokenVerifyResponse.entity?.dob
+            val genricKeyValue = GenericKeyValueInfoView(this)
+            genricKeyValue.setData("D.O.B",tokenVerifyResponse.entity?.dob)
+            binding.showLayout.addView(genricKeyValue)
 
         }
 
         if (CommonUtils.isNotNull(tokenVerifyResponse.entity?.proofType.toString()) &&
             CommonUtils.isNotNull(tokenVerifyResponse.entity?.proofId.toString())
         ) {
-
-            binding.row3.visible()
-            binding.row3Label.text = tokenVerifyResponse.entity?.proofType?.value
-            binding.row3Text.text = tokenVerifyResponse.entity?.proofId
-
+            val genricKeyValue = GenericKeyValueInfoView(this)
+            genricKeyValue.setData(tokenVerifyResponse.entity?.proofType?.value,tokenVerifyResponse.entity?.proofId)
+            binding.showLayout.addView(genricKeyValue)
         }
     }
 }

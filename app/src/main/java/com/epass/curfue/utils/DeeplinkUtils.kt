@@ -53,23 +53,4 @@ object DeeplinkUtils {
         return mIntent != null
     }
 
-    fun openInAppBrowser(
-        url: String?,
-        name: String?,
-        ad: Boolean?,
-        context: Context
-    ) {
-        if (isNotNull(url)) {
-           /* val intent = Intent(context, BrowserActivity::class.java)
-            intent.putExtra("url", url)
-            intent.putExtra("name", name)
-            intent.putExtra("ad", ad)
-            context.startActivity(intent)*/
-            //todo
-        } else {
-            context.showToast("No url found.")
-        }
-    }
-
-
 }
