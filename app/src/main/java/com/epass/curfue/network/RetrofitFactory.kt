@@ -18,9 +18,9 @@ object RetrofitFactory {
     fun makeRetrofitService(context: Context): RetrofitService {
         if (client == null){
             client =  OkHttpClient.Builder()
-                .connectTimeout(20, TimeUnit.SECONDS)
-                .readTimeout(30, TimeUnit.SECONDS)
-                .writeTimeout(30, TimeUnit.SECONDS)
+                .connectTimeout(1, TimeUnit.MINUTES)
+                .readTimeout(1, TimeUnit.MINUTES)
+                .writeTimeout(1, TimeUnit.MINUTES)
                 .addInterceptor(ChuckInterceptor(context))
                 .build()
         }
