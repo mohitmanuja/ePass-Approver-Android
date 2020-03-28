@@ -42,27 +42,19 @@ class VerifyTokenViewModel(val tokenRepo: TokenRepo) : ViewModel() {
         } else {
             val service = RetrofitFactory.makeRetrofitService(context)
             loadingScreen.postValue(true)
-            tokenRepo.fetchTokenResult(token, service) { response ->
-                try {
-                    if (response.isSuccessful) {
-                        response.body()?.apply {
-                            tokenResponseLiveData.postValue(this)
-                        }
-                    } else {
-                        showToast.postValue("Token is not Valid")
+            tokenRepo.fetchTokenResult(token, service, {response->
+                if (response.isSuccessful) {
+                    response.body()?.apply {
+                        tokenResponseLiveData.postValue(this)
                     }
-                } catch (e: HttpException) {
-                    showToast.postValue(context.getString(R.string.unable_to_connect_server_try_again))
-                } catch (e: Throwable) {
-                    showToast.postValue(context.getString(R.string.unable_to_connect_server_try_again))
-                } catch (e: SocketTimeoutException) {
-                    showToast.postValue(context.getString(R.string.unable_to_connect_server_try_again))
-                } catch (e: IOException) {
-                    showToast.postValue(context.getString(R.string.unable_to_connect_server_try_again))
-                }finally {
-                    loadingScreen.postValue(false)
+                } else {
+                    showToast.postValue("Token is not Valid")
                 }
-            }
+                loadingScreen.postValue(false)
+            },{
+                loadingScreen.postValue(false)
+                showToast.postValue(context.getString(R.string.unable_to_connect_server_try_again))
+            })
         }
 
     }
