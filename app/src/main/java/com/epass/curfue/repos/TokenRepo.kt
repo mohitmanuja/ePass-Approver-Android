@@ -1,7 +1,5 @@
 package com.epass.curfue.repos
 
-import android.content.Context
-import com.epass.curfue.R
 import com.epass.curfue.models.TokenVerifyResponse
 import com.epass.curfue.models.VerifyTokenRequest
 import com.epass.curfue.network.RetrofitService
@@ -29,14 +27,13 @@ class TokenRepo {
                 listener?.invoke(response)
             } catch (e: HttpException) {
                 errorListener?.invoke(null)
-//                showToast.postValue(context.getString(R.string.unable_to_connect_server_try_again))
             } catch (e: Throwable) {
                 errorListener?.invoke(null)
-//                showToast.postValue(context.getString(R.string.unable_to_connect_server_try_again))
             } catch (e: SocketTimeoutException) {
                 errorListener?.invoke(null)
-//                showToast.postValue(context.getString(R.string.unable_to_connect_server_try_again))
             } catch (e: IOException) {
+                errorListener?.invoke(null)
+            }catch (e:Exception){
                 errorListener?.invoke(null)
             }
         }

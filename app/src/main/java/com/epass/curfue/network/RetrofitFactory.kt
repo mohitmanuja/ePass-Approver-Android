@@ -9,7 +9,7 @@ import retrofit2.converter.moshi.MoshiConverterFactory
 import java.util.concurrent.TimeUnit
 
 object RetrofitFactory {
-    const val BASE_URL = "https://demo4807437.mockable.io"
+    const val BASE_URL = "https://viruscorona.co.in"
 //    const val BASE_URL = "https://epass.egovernments.org:8091"
     var client: OkHttpClient? = null
 
