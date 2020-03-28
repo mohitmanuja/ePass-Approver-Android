@@ -64,11 +64,14 @@ class QRVerificationActivity : BaseActivity() {
             }
 
         })
-        tokenViewModel.getTokenResponseLiveData().observe(this, Observer {
-
-            val intentNew = Intent(this, QRStatusActivity::class.java)
-            intentNew.putExtra(CommonUtils.DATA,it)
-            startActivity(intentNew)
+        tokenViewModel.getTokenResponseLiveData().observe(this, Observer {response->
+            if(response!=null){
+                val intentNew = Intent(this, QRStatusActivity::class.java)
+                intentNew.putExtra(CommonUtils.DATA,response)
+                startActivity(intentNew)
+            }else{
+                showToast(getString(R.string.something_went_wrong_try_again))
+            }
         })
 
     }
