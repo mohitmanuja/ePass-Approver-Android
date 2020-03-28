@@ -34,14 +34,6 @@
             </intent-filter>
         </service>
 
-        <activity android:name=".activities.EnterOtpActivity"/>
-        <activity android:name=".MainActivity"
-            android:theme="@style/AppTheme.NoActionBar"/>
-        <activity android:name=".activities.ProfileActivity"/>
-        <activity android:name=".activities.CreateApplicationActivity"/>
-        <activity android:name=".activities.ApplicationCreatedActivity"/>
-        <activity android:name=".activities.WelcomeActivity"/>
-        <activity android:name=".activities.VerificationFoundActivity"/>
         <activity android:name=".activities.QRVerificationActivity"
             android:theme="@style/AppTheme.NoActionBar"
             android:launchMode="singleTop"/>
