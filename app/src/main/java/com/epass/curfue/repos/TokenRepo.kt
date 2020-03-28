@@ -17,7 +17,7 @@ class TokenRepo(private val context: Context) {
         service: RetrofitService,
         listener: ((Response<TokenVerifyResponse>) -> Unit)?
     ) {
-        CoroutineScope(Dispatchers.Main).launch {
+        CoroutineScope(Dispatchers.IO).launch {
 
             val verifyTokenRequest = VerifyTokenRequest(token)
             val response = service.postVerifyToken(verifyTokenRequest)

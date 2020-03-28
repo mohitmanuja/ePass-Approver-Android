@@ -9,6 +9,8 @@ import com.epass.curfue.network.RetrofitFactory
 import com.epass.curfue.repos.TokenRepo
 import com.epass.curfue.utils.CommonUtils
 import retrofit2.HttpException
+import java.io.IOException
+import java.net.SocketTimeoutException
 
 class VerifyTokenViewModel(val tokenRepo: TokenRepo) : ViewModel() {
     private val tokenResponseLiveData: MutableLiveData<TokenVerifyResponse> = MutableLiveData()
@@ -54,6 +56,12 @@ class VerifyTokenViewModel(val tokenRepo: TokenRepo) : ViewModel() {
                     showToast.postValue("Exception ${e.message}")
                     loadingScreen.postValue(false)
                 } catch (e: Throwable) {
+                    loadingScreen.postValue(false)
+                    showToast.postValue("Oops: Something else went wrong")
+                } catch (e: SocketTimeoutException) {
+                    loadingScreen.postValue(false)
+                    showToast.postValue("Oops: Something else went wrong")
+                } catch (e: IOException) {
                     loadingScreen.postValue(false)
                     showToast.postValue("Oops: Something else went wrong")
                 }

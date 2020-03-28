@@ -106,8 +106,7 @@ class QRStatusActivity : BaseActivity() {
     private fun setPersonDetails(tokenVerifyResponse: TokenVerifyResponse) {
 
         if (CommonUtils.isNotNull(tokenVerifyResponse.entity?.firstName)) {
-            val fullName =
-                tokenVerifyResponse.entity?.firstName + tokenVerifyResponse.entity?.lastName
+            val fullName = tokenVerifyResponse.entity?.firstName +" "+ tokenVerifyResponse.entity?.lastName
             val genricKeyValue = GenericKeyValueInfoView(this)
             genricKeyValue.setData("Name",fullName)
             binding.showLayout.addView(genricKeyValue)
