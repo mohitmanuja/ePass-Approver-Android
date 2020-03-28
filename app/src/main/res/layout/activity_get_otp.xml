@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:background="@color/white"
+        android:layout_height="match_parent">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="@android:color/transparent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:navigationIcon="@drawable/ic_back_icon"
+            app:theme="@style/ToolbarTheme" />
+
+
+        <TextView
+            android:id="@+id/phone_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/margin_16dp"
+            android:layout_marginTop="@dimen/margin_25dp"
+            android:text="@string/enter_phone_number"
+            android:textColor="@color/text_color"
+            android:textSize="@dimen/text_size_24sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/toolbar" />
+
+        <TextView
+            android:id="@+id/phone_description"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/margin_16dp"
+            android:layout_marginTop="@dimen/margin_25dp"
+            android:text="@string/you_will_receive_otp"
+            android:textColor="@color/text_color"
+            android:textSize="@dimen/text_size_14sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/phone_label" />
+
+        <EditText
+            android:id="@+id/mobile_number_editText"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/margin_60dp"
+            android:layout_margin="@dimen/margin_16dp"
+            android:layout_marginTop="32dp"
+            android:imeOptions="actionGo"
+            android:hint="@string/enter_phone_number"
+            android:inputType="number"
+            android:maxLength="10"
+            android:textColorHint="@color/hint_color"
+            app:layout_constraintTop_toBottomOf="@id/phone_description" />
+
+        <Button
+            android:id="@+id/get_otp"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_120dp"
+            android:layout_marginEnd="@dimen/margin_16dp"
+            android:background="@drawable/button_rectangular"
+            android:text="@string/get_otp"
+            android:paddingTop="@dimen/margin_15dp"
+            android:paddingBottom="@dimen/margin_15dp"
+            android:paddingLeft="@dimen/margin_60dp"
+            android:paddingRight="@dimen/margin_60dp"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_size_14sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/mobile_number_editText" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

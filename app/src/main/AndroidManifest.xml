@@ -16,7 +16,7 @@
         android:usesCleartextTraffic="true"
         android:hardwareAccelerated="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".activities.QRCodeScannerActivity"
+        <activity android:name=".activities.OnBoardingActivity"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -40,6 +40,18 @@
 
         <activity android:name=".activities.QRStatusActivity"
             android:theme="@style/AppTheme.NoActionBar"/>
+
+          <activity android:name=".activities.QRCodeScannerActivity"
+            android:theme="@style/AppTheme.NoActionBar"/>
+
+          <activity android:name=".activities.EnterMobileNumberActivity"
+            android:theme="@style/AppTheme.NoActionBar"/>
+
+        <activity android:name=".activities.VerifyOtpActivity"
+            android:windowSoftInputMode="adjustResize"
+            android:theme="@style/AppTheme.NoActionBar"/>
+
+
 
     </application>
 

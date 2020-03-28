@@ -24,6 +24,15 @@
     <string name="try_again">Try Again</string>
     <string name="request_failed">Request Failed</string>
     <string name="please_enter_6_digit_token_number">Please enter 6 digit valid token number.</string>
+    <string name="scan_passes_to_verify_commuters_during_the_covid_pandemic">Scan passes to verify commuters during the COVID pandemic</string>
+    <string name="get_started">Get Started</string>
+    <string name="enter_phone_number">Enter phone number</string>
+    <string name="you_will_receive_otp">You’ll receive an OTP to verify your account</string>
+    <string name="get_otp">Get OTP</string>
+    <string name="verify_otp">Verify OTP</string>
+    <string name="verify">Verify</string>
+    <string name="didn_t_get_the_otp">Didn\'t get the OTP?</string>
+    <string name="resend_sms">Resend SMS</string>
 
 
 </resources>
