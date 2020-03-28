@@ -59,15 +59,14 @@ public final class QRCodeScannerActivity extends BaseActivity implements Barcode
     private VerifyTokenViewModel verifyTokenViewModel;
     private TokenViewModelFactory tokenViewModelFactory;
     private boolean requestInProgress;
-
-
+    AlertDialog.Builder alertDialogBuilder;
     @Override
     public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_qr_scanner);
         mGraphicOverlay = findViewById(R.id.graphicOverlay);
         gestureDetector = new GestureDetector(this, new CaptureGestureListener());
-        tokenViewModelFactory = new TokenViewModelFactory(new TokenRepo(this));
+        tokenViewModelFactory = new TokenViewModelFactory(new TokenRepo());
         verifyTokenViewModel = new ViewModelProvider(this, tokenViewModelFactory).get(VerifyTokenViewModel.class);
 
         setScreenName("QR Code Scanner");
@@ -255,17 +254,11 @@ public final class QRCodeScannerActivity extends BaseActivity implements Barcode
         Log.e(TAG, "Permission not granted: results len = " + grantResults.length +
                 " Result code = " + (grantResults.length > 0 ? grantResults[0] : "(empty)"));
 
-        DialogInterface.OnClickListener listener = new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int id) {
-
-            }
-        };
-
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("Permission Required")
+        builder.setTitle(R.string.permission_required)
                 .setMessage(R.string.no_camera_permission)
                 .setCancelable(false)
-                .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
                         dialog.dismiss();
                         ActivityCompat.requestPermissions(QRCodeScannerActivity.this, permissions,
@@ -289,9 +282,20 @@ public final class QRCodeScannerActivity extends BaseActivity implements Barcode
         int code = GoogleApiAvailability.getInstance().isGooglePlayServicesAvailable(
                 getApplicationContext());
         if (code != ConnectionResult.SUCCESS) {
-            Dialog dlg =
-                    GoogleApiAvailability.getInstance().getErrorDialog(this, code, RC_HANDLE_GMS);
-            dlg.show();
+            alertDialogBuilder = new AlertDialog.Builder(
+                    QRCodeScannerActivity.this);
+
+            alertDialogBuilder.setTitle(R.string.unable_to_open_scanner);
+            alertDialogBuilder
+                    .setMessage(R.string.your_phone_does_not_support_scan_feature)
+                    .setCancelable(true)
+                    .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+                            dialog.dismiss();
+                        }
+                    });
+            AlertDialog alertDialog = alertDialogBuilder.create();
+            alertDialog.show();
         }
 
         if (mCameraSource != null) {
@@ -312,7 +316,7 @@ public final class QRCodeScannerActivity extends BaseActivity implements Barcode
     }
 
     private boolean onTap(float x, float y) {
-        BarcodeGraphic graphic = mGraphicOverlay.getFirstGraphic();
+        BarcodeGraphic graphic = mGraphicOverlay.getGraphicAtLocation(x,y);
         Barcode barcode = null;
         if (graphic != null) {
             barcode = graphic.getBarcode();
@@ -333,10 +337,9 @@ public final class QRCodeScannerActivity extends BaseActivity implements Barcode
 
     @Override
     public void onBarcodeDetected(final Barcode barcode) {
-        final Barcode newbarCode = barcode;
         runOnUiThread(new Runnable() {
             public void run() {
-                validateQrCode(newbarCode.rawValue);
+                validateQrCode(barcode.rawValue);
             }
         });
     }
@@ -357,13 +360,12 @@ public final class QRCodeScannerActivity extends BaseActivity implements Barcode
 
         @Override
         public boolean onSingleTapConfirmed(MotionEvent e) {
-
             return onTap(e.getRawX(), e.getRawY()) || super.onSingleTapConfirmed(e);
         }
     }
 
     private void setObservers() {
-        final AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(
+        alertDialogBuilder = new AlertDialog.Builder(
                 QRCodeScannerActivity.this);
 
         verifyTokenViewModel.getUpdateScreenLiveData().observe(this, new Observer<String>() {

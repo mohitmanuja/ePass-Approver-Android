@@ -1,22 +1,10 @@
 <resources>
     <string name="app_name">Anumati Verify</string>
-    <string name="custom_title">Please Wait</string>
-    <string name="welcome_to_anumati">Welcome to Anumati</string>
-    <string name="mobile_number">Mobile Number</string>
-    <string name="enter_otp">Enter OTP</string>
-    <string name="enter_name">Enter Name</string>
-    <string name="dashboard">Dashboard</string>
-    <string name="you_have_no_application_yet">You have no anumati yet!</string>
-    <string name="create_new_application">Request new anumati</string>
-    <string name="claim_application">Claim Application</string>
-    <string name="go_to_home">Go to Home</string>
 
-    <string name="govt_id_promt">Select Govt. ID</string>
-    <string name="aadhar_number">Enter Aadhaar Number</string>
     <string name="permission_camera_rationale">Require Camera permission for this feature.</string>
-    <string name="ok">Ok</string>
+    <string name="ok">OK</string>
     <string name="low_storage_error">Storage is low, Please delete some file and try again.</string>
-    <string name="no_camera_permission">Camera Permission is required to use this feature. Click Ok to give Camera Permission.</string>
+    <string name="no_camera_permission">Camera Permission is required to use this feature. Click OK to give Camera Permission.</string>
     <string name="scan_qr_code_to_verify_the_pass">Scan QR code to verify the pass</string>
     <string name="enter_qr_code">Enter QR Code</string>
     <string name="enter_qr_code_manually">Enter QR code manually</string>
@@ -28,6 +16,14 @@
     <string name="something_went_wrong_try_again">Something went wrong! Try again</string>
     <string name="oops_seems_like_an_expired_code">Oops! Seems like an expired code!</string>
     <string name="oops_rejected_code">Oops! Your code has been rejected!</string>
+    <string name="unable_to_connect_server_try_again">Unable to connect server</string>
+    <string name="permission_required">Permission Required</string>
+    <string name="unable_to_open_scanner">Unable to Open Scanner</string>
+    <string name="your_phone_does_not_support_scan_feature">Your phone does not support scan feature.</string>
+    <string name="processing">Processing</string>
+    <string name="try_again">Try Again</string>
+    <string name="request_failed">Request Failed</string>
+    <string name="please_enter_6_digit_token_number">Please enter 6 digit valid token number.</string>
 
 
 </resources>

@@ -10,8 +10,6 @@ import com.epass.curfue.models.ApplicationStatus
 import com.epass.curfue.models.ApplicationType
 import com.epass.curfue.models.TokenVerifyResponse
 import com.epass.curfue.utils.CommonUtils
-import com.epass.curfue.utils.gone
-import com.epass.curfue.utils.visible
 import com.epass.curfue.views.GenericKeyValueInfoView
 
 

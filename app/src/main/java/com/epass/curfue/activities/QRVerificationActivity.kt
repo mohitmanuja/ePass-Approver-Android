@@ -17,7 +17,7 @@ import com.epass.curfue.viewmodels.VerifyTokenViewModel
 class QRVerificationActivity : BaseActivity() {
 
     lateinit var binding: ActivityEnterQrCodeBinding
-    private val tokenViewModelFactory = TokenViewModelFactory(TokenRepo(this))
+    private val tokenViewModelFactory = TokenViewModelFactory(TokenRepo())
     private val tokenViewModel: VerifyTokenViewModel by lazy {
         ViewModelProvider(this, tokenViewModelFactory).get(VerifyTokenViewModel::class.java)
     }
@@ -33,7 +33,7 @@ class QRVerificationActivity : BaseActivity() {
             if (validateToken()) {
                 tokenViewModel.fetchTokenResponse(binding.qrCodeEdittext.text.toString(), this)
             } else {
-                showToast("Please enter 6 digit valid token number.")
+                showToast(getString(R.string.please_enter_6_digit_token_number))
             }
         }
         setObservers()
@@ -47,18 +47,18 @@ class QRVerificationActivity : BaseActivity() {
 
         tokenViewModel.getUpdateScreenLiveData().observe(this, Observer {
             val alertDialogBuilder = AlertDialog.Builder(this)
-            alertDialogBuilder.setTitle("Oops!")
+            alertDialogBuilder.setTitle(getString(R.string.request_failed))
             alertDialogBuilder
                 .setMessage(it)
                 .setCancelable(false)
-                .setPositiveButton("Try Again"
+                .setPositiveButton(getString(R.string.try_again)
                 ) { dialog, _ -> dialog.dismiss() }
             val alertDialog = alertDialogBuilder.create()
             alertDialog.show()
         })
         tokenViewModel.getLoadingScreen().observe(this, Observer {
             if (it) {
-                showProgressDialog("Processing")
+                showProgressDialog(getString(R.string.processing))
             } else {
                 dismissProgressDialog()
             }

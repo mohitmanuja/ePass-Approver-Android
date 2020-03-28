@@ -10,7 +10,7 @@ import kotlinx.coroutines.launch
 import retrofit2.Response
 
 
-class TokenRepo(private val context: Context) {
+class TokenRepo {
 
     fun fetchTokenResult(
         token: String,

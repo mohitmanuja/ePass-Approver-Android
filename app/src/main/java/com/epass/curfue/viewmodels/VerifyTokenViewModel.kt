@@ -4,6 +4,7 @@ import android.content.Context
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.epass.curfue.R
 import com.epass.curfue.models.TokenVerifyResponse
 import com.epass.curfue.network.RetrofitFactory
 import com.epass.curfue.repos.TokenRepo
@@ -44,26 +45,22 @@ class VerifyTokenViewModel(val tokenRepo: TokenRepo) : ViewModel() {
             tokenRepo.fetchTokenResult(token, service) { response ->
                 try {
                     if (response.isSuccessful) {
-                        loadingScreen.postValue(false)
                         response.body()?.apply {
                             tokenResponseLiveData.postValue(this)
                         }
                     } else {
                         showToast.postValue("Token is not Valid")
-                        loadingScreen.postValue(false)
                     }
                 } catch (e: HttpException) {
-                    showToast.postValue("Exception ${e.message}")
-                    loadingScreen.postValue(false)
+                    showToast.postValue(context.getString(R.string.unable_to_connect_server_try_again))
                 } catch (e: Throwable) {
-                    loadingScreen.postValue(false)
-                    showToast.postValue("Oops: Something else went wrong")
+                    showToast.postValue(context.getString(R.string.unable_to_connect_server_try_again))
                 } catch (e: SocketTimeoutException) {
-                    loadingScreen.postValue(false)
-                    showToast.postValue("Oops: Something else went wrong")
+                    showToast.postValue(context.getString(R.string.unable_to_connect_server_try_again))
                 } catch (e: IOException) {
+                    showToast.postValue(context.getString(R.string.unable_to_connect_server_try_again))
+                }finally {
                     loadingScreen.postValue(false)
-                    showToast.postValue("Oops: Something else went wrong")
                 }
             }
         }

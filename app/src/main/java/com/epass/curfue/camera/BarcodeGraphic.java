@@ -19,15 +19,12 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.RectF;
-
-import com.epass.curfue.camera.GraphicOverlay;
 import com.google.android.gms.vision.barcode.Barcode;
 
 /**
  * Graphic instance for rendering barcode position, size, and ID within an associated graphic
  * overlay view.
  *
- * Created by Mayank on 7/21/2016.
  */
 public class BarcodeGraphic extends GraphicOverlay.Graphic {
 
