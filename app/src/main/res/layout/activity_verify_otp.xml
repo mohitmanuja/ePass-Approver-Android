@@ -45,6 +45,7 @@
             tools:text="Enter the OTP sent to XXXXXXX890" />
 
         <EditText
+            android:id="@+id/otp_editText"
             android:layout_width="match_parent"
             android:layout_height="@dimen/margin_60dp"
             android:layout_weight="1"

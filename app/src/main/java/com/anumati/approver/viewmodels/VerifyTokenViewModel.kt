@@ -39,8 +39,13 @@ class VerifyTokenViewModel(val tokenRepo: TokenRepo) : ViewModel() {
         } else {
             val service = RetrofitFactory.makeRetrofitService(context)
             loadingScreen.postValue(true)
-            tokenRepo.fetchTokenResult(token, service, {response->
+            tokenRepo.fetchTokenResult(token, service, { response ->
                 if (response.isSuccessful) {
+                    if (response.body() != null) {
+                        tokenResponseLiveData.postValue(response.body())
+                    } else {
+                        showToast.value = context.getString(R.string.something_went_wrong_try_again)
+                    }
                     response.body()?.apply {
                         tokenResponseLiveData.postValue(this)
                     }
@@ -48,7 +53,7 @@ class VerifyTokenViewModel(val tokenRepo: TokenRepo) : ViewModel() {
                     showToast.postValue("Token is not Valid")
                 }
                 loadingScreen.postValue(false)
-            },{
+            }, {
                 loadingScreen.postValue(false)
                 showToast.postValue(context.getString(R.string.unable_to_connect_server_try_again))
             })

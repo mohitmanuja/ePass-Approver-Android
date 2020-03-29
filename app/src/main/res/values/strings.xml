@@ -33,6 +33,10 @@
     <string name="verify">Verify</string>
     <string name="didn_t_get_the_otp">Didn\'t get the OTP?</string>
     <string name="resend_sms">Resend SMS</string>
+    <string name="no_internet_connection_found">No internet Connection found.</string>
+    <string name="please_enter_valid_otp">Please enter valid OTP</string>
+    <string name="enter_the_otp_sent_to_number">Enter the OTP sent to %s</string>
+    <string name="please_enter_valid_mobile_number">Please enter valid mobile number</string>
 
 
 </resources>

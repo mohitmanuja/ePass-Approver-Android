@@ -33,13 +33,14 @@
 
         <TextView
             android:id="@+id/phone_description"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/margin_16dp"
             android:layout_marginTop="@dimen/margin_25dp"
             android:text="@string/you_will_receive_otp"
             android:textColor="@color/text_color"
             android:textSize="@dimen/text_size_14sp"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/phone_label" />
 
@@ -49,7 +50,7 @@
             android:layout_height="@dimen/margin_60dp"
             android:layout_margin="@dimen/margin_16dp"
             android:layout_marginTop="32dp"
-            android:imeOptions="actionGo"
+            android:imeOptions="actionDone"
             android:hint="@string/enter_phone_number"
             android:inputType="number"
             android:maxLength="10"

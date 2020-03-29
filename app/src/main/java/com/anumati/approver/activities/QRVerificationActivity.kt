@@ -24,11 +24,13 @@ class QRVerificationActivity : BaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = DataBindingUtil.setContentView(this, R.layout.activity_enter_qr_code)
-        binding.toolbar.setNavigationOnClickListener {
-            finish()
-        }
         setScreenName("QR Verification Screen")
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_enter_qr_code)
+        setObservers()
+        setListeners()
+    }
+
+    private fun setListeners(){
         binding.verify.setOnClickListener {
             if (validateToken()) {
                 tokenViewModel.fetchTokenResponse(binding.qrCodeEdittext.text.toString(), this)
@@ -36,7 +38,9 @@ class QRVerificationActivity : BaseActivity() {
                 showToast(getString(R.string.please_enter_6_digit_token_number))
             }
         }
-        setObservers()
+        binding.toolbar.setNavigationOnClickListener {
+            finish()
+        }
     }
 
     private fun setObservers() {

@@ -400,7 +400,7 @@ public final class QRCodeScannerActivity extends BaseActivity implements Barcode
             @Override
             public void onChanged(Boolean aBoolean) {
                 if (aBoolean) {
-                    showProgressDialog("Processing");
+                    showProgressDialog(getString(R.string.processing));
                 } else {
                     dismissProgressDialog();
                 }
@@ -410,14 +410,9 @@ public final class QRCodeScannerActivity extends BaseActivity implements Barcode
             @Override
             public void onChanged(TokenVerifyResponse tokenVerifyResponse) {
                 requestInProgress = false;
-                if (tokenVerifyResponse!=null){
-                    Intent intentNew = new Intent(QRCodeScannerActivity.this, QRStatusActivity.class);
-                    intentNew.putExtra(CommonUtils.DATA,tokenVerifyResponse);
-                    startActivity(intentNew);
-                }else {
-                    Toast.makeText(QRCodeScannerActivity.this, getString(R.string.something_went_wrong_try_again), Toast.LENGTH_LONG).show();
-                }
-
+                Intent intentNew = new Intent(QRCodeScannerActivity.this, QRStatusActivity.class);
+                intentNew.putExtra(CommonUtils.DATA,tokenVerifyResponse);
+                startActivity(intentNew);
             }
         });
 

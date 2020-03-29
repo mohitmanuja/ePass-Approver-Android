@@ -10,10 +10,7 @@ import java.util.concurrent.TimeUnit
 
 object RetrofitFactory {
     const val BASE_URL = "https://viruscorona.co.in"
-//    const val BASE_URL = "https://epass.egovernments.org:8091"
     var client: OkHttpClient? = null
-
-
 
     fun makeRetrofitService(context: Context): RetrofitService {
         if (client == null){
