@@ -19,7 +19,7 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
         <activity
-            android:name=".activities.SplashActivity"
+            android:name=".onBoarding.activities.SplashActivity"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -40,32 +40,32 @@
         </service>
 
         <activity
-            android:name=".activities.QRVerificationActivity"
+            android:name=".qrcodecheck.activities.QRVerificationActivity"
             android:launchMode="singleTop"
             android:theme="@style/AppTheme.NoActionBar" />
 
         <activity
-            android:name=".activities.QRStatusActivity"
+            android:name=".qrcodecheck.activities.QRStatusActivity"
             android:theme="@style/AppTheme.NoActionBar" />
 
         <activity
-            android:name=".activities.QRCodeScannerActivity"
+            android:name=".qrcodecheck.activities.QRCodeScannerActivity"
             android:theme="@style/AppTheme.NoActionBar"
             android:windowSoftInputMode="stateAlwaysHidden" />
 
         <activity
-            android:name=".activities.EnterMobileNumberActivity"
+            android:name=".onBoarding.activities.EnterMobileNumberActivity"
             android:launchMode="singleTop"
             android:theme="@style/AppTheme.NoActionBar" />
 
         <activity
-            android:name=".activities.VerifyOtpActivity"
+            android:name=".onBoarding.activities.VerifyOtpActivity"
             android:launchMode="singleTop"
             android:theme="@style/AppTheme.NoActionBar"
             android:windowSoftInputMode="adjustResize" />
 
         <activity
-            android:name=".activities.OnBoardingActivity"
+            android:name=".onBoarding.activities.OnBoardingActivity"
             android:launchMode="singleTop"
             android:theme="@style/AppTheme.NoActionBar"
             android:windowSoftInputMode="adjustResize" />

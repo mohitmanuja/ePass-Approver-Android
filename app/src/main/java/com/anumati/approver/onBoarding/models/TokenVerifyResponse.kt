@@ -1,11 +1,10 @@
+package com.anumati.approver.onBoarding.models
+
 import androidx.annotation.Keep
-import com.anumati.approver.onBoarding.models.ApplicationStatus
-import com.anumati.approver.onBoarding.models.ApplicationType
-import com.anumati.approver.onBoarding.models.ProofType
 import java.io.Serializable
 
 @Keep
-data class TokenVerifyResponseFinal(
+data class TokenVerifyResponse(
     val applicationID: Int,
     val applicationStatus: ApplicationStatus,
     val applicationType: ApplicationType,

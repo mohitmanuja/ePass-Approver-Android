@@ -3,6 +3,7 @@ package com.anumati.approver.activities
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
+import com.anumati.approver.qrcodecheck.activities.QRCodeScannerActivity
 
 class DeeplinkActivity : Activity() {
     override fun onCreate(savedInstanceState: Bundle?) {
