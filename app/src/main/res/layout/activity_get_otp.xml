@@ -2,10 +2,17 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
+    <data >
+        <variable
+            name="viewmodel"
+            type="com.anumati.approver.onBoarding.viewmodels.OnBoardingViewModel" />
+
+    </data>
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:background="@color/white"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="@color/white">
 
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar"
@@ -45,17 +52,31 @@
             app:layout_constraintTop_toBottomOf="@id/phone_label" />
 
         <EditText
-            android:id="@+id/mobile_number_editText"
-            android:layout_width="match_parent"
+            android:id="@+id/country_code"
+            android:layout_width="@dimen/margin_50dp"
             android:layout_height="@dimen/margin_60dp"
             android:layout_margin="@dimen/margin_16dp"
-            android:layout_marginTop="32dp"
-            android:imeOptions="actionDone"
+            android:text="@string/india_dial_code"
+            android:maxLength="4"
+            android:digits="1234567890+"
+            android:singleLine="true"
+            android:hint="@string/india_dial_code"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/phone_description" />
+
+        <EditText
+            android:id="@+id/mobile_number_editText"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/margin_60dp"
             android:hint="@string/enter_phone_number"
+            android:imeOptions="actionDone"
             android:inputType="number"
             android:maxLength="10"
+            android:text="@={viewmodel.phoneNumber}"
             android:textColorHint="@color/hint_color"
-            app:layout_constraintTop_toBottomOf="@id/phone_description" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/country_code"
+            app:layout_constraintTop_toTopOf="@id/country_code" />
 
         <Button
             android:id="@+id/get_otp"
@@ -64,11 +85,11 @@
             android:layout_marginTop="@dimen/margin_120dp"
             android:layout_marginEnd="@dimen/margin_16dp"
             android:background="@drawable/button_rectangular"
-            android:text="@string/get_otp"
-            android:paddingTop="@dimen/margin_15dp"
-            android:paddingBottom="@dimen/margin_15dp"
             android:paddingLeft="@dimen/margin_60dp"
+            android:paddingTop="@dimen/margin_15dp"
             android:paddingRight="@dimen/margin_60dp"
+            android:paddingBottom="@dimen/margin_15dp"
+            android:text="@string/get_otp"
             android:textColor="@color/white"
             android:textSize="@dimen/text_size_14sp"
             app:layout_constraintEnd_toEndOf="parent"

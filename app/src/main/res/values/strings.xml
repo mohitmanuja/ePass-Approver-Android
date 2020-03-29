@@ -37,6 +37,8 @@
     <string name="please_enter_valid_otp">Please enter valid OTP</string>
     <string name="enter_the_otp_sent_to_number">Enter the OTP sent to %s</string>
     <string name="please_enter_valid_mobile_number">Please enter valid mobile number</string>
+    <string name="please_enter_valid_country_code">Please enter valid country code</string>
+    <string name="india_dial_code">+91</string>
 
 
 </resources>

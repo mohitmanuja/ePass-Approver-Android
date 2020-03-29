@@ -3,6 +3,7 @@ package com.anumati.approver.onBoarding.activities
 import android.app.AlertDialog
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -14,9 +15,15 @@ import com.anumati.approver.utils.CommonUtils
 import com.anumati.approver.utils.showToast
 import com.anumati.approver.onBoarding.viewmodels.OnBoardingViewModel
 import com.anumati.approver.onBoarding.viewmodels.OnBoardingViewModelFactory
+import io.michaelrocks.libphonenumber.android.NumberParseException
+import io.michaelrocks.libphonenumber.android.PhoneNumberUtil
 
 class EnterMobileNumberActivity : BaseActivity() {
     lateinit var binding: ActivityGetOtpBinding
+    private val phoneNumberUtil: PhoneNumberUtil by lazy {
+        PhoneNumberUtil.createInstance(this)
+    }
+
     private val onBoardingViewModelFactory: OnBoardingViewModelFactory by lazy {
         OnBoardingViewModelFactory(
             application,
@@ -75,11 +82,13 @@ class EnterMobileNumberActivity : BaseActivity() {
     private fun setListeners() {
         binding.getOtp.setOnClickListener {
             hideKeyboard(this)
-            onBoardingViewModel.phoneNumberEntered(binding.mobileNumberEditText.text.toString())
+            onBoardingViewModel.phoneNumberEntered(
+                binding.mobileNumberEditText.text.toString(),
+                binding.countryCode.text.toString()
+            )
         }
         binding.toolbar.setNavigationOnClickListener {
             finish()
         }
     }
-
 }

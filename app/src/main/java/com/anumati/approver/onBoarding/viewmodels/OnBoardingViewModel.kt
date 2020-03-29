@@ -11,6 +11,7 @@ import com.anumati.approver.network.RetrofitFactory
 import com.anumati.approver.onBoarding.repos.OnboardingRepo
 import com.anumati.approver.utils.CommonUtils
 import com.anumati.approver.utils.SharedPrefHelper
+import io.michaelrocks.libphonenumber.android.PhoneNumberUtil
 
 class OnBoardingViewModel(application: Application, val onboardingRepo: OnboardingRepo) :
     AndroidViewModel(application) {
@@ -20,6 +21,10 @@ class OnBoardingViewModel(application: Application, val onboardingRepo: Onboardi
     private val showToast = MutableLiveData<String>()
     private val loadingScreen = MutableLiveData<Boolean>()
     lateinit var phoneNumber: String
+    lateinit var isoCode: String
+    private val phoneNumberUtil: PhoneNumberUtil by lazy {
+        PhoneNumberUtil.createInstance(application)
+    }
 
     fun getLoadingScreen(): LiveData<Boolean> {
         return loadingScreen
@@ -110,16 +115,22 @@ class OnBoardingViewModel(application: Application, val onboardingRepo: Onboardi
         }
     }
 
-    fun setNumber(number: String) {
-        phoneNumber = number
-    }
 
-    fun phoneNumberEntered(phoneNumber: String) {
-        if (phoneNumber.length == 10) {
-            createOTPRequest(phoneNumber)
+    fun phoneNumberEntered(phoneNumber: String, countryCode: String) {
+        if (CommonUtils.isNotNull(countryCode) && countryCode.contains("+")) {
+            val region = phoneNumberUtil.getRegionCodeForCountryCode(countryCode.replace("+", "").toInt())
+            if (CommonUtils.isNotNull(phoneNumber)) {
+                val parse = phoneNumberUtil.parse(phoneNumber, region)
+                if (parse != null && phoneNumberUtil.isValidNumber(parse)) {
+                    createOTPRequest(phoneNumber)
+                } else {
+                    showToast.value = getApplication<Application>().getString(R.string.please_enter_valid_mobile_number)
+                }
+            } else {
+                showToast.value = getApplication<Application>().getString(R.string.please_enter_valid_mobile_number)
+            }
         } else {
-            showToast.value = getApplication<Application>().getString(R.string.please_enter_valid_mobile_number)
+            showToast.value = getApplication<Application>().getString(R.string.please_enter_valid_country_code)
         }
     }
-
 }
