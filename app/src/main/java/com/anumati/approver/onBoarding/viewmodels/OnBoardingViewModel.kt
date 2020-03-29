@@ -53,19 +53,32 @@ class OnBoardingViewModel(application: Application, val onboardingRepo: Onboardi
         } else {
             val service = RetrofitFactory.makeRetrofitService(getApplication())
             loadingScreen.postValue(true)
-            onboardingRepo.requestOTP(OTPIdentifier.PHONE, "+91$number", service, { response ->
-                if (response.isSuccessful) {
-                    createOTPRequestLiveData.postValue(true)
-                } else {
-                    showToast.postValue(getApplication<Application>().getString(R.string.something_went_wrong_try_again))
-                }
-                loadingScreen.postValue(false)
-            }, {
-                loadingScreen.postValue(false)
-                showToast.postValue(getApplication<Application>().getString(R.string.unable_to_connect_server_try_again))
-            })
+            onboardingRepo.requestOTP(
+                OTPIdentifier.PHONE,
+                "$isoCode$number",
+                service,
+                { response ->
+                    if (response.isSuccessful) {
+                        createOTPRequestLiveData.postValue(true)
+                    } else {
+                        showToast.postValue(getApplication<Application>().getString(R.string.something_went_wrong_try_again))
+                    }
+                    loadingScreen.postValue(false)
+                },
+                {
+                    loadingScreen.postValue(false)
+                    showToast.postValue(getApplication<Application>().getString(R.string.unable_to_connect_server_try_again))
+                })
         }
 
+    }
+
+    private fun setNumber(number: String){
+        phoneNumber = number
+    }
+
+    private fun setISOCode(isoCode: String){
+        this.isoCode = isoCode
     }
 
     private fun verifyOTPRequest(
@@ -78,7 +91,7 @@ class OnBoardingViewModel(application: Application, val onboardingRepo: Onboardi
         } else {
             val service = RetrofitFactory.makeRetrofitService(getApplication())
             loadingScreen.postValue(true)
-            onboardingRepo.verifyOTP("+91$number", otp, otpIdentifier, service, { response ->
+            onboardingRepo.verifyOTP("$isoCode$number", otp, otpIdentifier, service, { response ->
                 if (response.isSuccessful) {
                     response.body()?.apply {
                         SharedPrefHelper.saveUserLoggedIn(getApplication())
@@ -118,19 +131,26 @@ class OnBoardingViewModel(application: Application, val onboardingRepo: Onboardi
 
     fun phoneNumberEntered(phoneNumber: String, countryCode: String) {
         if (CommonUtils.isNotNull(countryCode) && countryCode.contains("+")) {
-            val region = phoneNumberUtil.getRegionCodeForCountryCode(countryCode.replace("+", "").toInt())
+            val region =
+                phoneNumberUtil.getRegionCodeForCountryCode(countryCode.replace("+", "").toInt())
             if (CommonUtils.isNotNull(phoneNumber)) {
+                isoCode = countryCode
                 val parse = phoneNumberUtil.parse(phoneNumber, region)
                 if (parse != null && phoneNumberUtil.isValidNumber(parse)) {
+                    this.phoneNumber = phoneNumber
+                    this.isoCode = countryCode
                     createOTPRequest(phoneNumber)
                 } else {
-                    showToast.value = getApplication<Application>().getString(R.string.please_enter_valid_mobile_number)
+                    showToast.value =
+                        getApplication<Application>().getString(R.string.please_enter_valid_mobile_number)
                 }
             } else {
-                showToast.value = getApplication<Application>().getString(R.string.please_enter_valid_mobile_number)
+                showToast.value =
+                    getApplication<Application>().getString(R.string.please_enter_valid_mobile_number)
             }
         } else {
-            showToast.value = getApplication<Application>().getString(R.string.please_enter_valid_country_code)
+            showToast.value =
+                getApplication<Application>().getString(R.string.please_enter_valid_country_code)
         }
     }
 }

@@ -49,7 +49,8 @@ class EnterMobileNumberActivity : BaseActivity() {
         onBoardingViewModel.getCreateOTPRequestLiveData().observe(this, Observer { requestSent ->
             if (requestSent) {
                 val intent = Intent(this, VerifyOtpActivity::class.java)
-                intent.putExtra(CommonUtils.NUMBER, binding.mobileNumberEditText.text.toString())
+                intent.putExtra(CommonUtils.NUMBER, onBoardingViewModel.phoneNumber)
+                intent.putExtra(CommonUtils.ISO_CODE, onBoardingViewModel.isoCode)
                 startActivity(intent)
             }
         })

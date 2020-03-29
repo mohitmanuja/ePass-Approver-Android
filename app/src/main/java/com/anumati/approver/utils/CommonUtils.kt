@@ -19,6 +19,7 @@ class CommonUtils {
     companion object {
 
         const val NUMBER: String = "number"
+        const val ISO_CODE: String = "iso"
         const val DATA: String = "data"
 
         @JvmStatic

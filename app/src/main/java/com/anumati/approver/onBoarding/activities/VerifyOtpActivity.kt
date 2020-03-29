@@ -34,6 +34,9 @@ class VerifyOtpActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_verify_otp)
         number = intent?.getStringExtra(CommonUtils.NUMBER)?:""
+        val isoCode = intent?.getStringExtra(CommonUtils.ISO_CODE)?:""
+        onboardingViewModel.phoneNumber = number
+        onboardingViewModel.isoCode = isoCode
         binding.phoneDescription.text = getString(R.string.enter_the_otp_sent_to_number,number)
 
         setListeners()
