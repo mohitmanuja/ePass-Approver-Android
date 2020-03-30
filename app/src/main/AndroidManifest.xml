@@ -44,7 +44,6 @@
             android:name=".qrCodeCheck.activities.QRCodeScannerActivity"
             android:theme="@style/AppTheme.NoActionBar"
             android:screenOrientation="portrait"
-            android:exported="true"
             android:windowSoftInputMode="stateAlwaysHidden" />
 
         <activity
