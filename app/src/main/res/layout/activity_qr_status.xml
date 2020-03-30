@@ -3,10 +3,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <data>
-
-    </data>
-
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -64,7 +60,7 @@
                 android:layout_marginStart="@dimen/margin_24dp"
                 android:layout_marginTop="28dp"
                 android:layout_marginEnd="@dimen/margin_24dp"
-                android:background="#C6CBD4"
+                android:background="@color/divider_color"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/qr_code_text" />

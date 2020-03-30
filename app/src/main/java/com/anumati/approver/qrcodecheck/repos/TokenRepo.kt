@@ -23,9 +23,7 @@ class TokenRepo {
         CoroutineScope(Dispatchers.IO).launch {
             try {
                 val verifyTokenRequest =
-                    VerifyTokenRequest(
-                        token
-                    )
+                    VerifyTokenRequest(token)
                 val response = service.postVerifyToken(verifyTokenRequest)
                 listener?.invoke(response)
             } catch (e: HttpException) {

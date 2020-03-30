@@ -2,10 +2,6 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:custom="http://schemas.android.com/apk/res-auto">
 
-    <data>
-
-    </data>
-
     <RelativeLayout
         android:id="@+id/topLayout"
         android:layout_width="match_parent"

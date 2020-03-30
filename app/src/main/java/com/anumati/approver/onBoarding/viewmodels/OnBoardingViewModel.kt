@@ -8,12 +8,13 @@ import com.anumati.approver.R
 import com.anumati.approver.onBoarding.models.OTPIdentifier
 import com.anumati.approver.qrcodecheck.models.VerifyOTPResponse
 import com.anumati.approver.network.RetrofitFactory
-import com.anumati.approver.onBoarding.repos.OnboardingRepo
+import com.anumati.approver.onBoarding.repos.OnBoardingRepo
+import com.anumati.approver.utils.CommonConfig.OTP_LENGTH
 import com.anumati.approver.utils.CommonUtils
 import com.anumati.approver.utils.SharedPrefHelper
 import io.michaelrocks.libphonenumber.android.PhoneNumberUtil
 
-class OnBoardingViewModel(application: Application, val onboardingRepo: OnboardingRepo) :
+class OnBoardingViewModel(application: Application, val onBoardingRepo: OnBoardingRepo) :
     AndroidViewModel(application) {
     private val createOTPRequestLiveData: MutableLiveData<Boolean> = MutableLiveData()
     private val verifyOTPRequestLiveData: MutableLiveData<VerifyOTPResponse> = MutableLiveData()
@@ -53,7 +54,7 @@ class OnBoardingViewModel(application: Application, val onboardingRepo: Onboardi
         } else {
             val service = RetrofitFactory.makeRetrofitService(getApplication())
             loadingScreen.postValue(true)
-            onboardingRepo.requestOTP(
+            onBoardingRepo.requestOTP(
                 OTPIdentifier.PHONE,
                 "$isoCode$number",
                 service,
@@ -73,14 +74,6 @@ class OnBoardingViewModel(application: Application, val onboardingRepo: Onboardi
 
     }
 
-    private fun setNumber(number: String){
-        phoneNumber = number
-    }
-
-    private fun setISOCode(isoCode: String){
-        this.isoCode = isoCode
-    }
-
     private fun verifyOTPRequest(
         number: String,
         otp: String,
@@ -91,7 +84,7 @@ class OnBoardingViewModel(application: Application, val onboardingRepo: Onboardi
         } else {
             val service = RetrofitFactory.makeRetrofitService(getApplication())
             loadingScreen.postValue(true)
-            onboardingRepo.verifyOTP("$isoCode$number", otp, otpIdentifier, service, { response ->
+            onBoardingRepo.verifyOTP("$isoCode$number", otp, otpIdentifier, service, { response ->
                 if (response.isSuccessful) {
                     response.body()?.apply {
                         SharedPrefHelper.saveUserLoggedIn(getApplication())
@@ -119,7 +112,7 @@ class OnBoardingViewModel(application: Application, val onboardingRepo: Onboardi
 
     private fun validateOTP(otpString: String): Boolean {
         // Write all your validation here for OTP
-        if (otpString.length == 6) {
+        if (otpString.length == OTP_LENGTH) {
             return true
         } else {
             showToast.value =

@@ -1,7 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
+    <data>
+        <variable
+            name="utils"
+            type="com.anumati.approver.utils.CommonConfig" />
 
+    </data>
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:background="@color/white"
@@ -15,8 +20,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:navigationIcon="@drawable/ic_back_icon"
-            app:theme="@style/ToolbarTheme" />
+            app:navigationIcon="@drawable/ic_back_icon" />
 
 
         <TextView
@@ -39,9 +43,9 @@
             android:layout_marginTop="32dp"
             android:imeOptions="actionGo"
             android:digits="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890"
-            android:hint="6 digit QR Code"
+            android:hint="@string/digit_qr_code"
             android:inputType="text"
-            android:maxLength="6"
+            android:maxLength="@{utils.MANUAL_QR_CODE_LENGTH}"
             android:textColorHint="@color/hint_color"
             app:layout_constraintTop_toBottomOf="@id/qr_code_label" />
 
@@ -52,7 +56,7 @@
             android:layout_marginTop="@dimen/margin_120dp"
             android:layout_marginEnd="@dimen/margin_16dp"
             android:background="@drawable/button_rectangular"
-            android:text="Verify"
+            android:text="@string/verify"
             android:paddingTop="@dimen/margin_15dp"
             android:paddingBottom="@dimen/margin_15dp"
             android:paddingLeft="@dimen/margin_60dp"

@@ -10,7 +10,7 @@ import com.anumati.approver.R
 import com.anumati.approver.activities.BaseActivity
 import com.anumati.approver.qrcodecheck.activities.QRCodeScannerActivity
 import com.anumati.approver.databinding.ActivityVerifyOtpBinding
-import com.anumati.approver.onBoarding.repos.OnboardingRepo
+import com.anumati.approver.onBoarding.repos.OnBoardingRepo
 import com.anumati.approver.utils.CommonUtils
 import com.anumati.approver.utils.showToast
 import com.anumati.approver.onBoarding.viewmodels.OnBoardingViewModel
@@ -23,7 +23,7 @@ class VerifyOtpActivity : BaseActivity() {
     private val onBoardingViewModelFactory: OnBoardingViewModelFactory by lazy {
         OnBoardingViewModelFactory(
             application,
-            OnboardingRepo()
+            OnBoardingRepo()
         )
     }
     private val onboardingViewModel: OnBoardingViewModel by lazy {
@@ -89,10 +89,6 @@ class VerifyOtpActivity : BaseActivity() {
         }
 
         binding.resendOtp.setOnClickListener {
-            showToast("Call resend API")
-        }
-
-        binding.resendOtp.setOnClickListener {
             onboardingViewModel.createOTPRequest(number)
         }
         binding.toolbar.setNavigationOnClickListener {
@@ -100,6 +96,5 @@ class VerifyOtpActivity : BaseActivity() {
         }
 
     }
-
 
 }

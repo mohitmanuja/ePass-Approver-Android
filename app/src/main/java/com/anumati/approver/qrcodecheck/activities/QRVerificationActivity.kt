@@ -13,7 +13,7 @@ import com.anumati.approver.qrcodecheck.repos.TokenRepo
 import com.anumati.approver.utils.CommonUtils
 import com.anumati.approver.utils.showToast
 import com.anumati.approver.qrcodecheck.viewmodels.TokenViewModelFactory
-import com.anumati.approver.viewmodels.VerifyTokenViewModel
+import com.anumati.approver.qrcodecheck.viewmodels.VerifyTokenViewModel
 
 class QRVerificationActivity : BaseActivity() {
 

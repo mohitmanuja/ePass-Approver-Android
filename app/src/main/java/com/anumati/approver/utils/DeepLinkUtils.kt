@@ -3,10 +3,8 @@ package com.anumati.approver.utils
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
-import com.anumati.approver.activities.DeeplinkActivity
-import com.anumati.approver.utils.CommonUtils.Companion.isNotNull
 
-object DeeplinkUtils {
+object DeepLinkUtils {
 
 
     fun openInBrowser(url: String, context: Context) {
@@ -30,27 +28,6 @@ object DeeplinkUtils {
         } catch (e: Exception) {
             context.showToast("You don't have play store :) Thanks. ")
         }
-    }
-
-
-    fun promoApp(id: String?, message: String?, context: Context) {
-        if (isAppInstalled("com.android.vending", context)) {
-            val rateintent = Intent(Intent.ACTION_VIEW)
-            rateintent.data = Uri.parse("market://details?id=$id")
-            context.startActivity(rateintent)
-            if (isNotNull(message)) {
-                context.showToast(message!!)
-            }
-        } else {
-            val i = Intent(context, DeeplinkActivity::class.java)
-            context.startActivity(i)
-        }
-    }
-
-    fun isAppInstalled(packageName: String?, context: Context): Boolean {
-        val mIntent =
-            context.packageManager.getLaunchIntentForPackage(packageName!!)
-        return mIntent != null
     }
 
 }

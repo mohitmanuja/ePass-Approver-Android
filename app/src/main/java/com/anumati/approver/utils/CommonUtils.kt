@@ -1,18 +1,10 @@
 package com.anumati.approver.utils
 
 
-import android.app.Activity
-import android.app.AlertDialog
 import android.content.Context
-import android.content.Intent
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
-import android.net.Uri
 import android.os.Build
-import org.json.JSONArray
-import org.json.JSONObject
-import java.text.SimpleDateFormat
-import java.util.*
 
 
 class CommonUtils {
@@ -32,38 +24,6 @@ class CommonUtils {
             return (string == null || string.isEmpty())
         }
 
-        @JvmStatic
-        fun makeArrayList(jsonArray: JSONArray?): ArrayList<JSONObject> {
-            val listdata = ArrayList<JSONObject>()
-            val jArray = jsonArray as JSONArray
-            for (i in 0 until jArray.length()) {
-                listdata.add(jArray.getJSONObject(i))
-            }
-            return listdata
-        }
-
-        @JvmStatic
-        fun getStringFromDate(long: Long, outputFromat: String): String? {
-            val date = Date(long)
-            val df2 = SimpleDateFormat(outputFromat, Locale.ENGLISH)
-            return df2.format(date)
-        }
-
-
-        fun sendEmail(context: Activity,recipient: String, subject: String, message: String) {
-            val mIntent = Intent(Intent.ACTION_SEND)
-            mIntent.data = Uri.parse("mailto:")
-            mIntent.type = "text/plain"
-            mIntent.putExtra(Intent.EXTRA_EMAIL, arrayOf(recipient))
-            mIntent.putExtra(Intent.EXTRA_SUBJECT, subject)
-            mIntent.putExtra(Intent.EXTRA_TEXT, message)
-            try {
-                context.startActivity(Intent.createChooser(mIntent, "Choose Email..."))
-            }
-            catch (e: Exception){
-            }
-
-        }
         fun isInternetAvailable(context: Context): Boolean {
             var result = false
             val connectivityManager =
@@ -96,23 +56,4 @@ class CommonUtils {
         }
 
     }
-
-
-    fun showAlertDialog(dialogBuilder: AlertDialog.Builder.() -> Unit,context: Context) {
-        val builder = AlertDialog.Builder(context)
-        builder.dialogBuilder()
-        val dialog = builder.create()
-
-        dialog.show()
-    }
-
-    fun AlertDialog.Builder.positiveButton(text: String = "Okay", handleClick: (which: Int) -> Unit = {}) {
-        this.setPositiveButton(text, { _, which-> handleClick(which) })
-    }
-
-    fun AlertDialog.Builder.negativeButton(text: String = "Cancel", handleClick: (which: Int) -> Unit = {}) {
-        this.setNegativeButton(text, { _, which-> handleClick(which) })
-    }
-
-
 }

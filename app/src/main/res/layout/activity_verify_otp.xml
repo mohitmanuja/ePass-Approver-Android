@@ -3,6 +3,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <data>
+        <variable
+            name="utils"
+            type="com.anumati.approver.utils.CommonConfig" />
+
+    </data>
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -16,8 +23,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:navigationIcon="@drawable/ic_back_icon"
-            app:theme="@style/ToolbarTheme" />
+            app:navigationIcon="@drawable/ic_back_icon" />
 
 
         <TextView
@@ -50,10 +56,10 @@
             android:layout_height="@dimen/margin_60dp"
             android:layout_weight="1"
             android:imeOptions="actionNext"
-            android:hint="Enter OTP"
+            android:hint="@string/enter_otp"
             android:inputType="number"
             android:layout_margin="@dimen/margin_16dp"
-            android:maxLength="6"
+            android:maxLength="@{utils.OTP_LENGTH}"
             android:singleLine="true"
             android:textColorHint="@color/hint_color"
             app:layout_constraintTop_toBottomOf="@id/phone_description" />

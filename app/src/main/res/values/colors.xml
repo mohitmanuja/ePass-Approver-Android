@@ -9,4 +9,5 @@
     <color name="black">#000000</color>
     <color name="hint_color">#3D4159</color>
     <color name="text_color">#191919</color>
+    <color name="divider_color">#C6CBD4</color>
 </resources>

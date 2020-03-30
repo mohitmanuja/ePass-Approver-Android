@@ -31,7 +31,7 @@ import com.anumati.approver.onBoarding.models.TokenVerifyResponse;
 import com.anumati.approver.qrcodecheck.repos.TokenRepo;
 import com.anumati.approver.utils.CommonUtils;
 import com.anumati.approver.qrcodecheck.viewmodels.TokenViewModelFactory;
-import com.anumati.approver.viewmodels.VerifyTokenViewModel;
+import com.anumati.approver.qrcodecheck.viewmodels.VerifyTokenViewModel;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GoogleApiAvailability;
 import com.google.android.gms.vision.CameraSource;
@@ -42,6 +42,7 @@ import com.google.android.gms.vision.barcode.BarcodeDetector;
 import java.io.IOException;
 
 /**
+ * @author googlesamples - android-vision
  * Activity for the multi-tracker app.  This app detects faces and barcodes with the rear facing
  * camera, and draws overlay graphics to indicate the position, size, and ID of each face and
  * barcode.
@@ -58,7 +59,6 @@ public final class QRCodeScannerActivity extends BaseActivity implements Barcode
     private GraphicOverlay<BarcodeGraphic> mGraphicOverlay;
     private GestureDetector gestureDetector;
     private VerifyTokenViewModel verifyTokenViewModel;
-    private TokenViewModelFactory tokenViewModelFactory;
     private boolean requestInProgress;
     AlertDialog.Builder alertDialogBuilder;
     @Override
@@ -67,7 +67,7 @@ public final class QRCodeScannerActivity extends BaseActivity implements Barcode
         binding = DataBindingUtil.setContentView(this, R.layout.activity_qr_scanner);
         mGraphicOverlay = findViewById(R.id.graphicOverlay);
         gestureDetector = new GestureDetector(this, new CaptureGestureListener());
-        tokenViewModelFactory = new TokenViewModelFactory(new TokenRepo());
+        TokenViewModelFactory tokenViewModelFactory = new TokenViewModelFactory(new TokenRepo());
         verifyTokenViewModel = new ViewModelProvider(this, tokenViewModelFactory).get(VerifyTokenViewModel.class);
 
         setScreenName("QR Code Scanner");
@@ -107,10 +107,10 @@ public final class QRCodeScannerActivity extends BaseActivity implements Barcode
 
 
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("Permission Required")
+        builder.setTitle(R.string.permission_required)
                 .setMessage(R.string.no_camera_permission)
                 .setCancelable(false)
-                .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                .setPositiveButton(getString(R.string.ok), new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
                         dialog.dismiss();
                         ActivityCompat.requestPermissions(QRCodeScannerActivity.this, permissions,
@@ -166,8 +166,8 @@ public final class QRCodeScannerActivity extends BaseActivity implements Barcode
 
             // Check for low storage.  If there is low storage, the native library will not be
             // downloaded, so detection will not become operational.
-            IntentFilter lowstorageFilter = new IntentFilter(Intent.ACTION_DEVICE_STORAGE_LOW);
-            boolean hasLowStorage = registerReceiver(null, lowstorageFilter) != null;
+            IntentFilter lowStorageFilter = new IntentFilter(Intent.ACTION_DEVICE_STORAGE_LOW);
+            boolean hasLowStorage = registerReceiver(null, lowStorageFilter) != null;
 
             if (hasLowStorage) {
                 Toast.makeText(this, R.string.low_storage_error, Toast.LENGTH_LONG).show();
@@ -258,7 +258,13 @@ public final class QRCodeScannerActivity extends BaseActivity implements Barcode
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle(R.string.permission_required)
                 .setMessage(R.string.no_camera_permission)
-                .setCancelable(false)
+                .setCancelable(true)
+                .setNegativeButton(R.string.not_now, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        dialogInterface.dismiss();
+                    }
+                })
                 .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
                         dialog.dismiss();
@@ -317,6 +323,12 @@ public final class QRCodeScannerActivity extends BaseActivity implements Barcode
     }
 
     private boolean onTap(float x, float y) {
+
+        int rc = ActivityCompat.checkSelfPermission(this, Manifest.permission.CAMERA);
+        if (rc != PackageManager.PERMISSION_GRANTED) {
+            requestCameraPermission();
+            return false;
+        }
         BarcodeGraphic graphic = mGraphicOverlay.getGraphicAtLocation(x,y);
         Barcode barcode = null;
         if (graphic != null) {
@@ -347,7 +359,7 @@ public final class QRCodeScannerActivity extends BaseActivity implements Barcode
 
     private void validateQrCode(String rawValue) {
         if (CommonUtils.isNull(rawValue)) {
-            Toast.makeText(this, "Invalid Code", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, R.string.invalid_qr_code, Toast.LENGTH_SHORT).show();
             return;
         }
         if (!requestInProgress) {
@@ -373,11 +385,11 @@ public final class QRCodeScannerActivity extends BaseActivity implements Barcode
             @Override
             public void onChanged(String s) {
                 binding.preview.stop();
-                alertDialogBuilder.setTitle("Oops!");
+                alertDialogBuilder.setTitle(getString(R.string.request_failed));
                 alertDialogBuilder
                         .setMessage(s)
                         .setCancelable(false)
-                        .setPositiveButton("Try Again", new DialogInterface.OnClickListener() {
+                        .setPositiveButton(getString(R.string.try_again), new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int id) {
                                 dialog.dismiss();
                                 startCameraSource();

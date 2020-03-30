@@ -14,7 +14,7 @@ import java.io.IOException
 import java.net.SocketTimeoutException
 
 
-class OnboardingRepo {
+class OnBoardingRepo {
 
     fun requestOTP(
         otpIdentifier: OTPIdentifier,

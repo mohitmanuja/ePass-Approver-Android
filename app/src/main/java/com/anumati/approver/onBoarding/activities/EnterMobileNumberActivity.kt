@@ -3,31 +3,25 @@ package com.anumati.approver.onBoarding.activities
 import android.app.AlertDialog
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.anumati.approver.R
 import com.anumati.approver.activities.BaseActivity
-import com.anumati.approver.databinding.ActivityGetOtpBinding
-import com.anumati.approver.onBoarding.repos.OnboardingRepo
+import com.anumati.approver.databinding.ActivityMobileNumberBinding
+import com.anumati.approver.onBoarding.repos.OnBoardingRepo
 import com.anumati.approver.utils.CommonUtils
 import com.anumati.approver.utils.showToast
 import com.anumati.approver.onBoarding.viewmodels.OnBoardingViewModel
 import com.anumati.approver.onBoarding.viewmodels.OnBoardingViewModelFactory
-import io.michaelrocks.libphonenumber.android.NumberParseException
-import io.michaelrocks.libphonenumber.android.PhoneNumberUtil
 
 class EnterMobileNumberActivity : BaseActivity() {
-    lateinit var binding: ActivityGetOtpBinding
-    private val phoneNumberUtil: PhoneNumberUtil by lazy {
-        PhoneNumberUtil.createInstance(this)
-    }
+    lateinit var binding: ActivityMobileNumberBinding
 
     private val onBoardingViewModelFactory: OnBoardingViewModelFactory by lazy {
         OnBoardingViewModelFactory(
             application,
-            OnboardingRepo()
+            OnBoardingRepo()
         )
     }
     private val onBoardingViewModel: OnBoardingViewModel by lazy {
@@ -37,7 +31,7 @@ class EnterMobileNumberActivity : BaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = DataBindingUtil.setContentView(this, R.layout.activity_get_otp)
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_mobile_number)
         binding.lifecycleOwner = this
 
 

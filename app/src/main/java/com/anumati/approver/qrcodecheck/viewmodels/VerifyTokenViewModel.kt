@@ -1,4 +1,4 @@
-package com.anumati.approver.viewmodels
+package com.anumati.approver.qrcodecheck.viewmodels
 
 import android.content.Context
 import androidx.lifecycle.LiveData
@@ -35,7 +35,7 @@ class VerifyTokenViewModel(val tokenRepo: TokenRepo) : ViewModel() {
 
     fun fetchTokenResponse(token: String, context: Context) {
         if (!CommonUtils.isInternetAvailable(context)) {
-            showToast.postValue("No internet Connection found.")
+            showToast.postValue(context.getString(R.string.no_internet_connection_found))
         } else {
             val service = RetrofitFactory.makeRetrofitService(context)
             loadingScreen.postValue(true)

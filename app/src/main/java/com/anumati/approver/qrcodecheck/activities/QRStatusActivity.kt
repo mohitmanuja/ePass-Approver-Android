@@ -11,7 +11,7 @@ import com.anumati.approver.onBoarding.models.ApplicationStatus
 import com.anumati.approver.onBoarding.models.ApplicationType
 import com.anumati.approver.onBoarding.models.TokenVerifyResponse
 import com.anumati.approver.utils.CommonUtils
-import com.anumati.approver.views.GenericKeyValueInfoView
+import com.anumati.approver.views.KeyValueView
 
 
 class QRStatusActivity : BaseActivity() {
@@ -58,7 +58,7 @@ class QRStatusActivity : BaseActivity() {
                 )
             }
             ApplicationStatus.pending -> {
-
+                // todo
             }
             ApplicationStatus.rejected -> {
                 binding.qrCodeStatusLabel.setText(getString(R.string.oops_rejected_code))
@@ -82,21 +82,21 @@ class QRStatusActivity : BaseActivity() {
     private fun setVehicleDetails(tokenVerifyResponse: TokenVerifyResponse) {
         if (CommonUtils.isNotNull(tokenVerifyResponse.entity?.proofId)) {
             val genricKeyValue =
-                GenericKeyValueInfoView(this)
+                KeyValueView(this)
             genricKeyValue.setData("Vehicle Number",tokenVerifyResponse.entity?.proofId)
             binding.showLayout.addView(genricKeyValue)
         }
 
         if (CommonUtils.isNotNull(tokenVerifyResponse.entity?.vehicleModel)) {
             val genricKeyValue =
-                GenericKeyValueInfoView(this)
+                KeyValueView(this)
             genricKeyValue.setData("Model",tokenVerifyResponse.entity?.vehicleModel)
             binding.showLayout.addView(genricKeyValue)
         }
 
         if (CommonUtils.isNotNull(tokenVerifyResponse.entity?.registrationNumber)) {
             val genricKeyValue =
-                GenericKeyValueInfoView(this)
+                KeyValueView(this)
             genricKeyValue.setData("Registration Number",tokenVerifyResponse.entity?.registrationNumber)
             binding.showLayout.addView(genricKeyValue)
         }
@@ -110,7 +110,7 @@ class QRStatusActivity : BaseActivity() {
         if (CommonUtils.isNotNull(tokenVerifyResponse.entity?.firstName)) {
             val fullName = tokenVerifyResponse.entity?.firstName +" "+ tokenVerifyResponse.entity?.lastName
             val genricKeyValue =
-                GenericKeyValueInfoView(this)
+                KeyValueView(this)
             genricKeyValue.setData("Name",fullName)
             binding.showLayout.addView(genricKeyValue)
 
@@ -118,7 +118,7 @@ class QRStatusActivity : BaseActivity() {
 
         if (CommonUtils.isNotNull(tokenVerifyResponse.entity?.dob)) {
             val genricKeyValue =
-                GenericKeyValueInfoView(this)
+                KeyValueView(this)
             genricKeyValue.setData("D.O.B",tokenVerifyResponse.entity?.dob)
             binding.showLayout.addView(genricKeyValue)
 
@@ -128,7 +128,7 @@ class QRStatusActivity : BaseActivity() {
             CommonUtils.isNotNull(tokenVerifyResponse.entity?.proofId.toString())
         ) {
             val genricKeyValue =
-                GenericKeyValueInfoView(this)
+                KeyValueView(this)
             genricKeyValue.setData(tokenVerifyResponse.entity?.proofType?.value,tokenVerifyResponse.entity?.proofId)
             binding.showLayout.addView(genricKeyValue)
         }

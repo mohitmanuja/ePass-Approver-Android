@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Anumati Verify</string>
+    <string name="app_name">ePass Verify</string>
 
     <string name="permission_camera_rationale">Require Camera permission for this feature.</string>
     <string name="ok">OK</string>
@@ -39,6 +39,10 @@
     <string name="please_enter_valid_mobile_number">Please enter valid mobile number</string>
     <string name="please_enter_valid_country_code">Please enter valid country code</string>
     <string name="india_dial_code">+91</string>
+    <string name="not_now">Not now</string>
+    <string name="enter_otp">Enter OTP</string>
+    <string name="invalid_qr_code">Invalid QR Code</string>
+    <string name="digit_qr_code">Enter QR Code</string>
 
 
 </resources>
