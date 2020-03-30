@@ -1,10 +1,10 @@
-package com.anumati.approver.qrcodecheck.models
+package com.anumati.approver.qrCodeCheck.models
 
 import androidx.annotation.Keep
 
 @Keep
-data class CreateOTPRequest(
+data class VerifyOTPRequest(
     val accountIdentifierType: String,
     val identifier: String,
-    val publicKey: String
+    val otp: String
 )

@@ -1,4 +1,4 @@
-package com.anumati.approver.qrcodecheck.activities
+package com.anumati.approver.qrCodeCheck.activities
 
 import android.content.Intent
 import android.os.Bundle

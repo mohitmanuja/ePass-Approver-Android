@@ -75,6 +75,7 @@ class EnterMobileNumberActivity : BaseActivity() {
     }
 
     private fun setListeners() {
+        binding.mobileNumberEditText.requestFocus()
         binding.getOtp.setOnClickListener {
             hideKeyboard(this)
             onBoardingViewModel.phoneNumberEntered(

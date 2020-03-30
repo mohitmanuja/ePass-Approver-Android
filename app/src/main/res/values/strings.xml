@@ -43,6 +43,9 @@
     <string name="enter_otp">Enter OTP</string>
     <string name="invalid_qr_code">Invalid QR Code</string>
     <string name="digit_qr_code">Enter QR Code</string>
+    <string name="logout">Logout</string>
+    <string name="otp_resent">OTP Resent</string>
+    <string name="incorrect_qr_code_entered">Incorrect QR code entered</string>
 
 
 </resources>

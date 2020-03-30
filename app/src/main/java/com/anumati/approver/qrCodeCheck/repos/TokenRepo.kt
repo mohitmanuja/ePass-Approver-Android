@@ -1,7 +1,7 @@
-package com.anumati.approver.qrcodecheck.repos
+package com.anumati.approver.qrCodeCheck.repos
 
 import com.anumati.approver.onBoarding.models.TokenVerifyResponse
-import com.anumati.approver.qrcodecheck.models.VerifyTokenRequest
+import com.anumati.approver.qrCodeCheck.models.VerifyTokenRequest
 import com.anumati.approver.network.RetrofitService
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers

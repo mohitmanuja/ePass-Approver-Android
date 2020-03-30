@@ -8,5 +8,6 @@ object CommonConfig {
     const val VERIFY_TOKEN = "/verifyToken"    // To Verify Token
     const val OTP_LENGTH = 6                   // Enter OTP Length to verify checks
     const val MANUAL_QR_CODE_LENGTH = 6        // Enter QR Code Length to verify checks
+    const val MAX_ALLOWED_MOBILE_LENGTH = 15   // Enter Max Digits allowed for Mobile Length
 
 }

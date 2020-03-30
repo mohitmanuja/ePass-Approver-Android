@@ -2,9 +2,9 @@ package com.anumati.approver.onBoarding.repos
 
 import com.anumati.approver.network.RetrofitService
 import com.anumati.approver.onBoarding.models.OTPIdentifier
-import com.anumati.approver.qrcodecheck.models.CreateOTPRequest
-import com.anumati.approver.qrcodecheck.models.VerifyOTPRequest
-import com.anumati.approver.qrcodecheck.models.VerifyOTPResponse
+import com.anumati.approver.qrCodeCheck.models.CreateOTPRequest
+import com.anumati.approver.qrCodeCheck.models.VerifyOTPRequest
+import com.anumati.approver.qrCodeCheck.models.VerifyOTPResponse
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch

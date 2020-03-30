@@ -13,13 +13,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.anumati.approver.qrcodecheck.camera;
+package com.anumati.approver.qrCodeCheck.camera;
 
 import android.content.Context;
 
-import com.anumati.approver.qrcodecheck.camera.BarcodeGraphic;
-import com.anumati.approver.qrcodecheck.camera.BarcodeGraphicTracker;
-import com.anumati.approver.qrcodecheck.camera.GraphicOverlay;
 import com.google.android.gms.vision.MultiProcessor;
 import com.google.android.gms.vision.Tracker;
 import com.google.android.gms.vision.barcode.Barcode;

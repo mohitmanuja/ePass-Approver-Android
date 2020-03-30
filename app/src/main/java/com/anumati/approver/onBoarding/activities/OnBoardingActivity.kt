@@ -5,7 +5,7 @@ import android.os.Bundle
 import androidx.databinding.DataBindingUtil
 import com.anumati.approver.R
 import com.anumati.approver.activities.BaseActivity
-import com.anumati.approver.qrcodecheck.activities.QRCodeScannerActivity
+import com.anumati.approver.qrCodeCheck.activities.QRCodeScannerActivity
 import com.anumati.approver.databinding.ActivityOnboardingBinding
 import com.anumati.approver.utils.SharedPrefHelper
 

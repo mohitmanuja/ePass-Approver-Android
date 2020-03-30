@@ -3,113 +3,102 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <ScrollView
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <ScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@color/white">
 
-            <ImageView
-                android:id="@+id/status_icon"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/margin_65dp"
-                android:contentDescription="TODO"
-                android:src="@drawable/activated"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-
-            <TextView
-                android:id="@+id/qr_code_status_label"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="@dimen/margin_16dp"
-                android:fontFamily="sans-serif"
-                android:gravity="center"
-                android:textColor="@color/black"
-                android:textSize="@dimen/text_size_24sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/status_icon"
-                tools:text="@string/qr_code_verified_successfully" />
-
-
-            <TextView
-                android:id="@+id/qr_code_text"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="@dimen/margin_16dp"
-                android:layout_marginTop="@dimen/margin_16dp"
-                android:fontFamily="sans-serif"
-                android:textColor="@color/black"
-                android:textSize="@dimen/text_size_24sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/qr_code_status_label"
-                tools:text="QT1782" />
-
-            <View
-                android:id="@+id/view"
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginStart="@dimen/margin_24dp"
-                android:layout_marginTop="28dp"
-                android:layout_marginEnd="@dimen/margin_24dp"
-                android:background="@color/divider_color"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/qr_code_text" />
-
-
-            <ImageView
-                android:id="@+id/goi_logo"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/margin_50dp"
-                android:contentDescription="status"
-                android:src="@drawable/goi_logo"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/show_layout" />
-
-
             <LinearLayout
-                android:id="@+id/show_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/margin_24dp"
-                android:layout_marginRight="@dimen/margin_24dp"
-                android:orientation="vertical"
-                app:layout_constraintBottom_toTopOf="@id/goi_logo"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/view" />
+                android:gravity="center"
+                android:orientation="vertical">
 
-            <Button
-                android:id="@+id/done"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="@dimen/margin_24dp"
-                android:layout_marginTop="@dimen/margin_120dp"
-                android:layout_marginEnd="@dimen/margin_16dp"
-                android:background="@drawable/button_rectangular"
-                android:paddingLeft="@dimen/margin_60dp"
-                android:paddingTop="13dp"
-                android:paddingRight="@dimen/margin_60dp"
-                android:paddingBottom="13dp"
-                android:text="@string/done"
-                android:textColor="@color/white"
-                android:textSize="@dimen/text_size_14sp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/goi_logo" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
-    </ScrollView>
+                <ImageView
+                    android:id="@+id/goi_logo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_36dp"
+                    android:src="@drawable/goi_logo" />
+
+                <ImageView
+                    android:id="@+id/status_icon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_30dp"
+                    tools:src="@drawable/activated" />
+
+
+                <TextView
+                    android:id="@+id/qr_code_status_label"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/margin_16dp"
+                    android:layout_marginTop="@dimen/margin_24dp"
+                    android:layout_marginEnd="@dimen/margin_16dp"
+                    android:fontFamily="sans-serif"
+                    android:gravity="center"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/text_size_24sp"
+                    tools:text="@string/qr_code_verified_successfully" />
+
+
+                <TextView
+                    android:id="@+id/qr_code_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/margin_16dp"
+                    android:layout_marginTop="@dimen/margin_16dp"
+                    android:fontFamily="sans-serif"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/text_size_24sp"
+                    tools:text="QT1782" />
+
+                <View
+                    android:id="@+id/view"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginStart="@dimen/margin_24dp"
+                    android:layout_marginTop="28dp"
+                    android:layout_marginEnd="@dimen/margin_24dp"
+                    android:background="@color/divider_color" />
+
+
+                <LinearLayout
+                    android:id="@+id/show_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_marginLeft="@dimen/margin_24dp"
+                    android:layout_marginRight="@dimen/margin_24dp"
+                    android:layout_weight="1"
+                    android:orientation="vertical" />
+
+
+            </LinearLayout>
+        </ScrollView>
+
+
+        <Button
+            android:id="@+id/done"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_margin="@dimen/margin_24dp"
+            android:layout_marginTop="@dimen/margin_120dp"
+            android:layout_marginEnd="@dimen/margin_16dp"
+            android:background="@drawable/button_rectangular"
+            android:paddingLeft="@dimen/margin_60dp"
+            android:paddingTop="13dp"
+            android:paddingRight="@dimen/margin_60dp"
+            android:paddingBottom="13dp"
+            android:text="@string/done"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_size_14sp" />
+    </RelativeLayout>
 
 </layout>

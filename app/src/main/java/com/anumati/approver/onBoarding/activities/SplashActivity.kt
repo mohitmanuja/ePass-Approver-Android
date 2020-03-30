@@ -5,7 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import com.anumati.approver.R
-import com.anumati.approver.qrcodecheck.activities.QRCodeScannerActivity
+import com.anumati.approver.qrCodeCheck.activities.QRCodeScannerActivity
 import com.anumati.approver.utils.SharedPrefHelper
 
 class SplashActivity : AppCompatActivity() {

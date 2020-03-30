@@ -31,30 +31,33 @@
         <activity android:name=".activities.BaseActivity" />
 
         <activity
-            android:name=".qrcodecheck.activities.QRVerificationActivity"
+            android:name=".qrCodeCheck.activities.QRVerificationActivity"
             android:launchMode="singleTop"
+            android:windowSoftInputMode="stateAlwaysVisible"
             android:theme="@style/AppTheme.NoActionBar" />
 
         <activity
-            android:name=".qrcodecheck.activities.QRStatusActivity"
+            android:name=".qrCodeCheck.activities.QRStatusActivity"
             android:theme="@style/AppTheme.NoActionBar" />
 
         <activity
-            android:name=".qrcodecheck.activities.QRCodeScannerActivity"
+            android:name=".qrCodeCheck.activities.QRCodeScannerActivity"
             android:theme="@style/AppTheme.NoActionBar"
             android:screenOrientation="portrait"
+            android:exported="true"
             android:windowSoftInputMode="stateAlwaysHidden" />
 
         <activity
             android:name=".onBoarding.activities.EnterMobileNumberActivity"
             android:launchMode="singleTop"
+            android:windowSoftInputMode="stateVisible"
             android:theme="@style/AppTheme.NoActionBar" />
 
         <activity
             android:name=".onBoarding.activities.VerifyOtpActivity"
             android:launchMode="singleTop"
             android:theme="@style/AppTheme.NoActionBar"
-            android:windowSoftInputMode="adjustResize" />
+            android:windowSoftInputMode="adjustResize|stateAlwaysVisible" />
 
         <activity
             android:name=".onBoarding.activities.OnBoardingActivity"

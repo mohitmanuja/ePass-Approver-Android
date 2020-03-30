@@ -1,4 +1,4 @@
-package com.anumati.approver.qrcodecheck.activities
+package com.anumati.approver.qrCodeCheck.activities
 
 import android.app.AlertDialog
 import android.content.Intent
@@ -9,11 +9,11 @@ import androidx.lifecycle.ViewModelProvider
 import com.anumati.approver.R
 import com.anumati.approver.activities.BaseActivity
 import com.anumati.approver.databinding.ActivityEnterQrCodeBinding
-import com.anumati.approver.qrcodecheck.repos.TokenRepo
+import com.anumati.approver.qrCodeCheck.repos.TokenRepo
 import com.anumati.approver.utils.CommonUtils
 import com.anumati.approver.utils.showToast
-import com.anumati.approver.qrcodecheck.viewmodels.TokenViewModelFactory
-import com.anumati.approver.qrcodecheck.viewmodels.VerifyTokenViewModel
+import com.anumati.approver.qrCodeCheck.viewmodels.TokenViewModelFactory
+import com.anumati.approver.qrCodeCheck.viewmodels.VerifyTokenViewModel
 
 class QRVerificationActivity : BaseActivity() {
 
@@ -32,6 +32,7 @@ class QRVerificationActivity : BaseActivity() {
     }
 
     private fun setListeners(){
+        binding.qrCodeEdittext.requestFocus()
         binding.verify.setOnClickListener {
             if (validateToken()) {
                 tokenViewModel.fetchTokenResponse(binding.qrCodeEdittext.text.toString(), this)

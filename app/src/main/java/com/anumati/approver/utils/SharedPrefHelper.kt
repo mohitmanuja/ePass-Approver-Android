@@ -42,4 +42,9 @@ object SharedPrefHelper {
         userPrefs.edit().putBoolean(IS_USER_LOGIN, true).apply()
     }
 
+    fun clearData(context: Context) {
+        val userPrefs = context.getSharedPreferences(USER_PREF, Context.MODE_PRIVATE)
+        userPrefs?.edit()?.clear()?.apply()
+    }
+
 }

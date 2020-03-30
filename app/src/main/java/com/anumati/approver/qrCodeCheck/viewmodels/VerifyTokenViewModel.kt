@@ -1,4 +1,4 @@
-package com.anumati.approver.qrcodecheck.viewmodels
+package com.anumati.approver.qrCodeCheck.viewmodels
 
 import android.content.Context
 import androidx.lifecycle.LiveData
@@ -7,7 +7,7 @@ import androidx.lifecycle.ViewModel
 import com.anumati.approver.R
 import com.anumati.approver.onBoarding.models.TokenVerifyResponse
 import com.anumati.approver.network.RetrofitFactory
-import com.anumati.approver.qrcodecheck.repos.TokenRepo
+import com.anumati.approver.qrCodeCheck.repos.TokenRepo
 import com.anumati.approver.utils.CommonUtils
 
 class VerifyTokenViewModel(val tokenRepo: TokenRepo) : ViewModel() {
@@ -50,7 +50,7 @@ class VerifyTokenViewModel(val tokenRepo: TokenRepo) : ViewModel() {
                         tokenResponseLiveData.postValue(this)
                     }
                 } else {
-                    showToast.postValue("Token is not Valid")
+                    showToast.postValue(context.getString(R.string.incorrect_qr_code_entered))
                 }
                 loadingScreen.postValue(false)
             }, {

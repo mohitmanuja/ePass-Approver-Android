@@ -6,7 +6,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.anumati.approver.R
 import com.anumati.approver.onBoarding.models.OTPIdentifier
-import com.anumati.approver.qrcodecheck.models.VerifyOTPResponse
+import com.anumati.approver.qrCodeCheck.models.VerifyOTPResponse
 import com.anumati.approver.network.RetrofitFactory
 import com.anumati.approver.onBoarding.repos.OnBoardingRepo
 import com.anumati.approver.utils.CommonConfig.OTP_LENGTH

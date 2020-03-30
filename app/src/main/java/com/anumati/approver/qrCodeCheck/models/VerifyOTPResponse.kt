@@ -1,4 +1,4 @@
-package com.anumati.approver.qrcodecheck.models
+package com.anumati.approver.qrCodeCheck.models
 
 import androidx.annotation.Keep
 

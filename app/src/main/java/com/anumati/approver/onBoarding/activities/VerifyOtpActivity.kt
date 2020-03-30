@@ -8,7 +8,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.anumati.approver.R
 import com.anumati.approver.activities.BaseActivity
-import com.anumati.approver.qrcodecheck.activities.QRCodeScannerActivity
+import com.anumati.approver.qrCodeCheck.activities.QRCodeScannerActivity
 import com.anumati.approver.databinding.ActivityVerifyOtpBinding
 import com.anumati.approver.onBoarding.repos.OnBoardingRepo
 import com.anumati.approver.utils.CommonUtils
@@ -26,7 +26,7 @@ class VerifyOtpActivity : BaseActivity() {
             OnBoardingRepo()
         )
     }
-    private val onboardingViewModel: OnBoardingViewModel by lazy {
+    private val onBoardingViewModel: OnBoardingViewModel by lazy {
         ViewModelProvider(this, onBoardingViewModelFactory).get(OnBoardingViewModel::class.java)
     }
 
@@ -35,8 +35,8 @@ class VerifyOtpActivity : BaseActivity() {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_verify_otp)
         number = intent?.getStringExtra(CommonUtils.NUMBER)?:""
         val isoCode = intent?.getStringExtra(CommonUtils.ISO_CODE)?:""
-        onboardingViewModel.phoneNumber = number
-        onboardingViewModel.isoCode = isoCode
+        onBoardingViewModel.phoneNumber = number
+        onBoardingViewModel.isoCode = isoCode
         binding.phoneDescription.text = getString(R.string.enter_the_otp_sent_to_number,number)
 
         setListeners()
@@ -45,18 +45,18 @@ class VerifyOtpActivity : BaseActivity() {
     }
 
     private fun setObservers() {
-        onboardingViewModel.getVerifyOTPRequestLiveData().observe(this, Observer {
+        onBoardingViewModel.getVerifyOTPRequestLiveData().observe(this, Observer {
             val intent = Intent(this,
                 QRCodeScannerActivity::class.java)
             intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
             startActivity(intent)
         })
 
-        onboardingViewModel.getshowToastLiveData().observe(this, Observer {
+        onBoardingViewModel.getshowToastLiveData().observe(this, Observer {
             showToast(it)
         })
 
-        onboardingViewModel.getUpdateScreenLiveData().observe(this, Observer {
+        onBoardingViewModel.getUpdateScreenLiveData().observe(this, Observer {
             val alertDialogBuilder = AlertDialog.Builder(this)
             alertDialogBuilder.setTitle(getString(R.string.request_failed))
             alertDialogBuilder
@@ -67,7 +67,7 @@ class VerifyOtpActivity : BaseActivity() {
             val alertDialog = alertDialogBuilder.create()
             alertDialog.show()
         })
-        onboardingViewModel.getLoadingScreen().observe(this, Observer {
+        onBoardingViewModel.getLoadingScreen().observe(this, Observer {
             if (it) {
                 showProgressDialog(getString(R.string.processing))
             } else {
@@ -75,21 +75,22 @@ class VerifyOtpActivity : BaseActivity() {
             }
 
         })
-        onboardingViewModel.getCreateOTPRequestLiveData().observe(this, Observer { requestSent->
+        onBoardingViewModel.getCreateOTPRequestLiveData().observe(this, Observer { requestSent->
             if (requestSent){
-               showToast("OTP Resent")
+               showToast(getString(R.string.otp_resent))
             }
         })
     }
 
     private fun setListeners() {
+        binding.otpEditText.requestFocus()
         binding.verify.setOnClickListener {
             hideKeyboard(this)
-            onboardingViewModel.otpEntered(binding.otpEditText.text.toString())
+            onBoardingViewModel.otpEntered(binding.otpEditText.text.toString())
         }
 
         binding.resendOtp.setOnClickListener {
-            onboardingViewModel.createOTPRequest(number)
+            onBoardingViewModel.createOTPRequest(number)
         }
         binding.toolbar.setNavigationOnClickListener {
             finish()

@@ -1,4 +1,4 @@
-package com.anumati.approver.qrcodecheck.activities;
+package com.anumati.approver.qrCodeCheck.activities;
 
 import android.Manifest;
 import android.app.AlertDialog;
@@ -19,19 +19,21 @@ import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
-import com.anumati.approver.activities.BaseActivity;
-import com.anumati.approver.qrcodecheck.camera.BarcodeGraphicTracker;
-import com.anumati.approver.qrcodecheck.camera.BarcodeTrackerFactory;
-import com.anumati.approver.qrcodecheck.camera.GraphicOverlay;
 import com.anumati.approver.BuildConfig;
+import com.anumati.approver.activities.BaseActivity;
+import com.anumati.approver.onBoarding.activities.OnBoardingActivity;
+import com.anumati.approver.qrCodeCheck.camera.BarcodeGraphicTracker;
+import com.anumati.approver.qrCodeCheck.camera.BarcodeTrackerFactory;
+import com.anumati.approver.qrCodeCheck.camera.GraphicOverlay;
 import com.anumati.approver.R;
-import com.anumati.approver.qrcodecheck.camera.BarcodeGraphic;
+import com.anumati.approver.qrCodeCheck.camera.BarcodeGraphic;
 import com.anumati.approver.databinding.ActivityQrScannerBinding;
 import com.anumati.approver.onBoarding.models.TokenVerifyResponse;
-import com.anumati.approver.qrcodecheck.repos.TokenRepo;
+import com.anumati.approver.qrCodeCheck.repos.TokenRepo;
 import com.anumati.approver.utils.CommonUtils;
-import com.anumati.approver.qrcodecheck.viewmodels.TokenViewModelFactory;
-import com.anumati.approver.qrcodecheck.viewmodels.VerifyTokenViewModel;
+import com.anumati.approver.qrCodeCheck.viewmodels.TokenViewModelFactory;
+import com.anumati.approver.qrCodeCheck.viewmodels.VerifyTokenViewModel;
+import com.anumati.approver.utils.SharedPrefHelper;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GoogleApiAvailability;
 import com.google.android.gms.vision.CameraSource;
@@ -48,9 +50,8 @@ import java.io.IOException;
  * barcode.
  */
 public final class QRCodeScannerActivity extends BaseActivity implements BarcodeGraphicTracker.BarcodeUpdateListener {
-    private static final String TAG = "Anumati_Police";
+    private static final String TAG = "ePass Approver";
 
-    private static final int RC_HANDLE_GMS = 9001;
     // permission request codes need to be < 256
     private static final int RC_HANDLE_CAMERA_PERM = 2;
 
@@ -77,12 +78,26 @@ public final class QRCodeScannerActivity extends BaseActivity implements Barcode
         } else {
             requestCameraPermission();
         }
-
         setObservers();
+        setListeners();
+    }
+
+    void setListeners(){
+
         binding.enterManualCode.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(QRCodeScannerActivity.this, QRVerificationActivity.class));
+            }
+        });
+        binding.logout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                SharedPrefHelper.INSTANCE.clearData(QRCodeScannerActivity.this);
+                Intent intent = new Intent(QRCodeScannerActivity.this, OnBoardingActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                startActivity(intent);
+
             }
         });
     }
@@ -194,7 +209,6 @@ public final class QRCodeScannerActivity extends BaseActivity implements Barcode
     @Override
     protected void onResume() {
         super.onResume();
-
         startCameraSource();
     }
 

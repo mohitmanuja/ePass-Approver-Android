@@ -2,25 +2,25 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:custom="http://schemas.android.com/apk/res-auto">
 
-    <RelativeLayout
+    <FrameLayout
         android:id="@+id/topLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:animateLayoutChanges="true"
         android:keepScreenOn="true">
 
-        <com.anumati.approver.qrcodecheck.camera.CameraSourcePreview
+        <com.anumati.approver.qrCodeCheck.camera.CameraSourcePreview
             android:id="@+id/preview"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_centerInParent="true">
 
-            <com.anumati.approver.qrcodecheck.camera.GraphicOverlay
+            <com.anumati.approver.qrCodeCheck.camera.GraphicOverlay
                 android:id="@+id/graphicOverlay"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent" />
 
-        </com.anumati.approver.qrcodecheck.camera.CameraSourcePreview>
+        </com.anumati.approver.qrCodeCheck.camera.CameraSourcePreview>
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -181,32 +181,51 @@
                 custom:layout_constraintTop_toBottomOf="@id/qr_scanner"
                 custom:layout_constraintWidth_percent="0.075" />
 
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/margin_32dp"
+                android:src="@drawable/logo_for_qr"
+                custom:layout_constraintStart_toStartOf="parent"
+                custom:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/logout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/margin_32dp"
+                android:text="@string/logout"
+                android:textColor="@color/white"
+                android:textSize="@dimen/text_size_16sp"
+                custom:layout_constraintEnd_toEndOf="parent"
+                custom:layout_constraintTop_toTopOf="parent" />
+
             <LinearLayout
                 android:id="@+id/other_option"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_alignParentBottom="true"
-                android:gravity="center"
-                android:padding="@dimen/margin_16dp"
                 android:background="@color/white"
+                android:gravity="center"
                 android:orientation="vertical"
+                android:padding="@dimen/margin_16dp"
                 custom:layout_constraintBottom_toBottomOf="parent"
                 custom:layout_constraintEnd_toEndOf="parent">
 
                 <Button
+                    android:id="@+id/enter_manual_code"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:background="@drawable/button_rectangular"
                     android:paddingTop="9dp"
-                    android:id="@+id/enter_manual_code"
-                    android:textSize="@dimen/text_size_14sp"
                     android:paddingBottom="9dp"
                     android:text="@string/enter_qr_code_manually"
-                    android:textColor="@color/white" />
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/text_size_14sp" />
 
             </LinearLayout>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-    </RelativeLayout>
+    </FrameLayout>
 </layout>
