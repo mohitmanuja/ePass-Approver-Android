@@ -12,7 +12,7 @@ android {
         applicationId "com.anumati.approver"
         minSdkVersion 19
         targetSdkVersion 29
-        versionCode 4
+        versionCode 6
         versionName "1.2"
         multiDexEnabled true
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
