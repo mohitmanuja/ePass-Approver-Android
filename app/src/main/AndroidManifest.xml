@@ -20,6 +20,7 @@
         android:usesCleartextTraffic="true">
         <activity
             android:name=".onBoarding.activities.SplashActivity"
+            android:exported="true"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
